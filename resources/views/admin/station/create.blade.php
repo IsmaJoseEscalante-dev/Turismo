@@ -21,13 +21,6 @@
             </div>
             <input type="hidden" name="tour_id" value="{{ $tour->id }}">
 
-            <div class="form-group">
-                <br>
-                Image/File:
-                <br>
-                <input type="file" name="image" class="form-control">
-                <br><br>
-              </div>
             <a href="{{ route('station.index',$tour->id) }}" class="btn btn-secondary" tabindex="5">Cancelar</a>
             <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
         </form>

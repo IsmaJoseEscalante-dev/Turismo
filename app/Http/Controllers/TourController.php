@@ -46,7 +46,7 @@ class TourController extends Controller
 
     public function update(UpdateRequest $request,Tour $tour)
     {
-        $tour->update($request->validated);
+        $tour->update($request->validated());
 
         return redirect()->route('tours.index');
     }

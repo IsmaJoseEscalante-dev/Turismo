@@ -25,6 +25,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'slug' => 'required|unique:tours',
             'amount' => 'required|numeric',
             'description' => 'required'
         ];
