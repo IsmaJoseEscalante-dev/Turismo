@@ -22,6 +22,15 @@
                     @enderror
                 </div>
                 <div class="mb-3">
+                    <label for="" class="form-label">Nombre amigable</label>
+                    <input id="slug" name="slug" type="text" class="form-control" readonly>
+                    @error('slug')
+                    <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="mb-3">
                     <label for="" class="form-label">Precio</label><br>
                     <input id="amount" name="amount" type="number" class="form-control" tabindex="3">
                     @error('amount')
@@ -52,5 +61,33 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script>
+        $(document).ready(function(){
+            $("#name").keyup(function(){
+                let cadena = $(this).val();
+                string_to_slug(cadena);
+            });
+        });
+
+
+        function string_to_slug (str) {
+            str = str.replace(/^\s+|\s+$/g, '');
+            str = str.toLowerCase();
+
+            //quita acentos, cambia la ñ por n, etc
+            let from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+            let to   = "aaaaeeeeiiiioooouuuunc------";
+
+            for (let i=0, l=from.length ; i<l ; i++) {
+                str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+            }
+
+            str = str.replace(/[^a-z0-9 -]/g, '') // quita caracteres invalidos
+                .replace(/\s+/g, '-') // reemplaza los espacios por -
+                .replace(/-+/g, '-'); // quita las plecas
+
+            return $("#slug").val(str);
+        }
+
+    </script>
 @stop

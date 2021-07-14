@@ -8,7 +8,7 @@ use App\Http\Controllers\WelcomeController;
 Auth::routes(['register' => false]);
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
-Route::get('paradas/{id}', [WelcomeController::class, 'paradas'])->name('paradas');
+Route::get('paradas/{slug}', [WelcomeController::class, 'paradas'])->name('paradas');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

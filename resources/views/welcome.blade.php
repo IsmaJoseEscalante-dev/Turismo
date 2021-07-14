@@ -27,7 +27,7 @@
             @foreach ($tours as $tour)
                 <div class="card mb-3">
                     <div class="card-body">
-                        <a href="{{ route('paradas', $tour->id) }}" class="text-decoration-none text-dark">
+                        <a href="{{ route('paradas', $tour->slug) }}" class="text-decoration-none text-dark">
                             <div class="row">
                                 <div class="col-md-4">
                                     <img src="/imagenes/img1.jpeg" class="img-fluid rounded-start" alt="...">

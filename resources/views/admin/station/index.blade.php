@@ -26,10 +26,12 @@
                         <td>{{$station->description}}</td>
                         <td>
                             @foreach($station->images as $image)
-                                <img src="../image/{{$image->image}}" alt="" width="50px">
+                                @if($loop->iteration == 1)
+                                    <img src="{{ Storage::url($image->image) }}" alt="" width="60px">
+                                @endif
                             @endforeach
                         </td>
-                        <td as $image>
+                        <td>
                         <form action="{{route('station.destroy',$station->id)}}" method="post">
                             <a href="{{ route('station.edit', $station->id) }}" class="btn btn-info">Editar</a>
                             @csrf
@@ -47,7 +49,6 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
     <link  href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 @stop
 

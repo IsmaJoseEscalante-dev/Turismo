@@ -1,19 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('images/{id}',[ImageController::class, 'index']);
+Route::post('storeTour/{id}',[ImageController::class,'storeTour'])->name('store.tour');
+Route::post('storeStation/{id}',[ImageController::class,'storeStation'])->name('store.station');
+Route::delete('deleteTour/{id}',[ImageController::class,'deleteTour'])->name('delete.tour');
+Route::delete('deleteStation/{id}',[ImageController::class,'deleteStation'])->name('delete.station');

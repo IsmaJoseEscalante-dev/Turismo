@@ -9,7 +9,7 @@ class Tour extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','description','amount'];
+    protected $fillable = ['name','description','amount','slug'];
 
     public function stations()
     {

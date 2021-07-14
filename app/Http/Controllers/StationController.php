@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Station\CreateRequest;
+use App\Http\Requests\Station\UpdateRequest;
 use App\Models\Tour;
-use App\Models\Image;
 use App\Models\Station;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 
 class StationController extends Controller
 {
@@ -30,17 +29,14 @@ class StationController extends Controller
         return view('admin.station.create', compact('tour'));
     }
 
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $path = time().$file->getClientOriginalName();
-            $file->move(public_path().'/image',$path);
-        }
-        $image = new Image(['image' => $path]);
-        $station = Station::create($request->all());
-        $station->images()->save($image);
-        return redirect()->route('station.index', $station->tour_id);
+        $station = Station::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'tour_id' => $request->input('tour_id'),
+        ]);
+        return redirect()->route('station.edit', $station->id);
     }
 
     public function show(Station $station)
@@ -54,14 +50,9 @@ class StationController extends Controller
         return view('admin.station.edit')->with('station', $station);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, Station $station)
     {
-        $station  = Station::find($id);
-
-        $station->name        = $request->get('name');
-        $station->description = $request->get('description');
-        $station->save();
-
+        $station->update($request->validated());
         return redirect()->route('station.index', $station->tour_id);
     }
 

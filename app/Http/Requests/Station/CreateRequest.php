@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Tour;
+namespace App\Http\Requests\Station;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateRequest extends FormRequest
+class CreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'slug' => [
-                'required',
-                Rule::unique('tours')->ignore($this->id),
-            ],
-            'amount' => 'required|numeric',
-            'description' => 'required'
+            'description' => 'required',
         ];
     }
 }
