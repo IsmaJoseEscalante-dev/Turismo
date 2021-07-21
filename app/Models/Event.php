@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['start','end','amount','description','title','color'];
+
+    public function tours()
+    {
+        return $this->belongsToMany(Tour::class);
+    }
 }

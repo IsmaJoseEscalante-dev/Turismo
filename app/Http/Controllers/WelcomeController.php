@@ -18,4 +18,9 @@ class WelcomeController extends Controller
         $tour = Tour::where('slug',$slug)->firstOrFail();
         return view('user.parada', compact('tour'));
     }
+
+    public function booking()
+    {
+        return view('user.booking');
+    }
 }

@@ -1,16 +1,13 @@
-@extends('adminlte::page')
+@extends('layouts.admin')
 
 @section('title', 'Dashboard')
 
-@section('css')
+@section('styles')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 @endsection
 
-@section('content_header')
-    <h1>MODIFICAR EXCURSION</h1>
-@stop
-
 @section('content')
+    <h3>MODIFICAR EXCURSION</h3>
     <div class="card">
         <div class="card-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">

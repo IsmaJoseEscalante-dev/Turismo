@@ -1,12 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.admin')
 
 @section('title', 'Dashboard')
 
-@section('content_header')
-    <h1>MODIFICAR EXCURSION</h1>
-@stop
-
 @section('content')
+    <h3>MODIFICAR EXCURSION</h3>
     <div class="card">
         <div class="card-body">
             <form action="{{ route('tours.update', $tour) }}" method="POST">
@@ -54,10 +51,6 @@
             </form>
         </div>
     </div>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
