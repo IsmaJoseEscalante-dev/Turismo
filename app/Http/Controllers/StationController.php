@@ -25,7 +25,7 @@ class StationController extends Controller
 
     public function create($id)
     {
-        $tour = Tour::where('id', $id)->first();
+        $tour = Tour::where('id', $id)->firstOrFail();
         return view('admin.station.create', compact('tour'));
     }
 
