@@ -3,8 +3,8 @@
 @section('title', 'Eventos')
 
 @section('styles')
-    <link href="{{ asset('plugins/FullCalendar/fullcalendar.min.css') }}" rel="stylesheet"/>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <link href="{{ asset('plugins/FullCalendar/fullcalendar.min.css') }}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         .select2-container {
             width: 100% !important;
@@ -13,6 +13,7 @@
         .select2-container--default .select2-selection--multiple .select2-selection__choice {
             background-color: #a846ea;
         }
+
     </style>
 @endsection
 
@@ -25,8 +26,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modalFullCalendar" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
+        <div class="modal fade" id="modalFullCalendar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -66,15 +66,14 @@
                                     <span class="btn btn-primary btn-sm deselect-all">Deseleccionar</span>
                                 </div>
                                 <select class="form-control select2 {{ $errors->has('tours') ? 'is-invalid' : '' }}"
-                                        name="tours[]" id="txtTours" multiple>
-                                    @foreach($tours as $id => $tour)
-                                        <option
-                                            value="{{ $id }}">
+                                    name="tours[]" id="txtTours" multiple>
+                                    @foreach ($tours as $id => $tour)
+                                        <option value="{{ $id }}">
                                             {{ $tour }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @if($errors->has('tours'))
+                                @if ($errors->has('tours'))
                                     <div class="invalid-feedback d-block">
                                         {{ $errors->first('tours') }}
                                     </div>
@@ -83,8 +82,8 @@
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea id="txtDescription" class="form-control txtDescription" rows="4"
-                                      placeholder="Descripcion del evento"></textarea>
+                            <textarea id="txtDescription" class="form-control" name="description" rows="4"
+                                placeholder="Descripcion del evento"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -108,7 +107,18 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>{
     <script src="{{ asset('js/main.js') }}"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
+
+            let editor;
+            ClassicEditor
+                .create(document.querySelector('#txtDescription'))
+                .then(newEditor => {
+                    editor = newEditor;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
             $('#full-calendar').fullCalendar({
                 selectable: true,
                 selectHelper: true,
@@ -120,7 +130,7 @@
                     center: 'title',
                     right: 'month,basicWeek,basicDay,agendaWeek,agendaDay'
                 },
-                dayClick: function (date) {
+                dayClick: function(date) {
                     $('#addEvent').prop("disabled", false);
                     $('#updateEvent').prop("disabled", true);
                     $('#destroyEvent').prop("disabled", true);
@@ -130,7 +140,7 @@
                     $('#txtFechaInicio').val(date.format());
                     $('#modalFullCalendar').modal();
                 },
-                eventClick: function (calEvent) {
+                eventClick: function(calEvent) {
                     $('#addEvent').prop("disabled", true);
                     $('#updateEvent').prop("disabled", false);
                     $('#destroyEvent').prop("disabled", false);
@@ -142,13 +152,13 @@
                     $('#txtColor').val(calEvent.color);
                     $('#txtAmount').val(calEvent.amount);
                     $('#txtTours').val(calEvent.tours);
-                    $('#txtDescription').val(calEvent.description);
+                    $('#txtDescription').val(editor.setData(calEvent.description));
                     $('#txtFechaInicio').val(calEvent.start.format('Y-MM-DD'));
                     $('#txtFechaFin').val(calEvent.end.format('Y-MM-DD'));
                     $('#txtTours').val('');
                     $('#txtTours').trigger('change');
                     if (calEvent.tours.length) {
-                        let array =[];
+                        let array = [];
                         for (let i = 0; i < calEvent.tours.length; i++) {
                             array.push(calEvent.tours[i].pivot.tour_id);
                         }
@@ -159,7 +169,7 @@
                     }
                     $('#modalFullCalendar').modal();
                 },
-                eventDrop: function (calEvent) {
+                eventDrop: function(calEvent) {
                     $('#txtId').val(calEvent.id);
                     $('#txtTitle').val(calEvent.title);
                     $('#txtColor').val(calEvent.color);
@@ -170,74 +180,73 @@
                     recolectarDatosGUI();
                     addEvent('/api/events/' + newEvent.id, 'PUT', newEvent, true);
                 },
-                select: function (start, end) {
+                select: function(start, end) {
                     $('#addEvent').prop("disabled", false);
                     $('#updateEvent').prop("disabled", true);
                     $('#destroyEvent').prop("disabled", true);
-
+                    $('#titleEvent').html("Crear evento");
                     cleanForm();
                     $('#txtFechaInicio').val(start.format());
                     $('#txtFechaFin').val(end.format());
                     $('#modalFullCalendar').modal();
                 },
             });
-        });
-    </script>
-    <script>
-        let newEvent;
-        $('#addEvent').click(function () {
-            recolectarDatosGUI();
-            addEvent('/api/events', 'POST', newEvent);
-        });
 
-        $('#updateEvent').click(function () {
-            recolectarDatosGUI();
-            addEvent('/api/events/' + newEvent.id, 'PUT', newEvent);
-        });
-
-        $('#destroyEvent').click(function () {
-            recolectarDatosGUI();
-            addEvent('/api/events/' + newEvent.id, 'DELETE', newEvent);
-        });
-
-        function recolectarDatosGUI() {
-            newEvent = {
-                id: $('#txtId').val(),
-                title: $('#txtTitle').val(),
-                start: $('#txtFechaInicio').val() + " 00:00:00",
-                color: $('#txtColor').val(),
-                amount: $('#txtAmount').val(),
-                tours: $('#txtTours').val(),
-                description: $('#txtDescription').val(),
-                end: $('#txtFechaFin').val() + " 23:59:59",
-            }
-        }
-
-        function addEvent(url, type, objEvent, modal) {
-            $.ajax({
-                type: type,
-                url: url,
-                data: objEvent,
-                success: function () {
-                    $('#full-calendar').fullCalendar('refetchEvents');
-                    if (!modal) {
-                        $('#modalFullCalendar').modal('toggle');
-                    }
-                },
-                error: function (error) {
-                    console.log(error);
-                }
+            let newEvent;
+            $('#addEvent').click(function() {
+                recolectarDatosGUI();
+                addEvent('/api/events', 'POST', newEvent);
             });
-        }
 
-        function cleanForm() {
-            $('#txtId').val('');
-            $('#txtTitle').val('');
-            $('#txtColor').val('');
-            $('#txtAmount').val('');
-            $('#txtDescription').val('');
-            $('#txtTours').val('');
-            $('#txtTours').trigger('change');
-        }
+            $('#updateEvent').click(function() {
+                recolectarDatosGUI();
+                addEvent('/api/events/' + newEvent.id, 'PUT', newEvent);
+            });
+
+            $('#destroyEvent').click(function() {
+                recolectarDatosGUI();
+                addEvent('/api/events/' + newEvent.id, 'DELETE', newEvent);
+            });
+
+            function recolectarDatosGUI() {
+                newEvent = {
+                    id: $('#txtId').val(),
+                    title: $('#txtTitle').val(),
+                    start: $('#txtFechaInicio').val() + " 00:00:00",
+                    color: $('#txtColor').val(),
+                    amount: $('#txtAmount').val(),
+                    tours: $('#txtTours').val(),
+                    description: editor.getData(),
+                    end: $('#txtFechaFin').val() + " 23:59:59",
+                }
+            }
+
+            function addEvent(url, type, objEvent, modal) {
+                $.ajax({
+                    type: type,
+                    url: url,
+                    data: objEvent,
+                    success: function() {
+                        $('#full-calendar').fullCalendar('refetchEvents');
+                        if (!modal) {
+                            $('#modalFullCalendar').modal('toggle');
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function cleanForm() {
+                $('#txtId').val('');
+                $('#txtTitle').val('');
+                $('#txtColor').val('');
+                $('#txtAmount').val('');
+                $('#txtDescription').val('');
+                $('#txtTours').val('');
+                $('#txtTours').trigger('change');
+            }
+        });
     </script>
 @endsection
