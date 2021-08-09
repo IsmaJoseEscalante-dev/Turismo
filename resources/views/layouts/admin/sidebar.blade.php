@@ -19,7 +19,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{ route('tours.index') }}" class="nav-link">
+                    <a href="{{ route('tours.index') }}" class="nav-link {{ Request::is('tours') ? 'active' :'' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Tour
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('events.events') }}" class="nav-link">
+                    <a href="{{ route('events.events') }}" class="nav-link  {{ Request::is('events') ? 'active' :'' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Eventos

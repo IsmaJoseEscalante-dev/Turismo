@@ -3,9 +3,9 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <div class="container d-flex justify-content-between">
+    <div class="container d-flex justify-content-between py-4">
         <h3>EXCURSIONES</h3>
-        <a href="tours/create" class="btn btn-primary mb-3">CREAR</a>
+        <a href="tours/create" class="btn btn-primary">CREAR</a>
     </div>
     <div class="card">
         <div class="card-body">

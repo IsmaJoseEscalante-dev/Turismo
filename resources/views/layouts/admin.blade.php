@@ -47,9 +47,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             reserved.
         </footer>
     </div>
-    <!-- ./wrapper -->
-
-    <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>

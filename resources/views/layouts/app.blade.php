@@ -16,6 +16,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     @yield('css')
 </head>
 
@@ -42,10 +43,17 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
+                            <a href="#" class="nav-link">Home</a>
+                            <div id="indicator"></div>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="#" class="nav-link">Servicios</a>
+                            <div id="indicator"></div>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">Sobre nosotros</a>
+                            <div id="indicator"></div>
                         </li>
                         @guest
                             @if (Route::has('login'))
@@ -86,8 +94,10 @@
                             @endif
                         @endguest
                     </ul>
+                    
                 </div>
             </div>
+            
         </nav>
 
         <main class="py-4">
