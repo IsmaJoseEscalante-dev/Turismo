@@ -33,12 +33,15 @@
                 </div>
             </div>
         </div>
-
     </main>
-    <div class="container-fluid row mt-4">
-        <div class="col-md-8">
+
+    <div class="container-fluid" style="background-color:rgb(218, 214, 214);">
+        <div class="" style="text-align:center;">
+            <h1 style = 'text-align:center'> Excursiones diarias </h1>
+        </div>
+        <div class="container">
             @foreach ($tours as $tour)
-                <div class="card mb-3">
+                <div class="row" style="background-color:#fdfdfd;" >
                     <div class="card-body">
                         <a href="{{ route('paradas', $tour->slug) }}" class="text-decoration-none text-dark">
                             <div class="row">
@@ -48,21 +51,29 @@
                                 <div class="col-md-8">
                                     <div class="d-flex justify-content-between">
                                         <h5 class="card-title"><b>{{ $tour->name }}</b></h5>
-                                        <h5><b>{{ $tour->amount }} $</b></h5>
+                                        <h5><b> $ {{ $tour->amount }} </b></h5>
                                     </div>
+                                    <div class="card__stars">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="16">
+                                           <g fill="none" fill-rule="evenodd">
+                                              <path stroke="#FFBF2C" d="M92 1.13l2.02 4.09 4.514.657-3.267 3.185.771 4.496L92 11.435l-4.038 2.123.771-4.496-3.267-3.185 4.515-.656L92 1.13z" />
+                                              <path fill="#FFBF2C" d="M71 12l-4.702 2.472.898-5.236-3.804-3.708 5.257-.764L71 0l2.351 4.764 5.257.764-3.804 3.708.898 5.236zM50 12l-4.702 2.472.898-5.236-3.804-3.708 5.257-.764L50 0l2.351 4.764 5.257.764-3.804 3.708.898 5.236zM29 12l-4.702 2.472.898-5.236-3.804-3.708 5.257-.764L29 0l2.351 4.764 5.257.764-3.804 3.708.898 5.236zM8 12l-4.702 2.472.898-5.236L.392 5.528l5.257-.764L8 0l2.351 4.764 5.257.764-3.804 3.708.898 5.236z" />
+                                           </g>
+                                        </svg>
+                                     </div>
                                     <p class="card-text">This is a wider card with supporting text below as a natural
                                         lead-in to
                                         additional content. This content is a little bit longer.</p>
                                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
+                <br>
             @endforeach
         </div>
-        <div class="col-md-4 px-0">
+       {{--  <div class="col-md-4 px-0">
             <div class="card">
                 <div class="card-body">
                     <h4>¿Por qué reservar con Viator?</h4>
@@ -74,9 +85,9 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
-    <h3 class="text-center">Eventos de esta semana</h3>
+   {{--  <h3 class="text-center">Eventos de esta semana</h3>
     <div class="row container-fluid">
         <div class="col-md-8">
             @foreach ($events as $event)
@@ -104,7 +115,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="py-5">
         <div class="text-center">
@@ -272,7 +283,7 @@
             <div class="card-images">
                 <img
                     src="https://images.unsplash.com/photo-1425342605259-25d80e320565?auto=format&amp;fit=crop&amp;w=750&amp;q=80&amp;ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" />
-                
+
                 <div class="info">
                     <h1>Road</h1>
                     <p>Lorem Ipsum is simply dummy text from the printing and typeseting industry</p>
@@ -282,7 +293,7 @@
             <div class="card-images">
                 <img
                     src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?auto=format&amp;fit=crop&amp;w=311&amp;q=80&amp;ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" />
-                
+
                 <div class="info">
                     <h1>Protester</h1>
                     <p>Lorem Ipsum is simply dummy text from the printing and typeseting industry</p>

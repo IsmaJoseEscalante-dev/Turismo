@@ -4,8 +4,8 @@
 
 @section('content')
     <div class="container d-flex justify-content-between py-4">
-        <h3>EXCURSIONES</h3>
-        <a href="tours/create" class="btn btn-primary">CREAR</a>
+        <h3>Categorias</h3>
+        <a href="categories/create" class="btn btn-primary">CREAR</a>
     </div>
     <div class="card">
         <div class="card-body">
@@ -13,24 +13,18 @@
                 <thead class="bg-primary text-white">
                 <th scope="col">ID</th>
                 <th scope="col">nombre</th>
-                <th scope="col">Categoria</th>
                 <th scope="col">Descripción</th>
-                <th scope="col">Precio</th>
                 <th scope="col">Acciones</th>
                 </thead>
                 <tbody>
-                @foreach($tours as $tour)
+                @foreach($categories as $category)
                     <tr>
-                        <td>{{$tour->id}}</td>
-                        <td>{{$tour->name}}</td>
-                        <td>{{$tour->category->name}}</td>
-                        <td>{{$tour->description}}</td>
-                        <td>{{$tour->amount}}</td>
+                        <td>{{$category->id}}</td>
+                        <td>{{$category->name}}</td>
+                        <td>{{$category->description}}</td>
                         <td>
-                            <form action="{{route('tours.destroy',$tour->id)}}" method="post">
-                                <a href="tours/{{$tour->id}}/edit" class="btn btn-info">Editar</a>
-                                <a href="{{ route('station.index', $tour->id) }}" class="btn btn-success">Lugares
-                                    Turisticos</a>
+                            <form action="{{route('categories.destroy',$category->id)}}" method="post">
+                                <a href="categories/{{$category->id}}/edit" class="btn btn-info">Editar</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Borrar</button>
@@ -60,5 +54,3 @@
         });
     </script>
 @stop
-
-

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Tour;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -25,13 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            /* 'slug' => [
-                'required',
-                Rule::unique('tours')->ignore($this->id),
-            ], */
-            'amount' => 'required|numeric',
-            'description' => 'required'
+            //
         ];
     }
 }

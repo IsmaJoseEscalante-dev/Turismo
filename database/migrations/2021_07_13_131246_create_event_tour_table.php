@@ -17,7 +17,6 @@ class CreateEventTourTable extends Migration
             $table->id();
             $table->foreignId('tour_id')->constrained();
             $table->foreignId('event_id')->constrained();
-            $table->foreignId('service_id')->constrained();
             $table->timestamps();
         });
     }

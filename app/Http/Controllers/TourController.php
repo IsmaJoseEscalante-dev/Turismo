@@ -7,6 +7,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Requests\Tour\CreateRequest;
 use App\Http\Requests\Tour\UpdateRequest;
+use App\Models\Category;
 
 class TourController extends Controller
 {
@@ -19,18 +20,19 @@ class TourController extends Controller
     public function index()
     {
         return view('admin.tours.index',[
-            'tours' => Tour::all()
+            'tours' => Tour::all(),
         ]);
     }
 
     public function create()
     {
-        return view('admin.tours.create');
+        $categories = Category::all();
+        return view('admin.tours.create',compact('categories'));
     }
 
     public function store(CreateRequest $request)
     {
-        Tour::create($request->validated());
+        $tour = Tour::create($request->all());
         return redirect()->route('tours.index');
     }
 
@@ -41,12 +43,13 @@ class TourController extends Controller
 
     public function edit(Tour $tour)
     {
-        return view('admin.tours.edit', compact('tour'));
+        $categories = Category::all();
+        return view('admin.tours.edit', compact('tour','categories'));
     }
 
     public function update(UpdateRequest $request,Tour $tour)
     {
-        $tour->update($request->validated());
+        $tour->update($request->all());
 
         return redirect()->route('tours.index');
     }
