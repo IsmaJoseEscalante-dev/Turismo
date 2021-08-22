@@ -47,9 +47,4 @@ class HomeController extends Controller
         var_dump($tours);
         return view('dashboard',compact('tours','stations','names','values'));
     }
-
-    public function pagar()
-    {
-        return view('pagar');
-    }
 }

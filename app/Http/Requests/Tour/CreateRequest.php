@@ -27,7 +27,9 @@ class CreateRequest extends FormRequest
             'name' => 'required',
             'slug' => 'required|unique:tours',
             'amount' => 'required|numeric',
-            'description' => 'required'
+            'description' => 'required',
+            'image' => 'required',
+            'category_id' => 'required|exists:App\Models\Category,id'
         ];
     }
 }

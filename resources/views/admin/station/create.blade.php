@@ -16,6 +16,12 @@
                     <label for="" class="form-label">Descripción</label><br>
                     <input id="description" name="description" type="text" class="form-control" tabindex="2">
                 </div>
+
+                {{-- <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                    <input class="form-control" type="file" id="formFileMultiple" multiple>
+                  </div> --}}
+
                 <input type="hidden" name="tour_id" value="{{ $tour->id }}">
 
                 <a href="{{ route('station.index',$tour->id) }}" class="btn btn-secondary" tabindex="5">Cancelar</a>

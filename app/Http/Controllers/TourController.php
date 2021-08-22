@@ -20,7 +20,7 @@ class TourController extends Controller
     public function index()
     {
         return view('admin.tours.index',[
-            'tours' => Tour::all(),
+            'tours' => Tour::with('image')->get(),
         ]);
     }
 
@@ -32,7 +32,12 @@ class TourController extends Controller
 
     public function store(CreateRequest $request)
     {
-        $tour = Tour::create($request->all());
+        $tour = Tour::create($request->validated());
+        $path = $request->file('image')->store('public');
+
+        $image = new Image(['image' => $path]);
+
+        $tour->image()->save($image);
         return redirect()->route('tours.index');
     }
 

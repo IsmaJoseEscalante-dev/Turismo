@@ -5,8 +5,6 @@
 @section('content')
 
 
-
-
 @section('content')
 
 <div class="header bg-primary pb-6">

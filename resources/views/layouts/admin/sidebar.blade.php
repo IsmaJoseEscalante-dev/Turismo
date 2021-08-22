@@ -27,6 +27,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('categories.index') }}" class="nav-link {{ Request::is('categories') ? 'active' :'' }}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Categorias
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('tours.index') }}" class="nav-link {{ Request::is('tours') ? 'active' :'' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>

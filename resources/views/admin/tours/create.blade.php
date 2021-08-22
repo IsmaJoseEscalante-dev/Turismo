@@ -7,7 +7,7 @@
     <div class="content">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('tours.store') }}" method="POST">
+                <form action="{{ route('tours.store') }}" method="POST" enctype = 'multipart/form-data'>
                     @csrf
                     <div class="mb-3">
                         <label for="" class="form-label">Nombre</label>
@@ -28,6 +28,15 @@
                         @enderror
                     </div>
                     <div class="mb-3">
+                    <label for="" class="form-label">Seleccionar categoria</label>
+                    <select class = 'form-control' name="category_id" value ='category_id' id = 'inputCategoryid'>
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}"
+                                >{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                    <div class="mb-3">
                         <label for="" class="form-label">Seleccionar categoria</label>
                         <select class = 'form-control' name="category_id" value ='category_id' id = 'inputCategoryid'>
                             @foreach ($categories as $category)
@@ -35,7 +44,10 @@
                             @endforeach
                         </select>
                     </div>
-
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Seleccionar imagen</label>
+                        <input type="file" name="image" id="image">
+                    </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Precio</label><br>
                         <input id="amount" name="amount" type="number" class="form-control" tabindex="3">
@@ -56,6 +68,8 @@
                     </div>
                     <a href="/tours" class="btn btn-secondary" tabindex="5">Cancelar</a>
                     <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                </div>
                 </form>
             </div>
         </div>

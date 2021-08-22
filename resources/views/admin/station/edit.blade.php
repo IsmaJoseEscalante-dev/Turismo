@@ -2,9 +2,6 @@
 
 @section('title', 'Dashboard')
 
-@section('styles')
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-@endsection
 
 @section('content')
     <h3>MODIFICAR EXCURSION</h3>
@@ -47,7 +44,3 @@
     </div>
 @stop
 
-
-@section('js')
-    <script src="{{ asset('js/app.js') }}"></script>
-@stop

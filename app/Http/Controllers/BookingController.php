@@ -2,84 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Booking\StoreRequest;
 use App\Models\Booking;
-use Illuminate\Http\Request;
+use App\Models\Cart;
+use App\Models\Tour;
+use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function store(StoreRequest $request)
     {
-        //
+        return DB::transaction(function () use ($request) {
+            $cart = Cart::create($request->validated());
+
+            for ($i = 0; $i < count($request->input('names')); $i++) {
+                $cart->passengers()->create([
+                    'name' => $request->input('names')[$i]['name'],
+                    'lastName' => $request->input('names')[$i]['lastName'],
+                    'user_id' => $request->input('user_id'),
+                    'tour_id' => $request->input('tour_id'),
+                ]);
+            }
+        });
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        return view('user.showReservation', [
+            'booking' => Booking::where('id', $id)->with(['passengers', 'tour'])->firstOrFail()
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function bookingTour($id)
     {
-        //
+        return view('user.booking')->with([
+            'cart' => Cart::where('tour_id', $id)->with('passengers','tour')->firstOrFail()
+        ]);
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Booking $booking)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Booking $booking)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Booking $booking)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Booking $booking)
-    {
-        //
-    }
 }

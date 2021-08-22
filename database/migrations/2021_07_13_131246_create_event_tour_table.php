@@ -13,10 +13,10 @@ class CreateEventTourTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_service_tour', function (Blueprint $table) {
+        Schema::create('event_tour', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tour_id')->constrained();
-            $table->foreignId('event_id')->constrained();
+            $table->foreignId('tour_id')->constrained()->onDelete('cascade');
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
