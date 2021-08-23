@@ -2,10 +2,6 @@
 
 @section('title', 'Dashboard')
 
-@section('styles')
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
     <h3>MODIFICAR EXCURSION</h3>
     <div class="card">
@@ -27,12 +23,12 @@
                         @method('PUT')
                         <div class="form-group mt-3">
                             <label for="" class="form-label">Nombre</label>
-                            <input id="name" name="name" type="text" class="form-control" value="{{$station->name}}">
+                            <input id="name" name="name" type="text" class="form-control" value="{{ old('name', $station->name) }}">
                         </div>
                         <div class="form-group">
                             <label for="" class="form-label">Descripción</label><br>
                             <textarea class="form-control" name="description"
-                                      rows="6">{{$station->description}}</textarea>
+                                      rows="6">{{ old('description', $station->description)}}</textarea>
                         </div>
                         <a href="{{ route('station.index', $station->tour_id) }}" class="btn btn-secondary">Cancelar</a>
                         <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -45,9 +41,8 @@
 
         </div>
     </div>
-@stop
-
+@endsection
 
 @section('js')
-    <script src="{{ asset('js/app.js') }}"></script>
-@stop
+<script src="{{ asset('js/app.js') }}"></script>
+@endsection

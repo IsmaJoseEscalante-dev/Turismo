@@ -19,6 +19,22 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
+                    <a href="{{ route('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' :'' }}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('categories.index') }}" class="nav-link {{ Request::is('categories') ? 'active' :'' }}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Categorias
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('tours.index') }}" class="nav-link {{ Request::is('tours') ? 'active' :'' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
@@ -31,6 +47,14 @@
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Eventos
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('comments.index') }}" class="nav-link {{ Request::is('comments') ? 'active' :'' }}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            comentarios
                         </p>
                     </a>
                 </li>

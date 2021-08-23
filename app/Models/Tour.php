@@ -2,18 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tour extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','description','amount','slug'];
+    protected $fillable = ['name','description','amount','slug','category_id'];
 
     public function stations()
     {
         return $this->hasMany(Station::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function image()

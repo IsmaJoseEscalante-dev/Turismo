@@ -26,12 +26,15 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'slug' => [
+            /* 'slug' => [
                 'required',
                 Rule::unique('tours')->ignore($this->id),
-            ],
+            ], */
+            'image' => 'mimes:jpeg,png',
             'amount' => 'required|numeric',
             'description' => 'required'
+            //chuuu que fue men...a dsfdsafds
+
         ];
     }
 }

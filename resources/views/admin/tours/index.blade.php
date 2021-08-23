@@ -13,7 +13,8 @@
                 <thead class="bg-primary text-white">
                 <th scope="col">ID</th>
                 <th scope="col">nombre</th>
-                <th scope="col">Descripción</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Image</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Acciones</th>
                 </thead>
@@ -22,13 +23,18 @@
                     <tr>
                         <td>{{$tour->id}}</td>
                         <td>{{$tour->name}}</td>
-                        <td>{{$tour->description}}</td>
+                        <td>{{$tour->category->name}}</td>
+                        <td>
+                        @if($tour->image)
+                            <img width = "40px" height= '40px'
+                            src="{{ Storage::url($tour->image->image) }}"  alt="">
+                        @endif
+                        </td>
                         <td>{{$tour->amount}}</td>
                         <td>
                             <form action="{{route('tours.destroy',$tour->id)}}" method="post">
                                 <a href="tours/{{$tour->id}}/edit" class="btn btn-info">Editar</a>
-                                <a href="{{ route('station.index', $tour->id) }}" class="btn btn-success">Lugares
-                                    Turisticos</a>
+                                <a href="{{ route('station.index', $tour->id) }}" class="btn btn-success">Paradas</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Borrar</button>
@@ -40,14 +46,14 @@
             </table>
         </div>
     </div>
-@stop
+@endsection
 
-@section('styles')
+@section('css')
     <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-@stop
+@endsection
 
 @section('js')
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
     <script>
@@ -57,6 +63,6 @@
             });
         });
     </script>
-@stop
+@endsection
 
 

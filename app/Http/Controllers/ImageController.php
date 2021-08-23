@@ -12,13 +12,10 @@ class ImageController extends Controller
 {
     public function index($id)
     {
-        $images = Image::where('imageable_id',$id)->get();
+        $images = Image::where('imageable_id',$id)
+            ->where('imageable_type','App\\Models\\Station')
+            ->get();
         return $images;
-    }
-
-    public function storeTour($id)
-    {
-        //
     }
 
     public function storeStation(Request $request,$id)

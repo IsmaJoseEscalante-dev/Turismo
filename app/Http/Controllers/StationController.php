@@ -18,7 +18,7 @@ class StationController extends Controller
     {
 
         $nameTour = Tour::where('id', $id)->first();
-        $stations = Station::where('tour_id', $id)->get();
+        $stations = Station::where('tour_id', $id)->with('images')->get();
 
         return view('admin.station.index', compact('stations', 'nameTour'));
     }

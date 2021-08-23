@@ -7,7 +7,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
 
-                        <h5 class="modal-title" id="exampleModalLabel">Create new image</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Crear nueva imagen</h5>
                         <button type="button" class="close btn btn-light" @click.prevent="closeModal('#modalStore')">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -22,7 +22,7 @@
                                 <span v-if="errors.image" class="text-danger">{{ errors.image[0] }}</span>
                             </div>
                             <div>
-                                <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                                <button type="submit" class="btn btn-primary btn-block">Agregar</button>
                             </div>
                         </form>
                     </div>
@@ -33,10 +33,10 @@
         <div class="col-md-12 mt-3">
             <div class="card-body">
                 <div class=" d-flex justify-content-between align-items-center">
-                    <h4 class="text-muted">Images</h4>
+                    <h4 class="text-muted">Imagenes</h4>
                     <button type="button" class="btn btn-success btn-sm" id="storeModal"
                             @click.prevent="createImage()">
-                        + Create
+                        + Crear
                     </button>
                 </div>
                 <div class="row">
@@ -45,10 +45,10 @@
                          :key="index">
                         <a  class="item-wrap fancybox">
                             <div class="work-info">
-                                <img class="img-fluid" width="300px" :src="/storage/+image.image.slice(6)">
+                                <img class="img-fluid" width="300px" height="400px" :src="/storage/+image.image.slice(6)">
                                 <span>
                                     <a class="btn btn-light" role="button" @click.prevent="showImage(image)">
-                                        Show
+                                        Ver
                                     </a>
                                     <a class="btn btn-danger" role="button" @click.prevent="deleteImage(image,index)">
                                         Eliminar
