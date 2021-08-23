@@ -11,7 +11,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="" class="form-label">Nombre</label>
-                        <input id="name" name="name" type="text" class="form-control" tabindex="1">
+                        <input id="name" name="name" type="text" value="{{ old('name') }}" class="form-control">
                         @error('name')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Nombre amigable</label>
-                        <input id="slug" name="slug" type="text" class="form-control" readonly>
+                        <input id="slug" name="slug" type="text" value="{{ old('slug') }}" class="form-control" readonly>
                         @error('slug')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -35,22 +35,19 @@
                                 >{{$category->name}}</option>
                         @endforeach
                     </select>
-                </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Seleccionar categoria</label>
-                        <select class = 'form-control' name="category_id" value ='category_id' id = 'inputCategoryid'>
-                            @foreach ($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                            @endforeach
-                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Seleccionar imagen</label>
-                        <input type="file" name="image" id="image">
+                        <input type="file" name="image" id="image" accept="image/*">
+                        @error('image')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="" class="form-label">Precio</label><br>
-                        <input id="amount" name="amount" type="number" class="form-control" tabindex="3">
+                        <label for="" class="form-label" >Precio</label><br>
+                        <input id="amount" name="amount" value="{{ old('amount') }}" type="number" class="form-control">
                         @error('amount')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -59,7 +56,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Descripción</label><br>
-                        <textarea class="form-control" name="description" id="description" rows="6"></textarea>
+                        <textarea class="form-control" name="description"  value="{{ old('description') }}"></textarea>
                         @error('description')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -81,7 +78,7 @@
 @stop
 
 @section('js')
-
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#name").keyup(function () {

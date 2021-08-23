@@ -35,6 +35,11 @@
                 <i class="fas fa-expand-arrows-alt"></i>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('comments.unread') }}" role="button" id="app">
+                <i class="fas fa-bell"></i><count-comment></count-comment>
+            </a>
+        </li>
         <li class="nav-item dropdown mr-3">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false" v-pre>

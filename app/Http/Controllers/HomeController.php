@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Station;
 use App\Models\Tour;
 use Illuminate\Http\Request;
@@ -23,9 +24,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $request->user()->authorizeRoles(['user', 'admin']);
+        return view('home')->with([
+            'bookings' => Booking::where('user_id', auth()->id())->orderByDesc('date')->get()
+        ]);
     }
 
     public function dashboard()

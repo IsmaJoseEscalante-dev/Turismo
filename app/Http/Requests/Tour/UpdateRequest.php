@@ -30,8 +30,11 @@ class UpdateRequest extends FormRequest
                 'required',
                 Rule::unique('tours')->ignore($this->id),
             ], */
+            'image' => 'mimes:jpeg,png',
             'amount' => 'required|numeric',
             'description' => 'required'
+            //chuuu que fue men...a dsfdsafds
+
         ];
     }
 }

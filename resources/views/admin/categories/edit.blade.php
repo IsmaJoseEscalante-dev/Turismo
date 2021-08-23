@@ -11,7 +11,7 @@
                 @method('PUT')
                 <div class="mb-3">
                     <label for="" class="form-label">Nombre</label>
-                    <input id="name" name="name" type="text" class="form-control" value="{{$category->name}}">
+                    <input id="name" name="name" type="text" class="form-control" value="{{ old('name', $category->name) }}">
                     @error('name')
                     <span class="invalid-feedback d-block" role="alert">
                     <strong>{{ $message }}</strong>
@@ -20,7 +20,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Nombre amigable</label>
-                    <input id="slug" name="slug" type="text" class="form-control" readonly value="{{$category->slug}}">
+                    <input  name="slug" type="text" class="form-control" readonly value="{{ old('slug', $category->slug) }}">
                     @error('slug')
                     <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -30,7 +30,7 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Descripción</label><br>
                     <textarea class="form-control" name="description" id="description"
-                              rows="6">{{ $category->description }}</textarea>
+                              rows="6">{{ old('description', $category->description) }}</textarea>
                     @error('description')
                     <span class="invalid-feedback d-block" role="alert">
                     <strong>{{ $message }}</strong>
@@ -42,9 +42,10 @@
             </form>
         </div>
     </div>
-@stop
+@endsection
 
 @section('js')
+<script src="{{ asset('js/app.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#name").keyup(function () {
@@ -74,4 +75,4 @@
         }
 
     </script>
-@stop
+@endsection

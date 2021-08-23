@@ -11,7 +11,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="" class="form-label">Nombre</label>
-                        <input id="name" name="name" type="text" class="form-control" tabindex="1">
+                        <input id="name" name="name" type="text" value="{{ old('name') }}" class="form-control">
                         @error('name')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Nombre amigable</label>
-                        <input id="slug" name="slug" type="text" class="form-control" readonly>
+                        <input id="slug" name="slug" type="text" class="form-control" value="{{ old('slug') }}" readonly>
                         @error('slug')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -29,26 +29,27 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Descripción</label><br>
-                        <textarea class="form-control" name="description" id="description" rows="6"></textarea>
+                        <textarea class="form-control" name="description" id="description" rows="6">{{  old('description') }}</textarea>
                         @error('description')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
-                    <a href="/categories" class="btn btn-secondary" tabindex="5">Cancelar</a>
-                    <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
+                    <a href="/categories" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>
         </div>
     </div>
-@stop
+@endsection
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
+@endsection
 
 @section('js')
+<script src="{{ asset('js/app.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#name").keyup(function () {
@@ -78,4 +79,4 @@
         }
 
     </script>
-@stop
+@endsection

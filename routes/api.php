@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('comments/{slug}', [CommentController::class,'comments'])->name('comments');

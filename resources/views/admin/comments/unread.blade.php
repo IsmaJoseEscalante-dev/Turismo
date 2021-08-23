@@ -3,7 +3,7 @@
 @section('title', 'Comments')
 
 @section('content')
-    <div class="container">
+    <div class="container my-3">
         <div class="card">
             <div class="card-body">
                 <h3>Comentarios no leidos</h3>
@@ -54,4 +54,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+<script src="{{ asset('js/app.js') }}"></script>
 @endsection

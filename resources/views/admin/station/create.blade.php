@@ -10,11 +10,11 @@
                 @csrf
                 <div class="mb-3">
                     <label for="" class="form-label">Nombre</label>
-                    <input id="name" name="name" type="text" class="form-control" tabindex="1">
+                    <input id="name" name="name" type="text" class="form-control" value="{{ old('name') }}">
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Descripción</label><br>
-                    <input id="description" name="description" type="text" class="form-control" tabindex="2">
+                    <input  name="description" type="text" class="form-control" value="{{ old('description') }}">
                 </div>
 
                 {{-- <div class="mb-3">
@@ -29,12 +29,13 @@
             </form>
         </div>
     </div>
-@stop
+@endsection
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
+@endsection
 
 @section('js')
-    <script> console.log('Hi!'); </script>
-@stop
+<script src="{{ asset('js/app.js') }}"></script>
+@endsection
+

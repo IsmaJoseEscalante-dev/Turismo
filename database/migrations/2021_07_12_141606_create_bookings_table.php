@@ -15,8 +15,11 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['activo', 'disable']);
-            $table->integer('quantity');
+            $table->enum('status', ['active', 'disable'])->default('disable');
+            $table->integer('total');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('tour_id')->constrained('tours');
+            $table->date('date');
             $table->timestamps();
         });
     }

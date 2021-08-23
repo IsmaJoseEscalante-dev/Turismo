@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h4>parada <b>{{ $tour->name }}</b></h4>
+        <h4>Paradas de  <b>{{ $tour->name }}</b></h4>
         <div class="row">
             <div class="col-md-7">
                 <div class="card">

@@ -50,6 +50,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('comments.index') }}" class="nav-link {{ Request::is('comments') ? 'active' :'' }}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            comentarios
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

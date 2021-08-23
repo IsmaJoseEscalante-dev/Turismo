@@ -42,4 +42,8 @@
             </div>
         </div>
     </div>
-@stop
+@endsection
+
+@section('js')
+<script src="{{ asset('js/app.js') }}"></script>
+@endsection

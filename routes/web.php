@@ -8,6 +8,7 @@ use App\Http\Controllers\StationController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CommentController;
 
 Auth::routes();
 

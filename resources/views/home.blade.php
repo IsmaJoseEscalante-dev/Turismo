@@ -66,7 +66,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($bookings as $booking)
+                            @forelse($bookings as $booking)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $booking->tour->name }}</td>
@@ -77,7 +77,11 @@
                                         <a href="{{ route('booking.show', $booking->id) }}" class="btn btn-primary">Ver</a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td>No hay reservas</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

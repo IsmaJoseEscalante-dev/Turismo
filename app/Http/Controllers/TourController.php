@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Tour;
 use App\Models\Image;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Tour\CreateRequest;
 use App\Http\Requests\Tour\UpdateRequest;
-use App\Models\Category;
 
 class TourController extends Controller
 {
@@ -54,7 +55,12 @@ class TourController extends Controller
 
     public function update(UpdateRequest $request,Tour $tour)
     {
-        $tour->update($request->all());
+        $tour->update($request->validated());
+        if($request->hasFile('image')){
+            $image = $tour->image;
+            $image->image = $request->file('image')->store('public');
+            $image->save();
+        }
 
         return redirect()->route('tours.index');
     }

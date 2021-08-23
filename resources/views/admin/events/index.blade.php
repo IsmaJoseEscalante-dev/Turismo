@@ -2,7 +2,7 @@
 
 @section('title', 'Eventos')
 
-@section('styles')
+@section('css')
     <link href="{{ asset('plugins/FullCalendar/fullcalendar.min.css') }}" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
@@ -105,7 +105,7 @@
     <script src="{{ asset('plugins/FullCalendar/es.js') }}"></script>
     <script src="{{ asset('plugins/CKEditor/ckeditor.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>{
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/main2.js') }}"></script>
     <script>
         $(document).ready(function() {
 
