@@ -14,7 +14,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Descripción</label><br>
-                    <input  name="description" type="text" class="form-control" value="{{ old('description') }}">
+                    <textarea name="description" rows="6" class="form-control">{{ old('description') }}</textarea>
                 </div>
 
                 {{-- <div class="mb-3">
@@ -30,12 +30,3 @@
         </div>
     </div>
 @endsection
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@endsection
-
-@section('js')
-<script src="{{ asset('js/app.js') }}"></script>
-@endsection
-

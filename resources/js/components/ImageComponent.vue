@@ -7,7 +7,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
 
-                        <h5 class="modal-title" id="exampleModalLabel">Crear nueva imagen</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Registrar nueva imagen</h5>
                         <button type="button" class="close btn btn-light" @click.prevent="closeModal('#modalStore')">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -45,7 +45,7 @@
                          :key="index">
                         <a  class="item-wrap fancybox">
                             <div class="work-info">
-                                <img class="img-fluid" width="300px" height="400px" :src="/storage/+image.image.slice(6)">
+                                <img width="100%" height="200px" :src="/storage/+image.image.slice(6)">
                                 <span>
                                     <a class="btn btn-light" role="button" @click.prevent="showImage(image)">
                                         Ver
@@ -114,6 +114,7 @@ export default {
                 })
         },
         closeModal(name) {
+            this.errors = []
             $(name).modal('hide')
         },
         showImage(image) {

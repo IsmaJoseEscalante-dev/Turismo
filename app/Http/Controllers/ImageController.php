@@ -12,19 +12,20 @@ class ImageController extends Controller
 {
     public function index($id)
     {
-        $images = Image::where('imageable_id',$id)
+        return Image::where('imageable_id',$id)
             ->where('imageable_type','App\\Models\\Station')
             ->get();
-        return $images;
     }
 
     public function storeStation(Request $request,$id)
     {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
         $station = Station::findOrFail($id);
         $path = $request->file('image')->store('public');
         $image = new Image(['image' => $path]);
         $station->images()->save($image);
-        return;
     }
 
     public function deleteStation($id)

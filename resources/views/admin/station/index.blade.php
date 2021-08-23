@@ -48,12 +48,11 @@
     </div>
 @stop
 
-@section('css')
+@section('style')
     <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 @stop
 
 @section('js')
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
     <script>

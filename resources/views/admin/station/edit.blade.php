@@ -2,6 +2,10 @@
 
 @section('title', 'Dashboard')
 
+@section('style')
+
+@endsection
+
 @section('content')
     <h3>MODIFICAR EXCURSION</h3>
     <div class="card">
@@ -16,7 +20,7 @@
                        aria-controls="profile" aria-selected="false">Imagenes</a>
                 </li>
             </ul>
-            <div class="tab-content" id="app">
+            <div class="tab-content">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <form action='{{ route('station.update', $station->id) }}' method="POST">
                         @csrf
@@ -35,14 +39,12 @@
                     </form>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
                         <image-component station="{{$station->id}}"></image-component>
+
                 </div>
             </div>
 
         </div>
     </div>
-@endsection
-
-@section('js')
-<script src="{{ asset('js/app.js') }}"></script>
 @endsection

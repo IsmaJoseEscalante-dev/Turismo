@@ -44,8 +44,7 @@
     </div>
 @endsection
 
-@section('js')
-<script src="{{ asset('js/app.js') }}"></script>
+@section('style')
     <script>
         $(document).ready(function () {
             $("#name").keyup(function () {

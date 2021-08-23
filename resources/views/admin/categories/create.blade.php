@@ -44,12 +44,11 @@
     </div>
 @endsection
 
-@section('css')
+@section('style')
     <link rel="stylesheet" href="/css/admin_custom.css">
 @endsection
 
 @section('js')
-<script src="{{ asset('js/app.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#name").keyup(function () {

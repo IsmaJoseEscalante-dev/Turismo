@@ -36,7 +36,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('comments.unread') }}" role="button" id="app">
+            <a class="nav-link" href="{{ route('comments.unread') }}" role="button">
                 <i class="fas fa-bell"></i><count-comment></count-comment>
             </a>
         </li>
