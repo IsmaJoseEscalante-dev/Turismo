@@ -1,16 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-center mt-3">
-                        <button class="btn btn-primary" disabled>Iniciar Sesión</button>
-                        <a href="{{ route('register') }}" class="btn btn-primary mx-4">Register</a>
-                    </div>
-                    <h3 class="text-center py-3">Iniciar Sesión</h3>
+
+                    <h3 class="text-center py-3">Login</h3>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -39,12 +37,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-8 offset-md-2">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        {{ __('Recuerdamé') }}
                                     </label>
                                 </div>
                             </div>
@@ -52,16 +50,24 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-2">
-                                <button type="submit" class="btn btn-primary btn-block">
+                                <button type="submit" class="btn btn-primary btn-block" style="color:#fff !important;">
                                     {{ __('Login') }}
                                 </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
                             </div>
+
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            @if (Route::has('password.request'))
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                {{ __('Olvidé mi contraseña?') }}
+                            </a>
+                        @endif
+
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            {{-- <button class="btn btn-primary" disabled>Entrar</button> --}}
+                            <p>¿No tiene cuenta todavia? <a class = "register" href="{{ route('register') }}" >Creála desde aquí</a></p>
+
                         </div>
                     </form>
                 </div>
@@ -69,4 +75,19 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('css')
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@500;600;700&display=swap");
+        h3{
+            font-family:'Raleway' !important;
+            color:#14505C !important;
+        }
+
+        .btn, .register{
+            color:#14505C !important;
+        }
+
+</style>
 @endsection

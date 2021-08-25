@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tour;
+use App\Models\User;
 use App\Models\Booking;
 use App\Models\Station;
-use App\Models\Tour;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -35,20 +37,34 @@ class HomeController extends Controller
     public function dashboard()
     {
         $tours = Tour::count();
+        $users = User::count();
 
-        $datos = Tour::select(['name'])
+        $datosTS = Tour::select(['name'])
         ->withCount('stations')
         ->get();
+
+        $datosTC = Category::select(['name'])
+        ->withCount('tours')
+        ->get();
+
         $stations = Station::count();
-        $names = array();
-        $values = array();
-        foreach ($datos as $dato) {
-            array_push($names , $dato->name);
-            array_push($values , $dato->stations_count);
+
+        $namesTour = array();
+        $countStations = array();
+        foreach ($datosTS  as $dato) {
+            array_push($namesTour , $dato->name);
+            array_push($countStations  , $dato->stations_count);
         }
-        print_r($values);
+
+        $namesCategory = array();
+        $countTours = array();
+        foreach ($datosTC as $dato) {
+            array_push($namesCategory , $dato->name);
+            array_push($countTours , $dato->tours_count);
+        }
+        /* print_r($values);
         print_r( $names);
-        var_dump($tours);
-        return view('dashboard',compact('tours','stations','names','values'));
+        var_dump($tours); */
+        return view('dashboard',compact('tours','stations','namesCategory','countTours','namesTour','countStations','users'));
     }
 }

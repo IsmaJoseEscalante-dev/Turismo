@@ -18,7 +18,11 @@ class CreateToursTable extends Migration
             $table->foreignId('category_id')->constrained()->nullable();;
             $table->string('name');
             $table->string('slug')->unique();
-            $table->text('description');
+            $table->text('itinerario');
+            $table->text('services');
+            $table->text('tips');
+            $table->text('description_tour');
+            $table->text('description_place');
             $table->decimal('amount',8,2);
             $table->timestamps();
         });

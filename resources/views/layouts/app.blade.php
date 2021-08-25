@@ -17,14 +17,31 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
+    <style>
+    @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@500;600;700&display=swap");
+        .navbar-light .navbar-nav .nav-link{
+            font-family:'Raleway' !important;
+            color:#14505C !important;
+        }
+        .navbar .navbar-nav .nav-item a{
+            font-family:'Raleway' !important;
+            color:#14505C !important;
+        }
+        /* button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled){
+            border:0;
+        } */
+
+    </style>
+
     @yield('css')
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
+        <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" style="color:#14505C">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -42,29 +59,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Home</a>
-                            <div id="indicator"></div>
-                        </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Servicios</a>
-                            <div id="indicator"></div>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Sobre nosotros</a>
-                            <div id="indicator"></div>
-                        </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -73,6 +72,9 @@
                                     <a href="{{ route('home') }}" class="nav-link">Home</a>
                                 </li>
                             @else
+                            <li class="nav-item">
+                                    <a href="{{ route('home') }}" class="nav-link">Home</a>
+                                </li>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -99,6 +101,7 @@
             </div>
 
         </nav>
+
 
         <main class="py-4">
             @yield('content')

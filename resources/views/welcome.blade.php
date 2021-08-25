@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/png">
 
     <!--=============== REMIXICONS ===============-->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -17,17 +17,15 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
 
-    <!-- <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
-    -->
-
     <title>Responsive Website Travel</title>
 </head>
 
 <body>
     <header class="header" id="header">
         <nav class="nav container">
-            <a href="#" class="nav__logo">Travel</a>
+            <a href="#" class="nav__logo">{{ config('app.name', 'Laravel') }}</a>
 
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
@@ -38,11 +36,43 @@
                         <a href="#place" class="nav__link">Servicios</a>
                     </li>
                     <li class="nav__item">
-                        <a href="#discover" class="nav__link">Descubrí </a>
-                    </li>
-                    <li class="nav__item">
                         <a href="#about" class="nav__link"> Nuesta Agencia</a>
                     </li>
+                    <li class="nav__item">
+                        <a href="#discover" class="nav__link">Descubrí </a>
+                    </li>
+                    @guest
+                            @if (Route::has('login'))
+                                <li class="nav__item">
+                                    <a class="nav__link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            @if (Request::is('/'))
+                                <li class="nav__item">
+                                    <a href="{{ route('home') }}" class="nav__link">Home</a>
+                                </li>
+                            @else
+                                <li class="nav__item dropdown">
+                                    <a id="navbarDropdown" class="nav__link dropdown-toggle" href="#" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endif
+                        @endguest
                 </ul>
 
                 <div class="nav__dark">
@@ -59,7 +89,6 @@
             </div>
         </nav>
     </header>
-
     <main class="main">
         <!--==================== HOME ====================-->
         <section class="home" id="home">
@@ -143,6 +172,38 @@
                     </div>
                 @endforeach
 
+        </section>
+        <section class="place section" id="event">
+            <h2 class="section__title">Proximos Eventos</h2>
+
+            <div class="place__container container grid">
+                <!--==================== PLACES CARD 1 ====================-->
+
+                @foreach ($events as $event)
+                    @foreach ($event->tours as $tour)
+                    <div class="place__card">
+                        <img src="{{ asset(Storage::url($tour->image->image)) }}" alt="" class="place__img">
+
+                        <div class="place__content">
+                            <span class="place__rating">
+                                <i class="ri-star-line place__rating-icon"></i>
+                                <span class="place__rating-number">4,8</span>
+                            </span>
+
+                            <div class="place__data">
+                                <h3 class="place__title">{{ $tour->name }}</h3>
+                                <span class="place__subtitle">{{ $tour->category->name }}</span>
+                                <span class="place__subtitle">{{ $event->start }}</span>
+                                <span class="place__price">{{ $tour->amount }}</span>
+                            </div>
+                        </div>
+
+                        <a href="{{ route('paradas', $tour->slug) }}" class="button button--flex place__button">
+                            <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                    @endforeach
+                @endforeach
         </section>
 
         <!--==================== ABOUT ====================-->

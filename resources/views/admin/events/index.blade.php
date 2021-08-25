@@ -109,6 +109,11 @@
         $(document).ready(function() {
 
             let editor;
+            ClassicEditor.editorConfig = function( config ) {
+                config.extraPlugins = 'ckeditorfa';
+                config.allowedContent = true;
+                config.contentsCss = '/adminlte/plugins/fontawesome-free/fontawesome.min.css';
+            };
             ClassicEditor
                 .create(document.querySelector('#txtDescription'))
                 .then(newEditor => {
@@ -245,6 +250,7 @@
                 $('#txtDescription').val('');
                 $('#txtTours').val('');
                 $('#txtTours').trigger('change');
+                editor.setData("")
             }
         });
     </script>

@@ -162,7 +162,7 @@ input[type=number]::-webkit-inner-spin-button {
     width: 30px !important;
     outline: none !important;
     border: none !important;
-    color: #777 !important;
+    color: #14505C !important;
     padding: 0 !important;
     display: inline !important;
 }
@@ -171,8 +171,8 @@ input[type=number]::-webkit-inner-spin-button {
     height: 28px;
     width: 28px;
     background: #fff;
-    border: 2px solid #268fc7;
-    color: #268fc7;
+    border: 2px solid #14505C;
+    color: #14505C;
     font-size: 15px;
     margin: 0 7px;
 }
@@ -185,6 +185,9 @@ input[type=number]::-webkit-inner-spin-button {
 
 .vdp-datepicker__calendar .cell.selected {
     color: white;
-    background: #268fc7 !important;
+    background: #14505C !important;
+}
+.vdp-datepicker__calendar .cell:hover{
+   border: 1px solid #14505C !important;
 }
 </style>

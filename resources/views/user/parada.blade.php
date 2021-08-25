@@ -1,116 +1,108 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
-        <h4>Paradas de  <b>{{ $tour->name }}</b></h4>
+    <div class="container">
+        <h4>Preservar a  <b>{{ $tour->name }}</b></h4>
+
+
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-6 col-lg-7 col-xl-8">
                 <div class="card">
                     <div class="card-body">
-                        <div id="slider" class="flexslider" style="margin:0 0 15px;">
-                            <ul class="slides">
-                                <li>
-                                    <img src="{{ asset('imagenes/slider1.jpg') }}"/>
-                                </li>
-                                <li>
-                                    <img src="{{ asset('imagenes/slider2.jpg') }}"/>
-                                </li>
-                                <li>
-                                    <img src="{{ asset('imagenes/slider3.jpg') }}"/>
-                                </li>
-                                <li>
-                                    <img src="{{ asset('imagenes/slider4.jpg') }}"/>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="carousel" class="flexslider">
-                            <ul class="slides ul-flex">
-                                <li class="ml-3 li-flex">
-                                    <img src="{{ asset('imagenes/slider1.jpg') }}" alt="img1"/>
-                                </li>
-                                <li class="li-flex">
-                                    <img src="{{ asset('imagenes/slider2.jpg') }}" alt="img2"/>
-                                </li>
-                                <li class="li-flex">
-                                    <img src="{{ asset('imagenes/slider3.jpg') }}" alt="img3"/>
-                                </li>
-                                <li class="li-flex">
-                                    <img src="{{ asset('imagenes/slider4.jpg') }}" alt="img4"/>
-                                </li>
-                            </ul>
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @foreach ($paradas as $parada)
+                                    @if ($loop->iteration == 1)
+                                        @foreach ($parada->images as $image)
+                                            <div class="carousel-item active">
+                                                <img src="{{ Storage::url($image->image) }}" class="d-block w-100"
+                                                    alt="...">
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        @foreach ($parada->images as $image)
+                                            <div class="carousel-item">
+                                                <img src="{{ Storage::url($image->image) }}" class="d-block w-100"
+                                                    alt="...">
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+                                @endforeach
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                                data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
                     </div>
                 </div>
+                {{-- Descripcion del tour --}}
+                <section class="mt-5">
+                    <div class="text-justify">
+                        <p class="lead">{!! $tour->description_tour !!}</p>
+                    </div>
+                </section>
+                <section class="mt-5">
+                    <h3 class="color-primary">Descripcion</h3>
+                    <div class="text-justify">
+                        <p class="lead">{!! $tour->description_place !!}</p>
+                    </div>
+                </section>
+                {{-- Descripcion del tour --}}
+                <section class="mt-5">
+                    <h3 class="color-primary">Itinerario</h3>
+                    <div>
+                        <p class="lead">{!! $tour->itinerario !!}</p>
+                    </div>
+                </section>
+
+                <section class="mt-5">
+                    <h3 class="color-primary">Servicios</h3>
+                    <div>
+                        <p class="lead">{!! $tour->services !!}</p>
+                    </div>
+                </section>
+
+                <section class="mt-5">
+                    <h3 class="color-primary">Tips</h3>
+                    <div>
+                        <p class="lead">{!! $tour->tips !!}</p>
+                    </div>
+                </section>
             </div>
-            <div class="col-md-5 mt-3 mt-md-0">
+            <div class="col-md-6 col-lg-5 col-xl-4 mt-3 mt-md-0">
                 <div class="card">
                     <div class="card-body">
-                        <form-booking-component
-                            :tour="{{ json_encode($tour) }}"
-                        ></form-booking-component>
+                        <form-booking-component :tour="{{ json_encode($tour) }}"></form-booking-component>
                     </div>
                 </div>
             </div>
         </div>
-        {{-- Descripcion del tour --}}
-        <section>
-            <div class="row container-fluid my-3">
-                <div class="col-md-4">
-                    {{ $tour->description }}
-                </div>
-            </div>
-        </section>
 
         {{-- Comentarios --}}
-        <section>
-            <h3>Comentarios</h3>
+        <section class="mt-5">
+            <div class="text-center">
+                <h3 class="color-primary">Opiniones de nuestros clientes</h3>
+                <p class="lead">Todas las opiniones han sido escritas por clientes reales que han reservado con nosotros.
+                </p>
+            </div>
             <comment-component :tour="{{ json_encode($tour->id) }}"></comment-component>
         </section>
     </div>
 @endsection
 
-@section('style')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" href="{{ asset('plugins/FlexSlider/flexslider.css') }}" type="text/css">
+@section('css')
     <style>
-        .flexslider {
-            margin: 0 0 !important;
+        .color-primary {
+            color: #14505C !important;
         }
 
-        .ul-flex {
-            display: flex;
-            width: 100% !important;
-            justify-content: center;
-        }
-
-        .li-flex {
-            float: none !important;
-            width: 20% !important;
-
-        }
     </style>
-@endsection
-@section('script')
-    <script src="{{ asset('plugins/FlexSlider/jquery.flexslider.js') }}"></script>
-    <script>
-        $(document).ready(function () {
-            $('#carousel').flexslider({
-                animation: "slide",
-                controlNav: false,
-                animationLoop: true,
-                slideshow: false,
-                itemWidth: 130,
-                itemMargin: 4,
-                asNavFor: '#slider'
-            });
-
-            $('#slider').flexslider({
-                animation: "slide",
-                controlNav: false,
-                animationLoop: false,
-                slideshow: false,
-                sync: "#carousel"
-            });
-        });
-    </script>
 @endsection

@@ -6,10 +6,10 @@
         <div class="col-md-8 col-lg-6">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-center mt-3">
+                    {{-- <div class="d-flex align-items-center justify-content-center mt-3">
                         <a href="{{ route('login') }}" class="btn btn-primary mx-4">Iniciar Sesión</a>
                         <button class="btn btn-primary" disabled>Registrarse</button>
-                    </div>
+                    </div> --}}
                     <h3 class="text-center py-3">Registrarse</h3>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf

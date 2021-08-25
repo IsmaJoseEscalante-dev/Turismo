@@ -26,14 +26,18 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            /* 'slug' => [
+            'slug' => [
                 'required',
-                Rule::unique('tours')->ignore($this->id),
-            ], */
-            'image' => 'mimes:jpeg,png',
+                Rule::unique('tours')->ignore($this->tour->id),
+            ],
             'amount' => 'required|numeric',
-            'description' => 'required'
-            //chuuu que fue men...a dsfdsafds
+            'description_tour' => 'required',
+            'description_place' => 'required',
+            'itinerario' => 'required',
+            'services' => 'required',
+            'tips' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_id' => 'required|exists:App\Models\Category,id'
 
         ];
     }
