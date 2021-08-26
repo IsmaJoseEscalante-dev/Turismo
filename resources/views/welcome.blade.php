@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('/imagenes/icono.jpg') }}" type="image/png">
 
     <!--=============== REMIXICONS ===============-->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -19,7 +19,7 @@
 
     <!-- Bootstrap CSS -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
-    <title>Responsive Website Travel</title>
+    <title>Alli Turismo</title>
 </head>
 
 <body>
@@ -34,6 +34,9 @@
                     </li>
                     <li class="nav__item">
                         <a href="#place" class="nav__link">Servicios</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#event" class="nav__link">Event</a>
                     </li>
                     <li class="nav__item">
                         <a href="#about" class="nav__link"> Nuesta Agencia</a>
@@ -112,7 +115,6 @@
                     <span class="home__data-subtitle">Conoce nuevos lugares</span>
                     <h1 class="home__data-title"><b>A'lli Turismo </b> Leg.14876</b><br> Agencia de <b>viajes</b> </h1>
                     <a href="#" class="button">Explore</a>
-
                 </div>
 
                 <div class="home__social">
@@ -173,6 +175,7 @@
                 @endforeach
 
         </section>
+
         <section class="place section" id="event">
             <h2 class="section__title">Proximos Eventos</h2>
 
@@ -308,7 +311,7 @@
             </section> --}}
 
         <!--==================== SUBSCRIBE ====================-->
-        <section class="subscribe section">
+        {{-- <section class="subscribe section">
             <div class="subscribe__bg">
                 <div class="subscribe__container container">
                     <h2 class="section__title subscribe__title">Subscribe Our <br> Newsletter</h2>
@@ -325,7 +328,7 @@
                     </form>
                 </div>
             </div>
-        </section>
+        </section> --}}
 
         <!--==================== SPONSORS ====================-->
         <section class="sponsor section">

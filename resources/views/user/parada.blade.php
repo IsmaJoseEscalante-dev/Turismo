@@ -2,32 +2,30 @@
 
 @section('content')
     <div class="container">
-        <h4>Preservar a  <b>{{ $tour->name }}</b></h4>
+        <h4>Reservar a <b>{{ $tour->name }}</b></h4>
 
 
         <div class="row">
             <div class="col-md-6 col-lg-7 col-xl-8">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body p-0">
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 @foreach ($paradas as $parada)
-                                    @if ($loop->iteration == 1)
-                                        @foreach ($parada->images as $image)
-                                            <div class="carousel-item active">
-                                                <img src="{{ Storage::url($image->image) }}" class="d-block w-100"
-                                                    alt="...">
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        @foreach ($parada->images as $image)
-                                            <div class="carousel-item">
-                                                <img src="{{ Storage::url($image->image) }}" class="d-block w-100"
-                                                    alt="...">
-                                            </div>
-                                        @endforeach
-                                    @endif
 
+                                    @foreach ($parada->images as $image)
+                                        @if ($loop->iteration == 1)
+                                            <div class="carousel-item active">
+                                                <img src="{{ Storage::url($image->image) }}" width="100%" height="400px"
+                                                    alt="...">
+                                            </div>
+                                        @else
+                                            <div class="carousel-item">
+                                                <img src="{{ Storage::url($image->image) }}" width="100%" height="400px"
+                                                    alt="...">
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 @endforeach
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
@@ -80,6 +78,7 @@
             <div class="col-md-6 col-lg-5 col-xl-4 mt-3 mt-md-0">
                 <div class="card">
                     <div class="card-body">
+                        <h4 class="text-right">$ {{ $tour->amount }}</h4>
                         <form-booking-component :tour="{{ json_encode($tour) }}"></form-booking-component>
                     </div>
                 </div>

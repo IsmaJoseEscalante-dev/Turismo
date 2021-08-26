@@ -1,14 +1,21 @@
 @extends('layouts.app')
-
+@section('css')
+    <style>
+        .fa-user{
+            font-size:60px;
+            color:#14505C !important;
+        }
+    </style>
+@endsection
 @section('content')
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-
-                    <h3 class="text-center py-3">Login</h3>
+                    <h2 class="text-center"><i class="fas fa-user"></i></h2>
+                    {{-- <h3 class="text-center">A'lli Turismo</h3> --}}
+                    <h3 class="text-center py-3"><B>LOGIN</B></h3>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

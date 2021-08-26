@@ -8,8 +8,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title')</title>
-
+    <title>{{ config('app.name', 'Laravel') }}| @yield('title')</title>
+    <link rel="shortcut icon" href="{{ asset('/imagenes/icono.jpg') }}" type="image/png">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -39,11 +39,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <footer class="main-footer">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-                Anything you want
+               A'lli Turismo
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-            reserved.
+            <strong>Copyright &copy; {{ now()->year }} <a href="{{ route('welcome') }}">Ir al inicio</a>.</strong> Derechos reservados
         </footer>
     </div>
     <!-- jQuery -->

@@ -13,7 +13,9 @@
         .select2-container--default .select2-selection--multiple .select2-selection__choice {
             background-color: #a846ea;
         }
-
+        .fc-unthemed td.fc-today{
+            background-color: #e8d77a !important;
+        }
     </style>
 @endsection
 
@@ -36,7 +38,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div id="descriptionEvent"></div>
+                        <div id="errors"></div>
                         <div class="form-group">
                             <label>titulo</label>
                             <input type="text" class="form-control" id="txtTitle" placeholder="Titulo del evento">
@@ -135,9 +137,9 @@
                     right: 'month,basicWeek,basicDay,agendaWeek,agendaDay'
                 },
                 dayClick: function(date) {
-                    $('#addEvent').prop("disabled", false);
-                    $('#updateEvent').prop("disabled", true);
-                    $('#destroyEvent').prop("disabled", true);
+                    $('#addEvent').css("display", "block");
+                    $('#updateEvent').css("display", "none");
+                    $('#destroyEvent').css("display", "none");
 
                     cleanForm();
                     $('#titleEvent').html("crear evento");
@@ -145,9 +147,9 @@
                     $('#modalFullCalendar').modal();
                 },
                 eventClick: function(calEvent) {
-                    $('#addEvent').prop("disabled", true);
-                    $('#updateEvent').prop("disabled", false);
-                    $('#destroyEvent').prop("disabled", false);
+                    $('#addEvent').css("display", "none");
+                    $('#updateEvent').css("display", "block");
+                    $('#destroyEvent').css("display", "block");
 
                     $('#txtId').val(calEvent.id);
                     $('#titleEvent').html(calEvent.title);
@@ -185,9 +187,10 @@
                     addEvent('/api/events/' + newEvent.id, 'PUT', newEvent, true);
                 },
                 select: function(start, end) {
-                    $('#addEvent').prop("disabled", false);
-                    $('#updateEvent').prop("disabled", true);
-                    $('#destroyEvent').prop("disabled", true);
+                    $('#addEvent').css("display", "block");
+                    $('#updateEvent').css("display", "none");
+                    $('#destroyEvent').css("display", "none");
+
                     $('#titleEvent').html("Crear evento");
                     cleanForm();
                     $('#txtFechaInicio').val(start.format());
@@ -236,8 +239,14 @@
                             $('#modalFullCalendar').modal('toggle');
                         }
                     },
-                    error: function(error) {
-                        console.log(error);
+                    error: function(xhr, status, error){
+                        var response = JSON.parse(xhr.responseText);
+                        var errorString = '<div class="alert alert-danger"><ul>';
+                        $.each( response.errors, function( key, value) {
+                            errorString += '<li>' + value + '</li>';
+                        });
+                        errorString += '</ul></div>';
+                        $("#errors").append(errorString);
                     }
                 });
             }
