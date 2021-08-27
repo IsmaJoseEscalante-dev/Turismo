@@ -19,13 +19,13 @@
 
     <!-- Bootstrap CSS -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
-    <title>Alli Turismo</title>
+    <title>A'lli Turismo</title>
 </head>
 
 <body>
     <header class="header" id="header">
         <nav class="nav container">
-            <a href="#" class="nav__logo">{{ config('app.name', 'Laravel') }}</a>
+            <a href="#" class="nav__logo">A'lli Turismo</a>
 
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
@@ -36,7 +36,7 @@
                         <a href="#place" class="nav__link">Servicios</a>
                     </li>
                     <li class="nav__item">
-                        <a href="#event" class="nav__link">Event</a>
+                        <a href="#event" class="nav__link">Eventos</a>
                     </li>
                     <li class="nav__item">
                         <a href="#about" class="nav__link"> Nuesta Agencia</a>

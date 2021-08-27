@@ -6,7 +6,6 @@
         MercadoPago\SDK::setAccessToken(config('services.mercado_pago.token'));
 
         $preference = new MercadoPago\Preference();
-
         $item = new MercadoPago\Item();
         $item->title = $cart->tour->name;
         $item->quantity = $cart->quantity;
@@ -14,14 +13,12 @@
         $preference->items = array($item);
         $preference->back_urls = array(
             "success" => route('home'),
-            "failure" => "http://www.tu-sitio/failure",
-            "pending" => "http://www.tu-sitio/pending"
+            "failure" => route('home'),
+            "pending" => route('home')
         );
-
+        <!-- $cart->update(['status','finalized']);  -->
         $preference->auto_return = "approved";
         $preference->save();
-
-
 
     @endphp
     <div class="container-fluid my-3">

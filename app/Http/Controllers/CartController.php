@@ -9,7 +9,10 @@ class CartController extends Controller
 {
     public function index()
     {
-        $carts = Cart::where('user_id', auth()->id())->where('status','pendiente')->with('tour')->get();
+        $carts = Cart::where('user_id', auth()->id())
+                ->where('status','pendiente')
+                ->with('tour')
+                ->get();
         return view('user.bookings', compact('carts'));
     }
 

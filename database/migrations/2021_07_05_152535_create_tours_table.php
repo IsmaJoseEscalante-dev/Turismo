@@ -15,7 +15,7 @@ class CreateToursTable extends Migration
     {
         Schema::create('tours', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained()->nullable();;
+            $table->foreignId('category_id')->constrained()->nullable();
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('itinerario');

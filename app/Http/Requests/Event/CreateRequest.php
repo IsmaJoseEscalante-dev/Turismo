@@ -25,7 +25,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'start' => 'required|date|after:today',
-            'end' => 'date|after:today',
+            'end' => 'date|after:today|after_or_equal:start',
             'amount' => 'required',
             'description' => 'required',
             'title' => 'required',
@@ -46,6 +46,7 @@ class CreateRequest extends FormRequest
             'description.required' => 'Es campo descripcion no puede estar vacio',
             'title.required' => 'Es campo titulo no puede estar vacio',
             'tours.required' => 'Debes seleccionar al menos un tour',
+            'end.after_or_equal' => 'La fecha de llegada debe ser mayor o igual a la fecha de salida'
         ];
     }
 }

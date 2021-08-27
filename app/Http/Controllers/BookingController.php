@@ -6,6 +6,7 @@ use App\Http\Requests\Booking\StoreRequest;
 use App\Models\Booking;
 use App\Models\Cart;
 use App\Models\Tour;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
@@ -35,9 +36,8 @@ class BookingController extends Controller
 
     public function bookingTour($id)
     {
-        return view('user.booking')->with([
-            'cart' => Cart::where('tour_id', $id)->with('passengers','tour')->firstOrFail()
-        ]);
+        $cart = Cart::where('tour_id', $id)->where('user_id',Auth::id())->with('passengers','tour')->firstOrFail();
+        return view('user.booking', compact('cart'));
 
     }
 

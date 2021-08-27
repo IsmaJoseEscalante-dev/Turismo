@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>A'lli Turismo</title>
 
      <!-- Icon title -->
     <link rel="shortcut icon" href="{{ asset('/imagenes/icono.jpg') }}" type="image/png">
@@ -19,7 +19,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
     <style>
     @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@500;600;700&display=swap");
@@ -45,7 +44,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" style="color:#14505C">
-                    {{ config('app.name', 'Laravel') }}
+                    A'lli Turismo
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -75,8 +74,11 @@
                                     <a href="{{ route('home') }}" class="nav-link">Home</a>
                                 </li>
                             @else
-                            <li class="nav-item">
+                                <li class="nav-item">
                                     <a href="{{ route('home') }}" class="nav-link">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('checkout') }}" class="nav-link">Mis reservas <span class="badge badge-primary">{{ Auth::user()->carts()->count() }}</span></a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -111,8 +113,13 @@
         </main>
     </div>
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $('.dropdown-toggle').dropdown();
+    </script>
     @yield('script')
 </body>
 

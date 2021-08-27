@@ -79,7 +79,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td>No hay reservas</td>
+                                    <td colspan="6" class="text-center">No hay reservas</td>
                                 </tr>
                             @endforelse
                             </tbody>

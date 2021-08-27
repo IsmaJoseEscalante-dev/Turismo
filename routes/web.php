@@ -9,6 +9,8 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\BookingController;
 
 Auth::routes();
 

@@ -3,8 +3,6 @@
 @section('content')
     <div class="container">
         <h4>Reservar a <b>{{ $tour->name }}</b></h4>
-
-
         <div class="row">
             <div class="col-md-6 col-lg-7 col-xl-8">
                 <div class="card">
@@ -79,7 +77,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="text-right">$ {{ $tour->amount }}</h4>
-                        <form-booking-component :tour="{{ json_encode($tour) }}"></form-booking-component>
+                        <form-booking-component
+                            :tour="{{ json_encode($tour) }}"
+                        ></form-booking-component>
                     </div>
                 </div>
             </div>

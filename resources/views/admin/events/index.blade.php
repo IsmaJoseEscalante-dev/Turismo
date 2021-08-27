@@ -128,7 +128,7 @@
             $('#full-calendar').fullCalendar({
                 selectable: true,
                 selectHelper: true,
-                editable: true,
+                //editable: true,
                 displayEventTime: false,
                 events: '/api/events',
                 header: {
@@ -224,7 +224,7 @@
                     amount: $('#txtAmount').val(),
                     tours: $('#txtTours').val(),
                     description: editor.getData(),
-                    end: $('#txtFechaFin').val() + " 23:59:59",
+                    end: $('#txtFechaFin').val() + " 23:59:59"
                 }
             }
 
@@ -234,12 +234,14 @@
                     url: url,
                     data: objEvent,
                     success: function() {
+                        $('#errors').html("");
                         $('#full-calendar').fullCalendar('refetchEvents');
                         if (!modal) {
                             $('#modalFullCalendar').modal('toggle');
                         }
                     },
                     error: function(xhr, status, error){
+                        $('#errors').html("");
                         var response = JSON.parse(xhr.responseText);
                         var errorString = '<div class="alert alert-danger"><ul>';
                         $.each( response.errors, function( key, value) {
@@ -259,7 +261,8 @@
                 $('#txtDescription').val('');
                 $('#txtTours').val('');
                 $('#txtTours').trigger('change');
-                editor.setData("")
+                editor.setData("");
+                $('#errors').html("");
             }
         });
     </script>
