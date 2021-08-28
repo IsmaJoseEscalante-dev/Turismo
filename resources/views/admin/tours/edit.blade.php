@@ -1,6 +1,24 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard')
+@section('title', 'Editar excursion')
+
+@section('style')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container {
+            width: 100% !important;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #a846ea;
+        }
+
+        .fc-unthemed td.fc-today {
+            background-color: #e8d77a !important;
+        }
+
+    </style>
+@endsection
 
 @section('content')
     <h3>MODIFICAR EXCURSION</h3>
@@ -32,16 +50,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="" class="form-label">Seleccionar categoria</label>
-                        <select class='form-control' name="category_id" value='category_id' id='inputCategoryid'>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" @if ($category->id == $tour->category_id)
-                                    selected
-                            @endif
-                            >{{ $category->name }}</option>
+                    <div class="form-group col-md-6 ">
+                        <label>Paradas</label>
+                        <select class="form-control select2 {{ $errors->has('stations') ? 'is-invalid' : '' }}"
+                            name="stations[]" id="txtStations" multiple>
+                            @foreach ($stations as $id => $station)
+                                <option value="{{ $id }}"
+                                {{ (in_array($id, old('stations', [])) || $tour->stations->contains($id)) ? 'selected' : '' }}>
+                                    {{ $station }}
+                                </option>
                             @endforeach
                         </select>
+                        @if ($errors->has('stations'))
+                            <div class="invalid-feedback d-block">
+                                {{ $errors->first('stations') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="form-group col-md-6">
                         <label for="" class="form-label">Precio</label><br>
@@ -54,15 +78,31 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="formFile" class="form-label">Seleccionar imagen</label>
-                    <input type="file" name="image" value="{{ old('image', $tour->image->image) }}"
-                        accept="image/*">
-                    @error('image')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Seleccionar imagen</label>
+                        <input type="file" name="image" accept="image/*" class="form-control">
+                        @error('image')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Seleccionar Categoria</label>
+                        <select class="form-control" name="category_id">
+                            @foreach ($categories as $id => $category)
+                                <option value="{{ $id }}"
+                                @if($id == $tour->category_id) selected='selected' @endif
+                                >{{ $category }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Descripción Tour</label><br>
@@ -109,7 +149,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Tips</label><br>
-                    <textarea class="ckeditor form-control" name="tips">{{ old('tips',$tour->tips) }}</textarea>
+                    <textarea class="ckeditor form-control" name="tips">{{ old('tips', $tour->tips) }}</textarea>
                     @error('tips')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -152,6 +192,11 @@
 
             return $("#slug").val(str);
         }
+
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
     </script>
     <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @stop

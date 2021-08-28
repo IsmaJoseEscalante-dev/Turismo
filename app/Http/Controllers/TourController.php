@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Tour\CreateRequest;
 use App\Http\Requests\Tour\UpdateRequest;
+use App\Models\Station;
 
 class TourController extends Controller
 {
@@ -27,30 +28,36 @@ class TourController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        return view('admin.tours.create',compact('categories'));
+        $categories = Category::pluck('name','id');
+        $stations = Station::pluck('name','id');
+        return view('admin.tours.create', compact('stations','categories'));
     }
 
     public function store(CreateRequest $request)
     {
         $tour = Tour::create($request->validated());
+
         $path = $request->file('image')->store('public');
 
         $image = new Image(['image' => $path]);
 
         $tour->image()->save($image);
+        $tour->stations()->attach($request->stations);
         return redirect()->route('tours.index');
     }
 
     public function show(Tour $tour)
     {
-        return view('admin.tours.show', compact('tour'));
+        $categories = Category::all();
+        $stations = Station::all();
+        return view('admin.tours.show', compact('tour','categories'));
     }
 
     public function edit(Tour $tour)
     {
-        $categories = Category::all();
-        return view('admin.tours.edit', compact('tour','categories'));
+        $categories = Category::pluck('name','id');
+        $stations = Station::pluck('name','id');
+        return view('admin.tours.edit', compact('tour', 'stations','categories'));
     }
 
     public function update(UpdateRequest $request,Tour $tour)
@@ -61,7 +68,7 @@ class TourController extends Controller
             $image->image = $request->file('image')->store('public');
             $image->save();
         }
-
+        $tour->stations()->sync($request->stations);
         return redirect()->route('tours.index');
     }
 

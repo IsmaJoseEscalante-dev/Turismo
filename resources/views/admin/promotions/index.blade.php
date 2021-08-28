@@ -4,12 +4,12 @@
 
 @section('content')
     <div class="container d-flex justify-content-between py-4">
-        <h3>EXCURSIONES</h3>
-        <a href="tours/create" class="btn btn-primary">CREAR</a>
+        <h3>Promociones</h3>
+        <a href="promotions/create" class="btn btn-primary">CREAR</a>
     </div>
     <div class="card">
         <div class="card-body">
-            <table id="tours" class="table table-striped shadow-lg mt-4" style="width:100%">
+            <table id="promotions" class="table table-striped shadow-lg mt-4" style="width:100%">
                 <thead class="bg-primary text-white">
                 <th scope="col">ID</th>
                 <th scope="col">nombre</th>
@@ -18,23 +18,23 @@
                 <th scope="col">Acciones</th>
                 </thead>
                 <tbody>
-                @foreach($tours as $tour)
+                @foreach($promotions as $promotion)
                     <tr>
-                        <td>{{$tour->id}}</td>
-                        <td>{{$tour->name}}</td>
+                        <td>{{$promotion->id}}</td>
+                        <td>{{$promotion->name}}</td>
                         <td>
-                        @if($tour->image)
+                        @if($promotion->image)
                             <img width = "40px" height= '40px'
-                            src="{{ Storage::url($tour->image->image) }}"  alt="">
+                            src="{{ Storage::url($promotions->image->image) }}"  alt="">
                         @endif
                         </td>
-                        <td>{{$tour->amount}}</td>
+                        <td>{{$promotion->price}}</td>
                         <td>
-                            <form action="{{route('tours.destroy',$tour->id)}}" method="post">
+                            <form action="{{route('promotionss.destroy',$promotions->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <a href="tours/{{$tour->id}}" class="btn btn-info">Ver</a>
-                                <a href="tours/{{$tour->id}}/edit" class="btn btn-warning">Editar</a>
+                                <a href="promotions/{{$promotion->id}}" class="btn btn-info">Ver</a>
+                                <a href="promotions/{{$promotion->id}}/edit" class="btn btn-warning">Editar</a>
                                 <button type="submit" class="btn btn-danger">Borrar</button>
                             </form>
                         </td>
@@ -55,7 +55,7 @@
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#tours').DataTable({
+            $('#promotionss').DataTable({
                 "lengthMenu": [[5, 10, 50, -1], [5, 10, 50, 'All']]
             });
         });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Event;
+namespace App\Http\Requests\Promotion;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,31 +24,29 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'start' => 'required|date|after:today',
-            'end' => 'date|after:today|after_or_equal:start',
+            'date_start' => 'required|date|after:today',
+            'date_finish' => 'date|after:today|after_or_equal:start',
             'amount' => 'required',
             'description' => 'required',
-            'title' => 'required',
-            'color' => 'required',
+            'discount' => 'required',
+            'status'=> 'required',
             "tours"    => "required|array|min:1",
             "tours.*"  => "required|distinct",
-            "category_id" => 'required|numeric|exists:App\Models\Category,id'
         ];
     }
 
     public function messages()
     {
         return [
-            'start.after' => 'La fecha de inicio no puede ser menor a la fecha actual',
-            'end.after' => 'La fecha de llegada no puede ser menor a la fecha actual',
+            'date_start.after' => 'La fecha de inicio no puede ser menor a la fecha actual',
+            'date_finish.after' => 'La fecha de llegada no puede ser menor a la fecha actual',
             'amount.required' => 'El campo precio no puede estar vacio',
-            'start.required' => 'El campo fecha de inicio no puede estar vacio',
-            'end.required' => 'El campo fecha de llegada no puede estar vacio',
+            'date_start.required' => 'El campo fecha de inicio no puede estar vacio',
+            'date_finish.required' => 'El campo fecha de llegada no puede estar vacio',
             'description.required' => 'El campo descripcion no puede estar vacio',
-            'title.required' => 'El campo titulo no puede estar vacio',
+            'name.required' => 'El campo titulo no puede estar vacio',
             'tours.required' => 'Debes seleccionar al menos un tour',
-            'end.after_or_equal' => 'La fecha de llegada debe ser mayor o igual a la fecha de salida',
-            'category_id.required' => 'El campo categoria es requerido'
+            'date_finish.after_or_equal' => 'La fecha de llegada debe ser mayor o igual a la fecha de salida',
         ];
     }
 }

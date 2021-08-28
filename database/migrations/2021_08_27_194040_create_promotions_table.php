@@ -4,20 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStationsTable extends Migration
+class CreatePromotionsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
-     *
      */
     public function up()
     {
-        Schema::create('stations', function (Blueprint $table) {
+        Schema::create('promotions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->text('description');
+            $table->integer('amount');
+            $table->integer('discount');
+            $table->date('date_start');
+            $table->date('date_finish');
+            $table->enum('status', ['available', 'not_available'])->default('not_available');
             $table->timestamps();
         });
     }
@@ -29,6 +34,6 @@ class CreateStationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stations');
+        Schema::dropIfExists('promotions');
     }
 }

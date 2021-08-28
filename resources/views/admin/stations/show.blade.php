@@ -16,10 +16,6 @@
                     <td>{{ $station->id }}</td>
                 </tr>
                 <tr>
-                    <th>Tour</th>
-                    <td>{{ $station->tour->name }}</td>
-                </tr>
-                <tr>
                     <th>Name</th>
                     <td>{{ $station->name }}</td>
                 </tr>
@@ -34,12 +30,12 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <a class="btn btn-primary"
-                   href="{{ route('station.index',$station->tour_id) }}">
+                   href="{{ route('station.index') }}">
                     Volver
                 </a>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

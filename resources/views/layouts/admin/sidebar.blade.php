@@ -35,10 +35,26 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('promotions.index') }}" class="nav-link {{ Request::is('promotions') ? 'active' :'' }}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Promociones
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('tours.index') }}" class="nav-link {{ Request::is('tours') ? 'active' :'' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Tour
+                            Excursiones
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('stations.index') }}" class="nav-link {{ Request::is('stations') ? 'active' :'' }}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Paradas
                         </p>
                     </a>
                 </li>

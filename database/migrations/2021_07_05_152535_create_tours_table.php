@@ -15,7 +15,6 @@ class CreateToursTable extends Migration
     {
         Schema::create('tours', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained()->nullable();
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('itinerario');
@@ -24,6 +23,7 @@ class CreateToursTable extends Migration
             $table->text('description_tour');
             $table->text('description_place');
             $table->decimal('amount',8,2);
+            $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
         });
     }

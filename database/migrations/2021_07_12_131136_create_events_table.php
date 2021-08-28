@@ -21,6 +21,7 @@ class CreateEventsTable extends Migration
             $table->string('color');
             $table->text('description');
             $table->decimal('amount',8,2);
+            $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
         });
     }

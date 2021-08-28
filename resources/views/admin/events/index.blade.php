@@ -105,17 +105,12 @@
     <script src="{{ asset('plugins/FullCalendar/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('plugins/FullCalendar/es.js') }}"></script>
     <script src="{{ asset('plugins/CKEditor/ckeditor.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>{
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/main2.js') }}"></script>
     <script>
         $(document).ready(function() {
 
             let editor;
-            ClassicEditor.editorConfig = function( config ) {
-                config.extraPlugins = 'ckeditorfa';
-                config.allowedContent = true;
-                config.contentsCss = '/adminlte/plugins/fontawesome-free/fontawesome.min.css';
-            };
             ClassicEditor
                 .create(document.querySelector('#txtDescription'))
                 .then(newEditor => {

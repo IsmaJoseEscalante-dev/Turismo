@@ -2,15 +2,16 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\BookingController;
+use App\Http\Controllers\PromotionController;
 
 Auth::routes();
 
@@ -42,10 +43,12 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('tours', TourController::class);
+    Route::resource('stations', StationController::class);
+    Route::resource('promotions', PromotionController::class);
 
-    Route::get('stations/{id}', [StationController::class, 'index'])->name('station.index');
-    Route::get('stations/create/{id}', [StationController::class, 'create'])->name('station.create');
-    Route::resource('station', StationController::class)->except(['index', 'create']);
+    /* Route::get('stations/{id}', [StationController::class, 'index'])->name('station.index'); */
+    Route::get('stations/create', [StationController::class, 'create'])->name('stations.create');
+    Route::resource('stations', StationController::class)->except(['index', 'create']);
 
     Route::get('events', [EventController::class, 'events'])->name('events.events');
 

@@ -4,20 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStationsTable extends Migration
+class CreateStationTourTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
-     *
      */
     public function up()
     {
-        Schema::create('stations', function (Blueprint $table) {
+        Schema::create('station_tour', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
+            $table->foreignId('tour_id')->constrained();
+            $table->foreignId('station_id')->constrained();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateStationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stations');
+        Schema::dropIfExists('station_tour');
     }
 }

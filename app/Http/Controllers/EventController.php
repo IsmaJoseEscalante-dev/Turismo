@@ -6,17 +6,18 @@ use App\Http\Requests\Event\CreateRequest;
 use App\Http\Requests\Event\UpdateRequest;
 use App\Models\Event;
 use App\Models\Tour;
-
+use App\Models\Category;
 class EventController extends Controller
 {
     public function events()
     {
+        $categories = Category::pluck('name', 'id');
         $tours = Tour::pluck('name', 'id');
-        return view('admin.events.index', compact('tours'));
+        return view('admin.events.index', compact('tours','categories'));
     }
     public function index()
     {
-        return Event::with('tours:name,id')->get();
+        return Event::with('tours:name,id','category:name,id')->get();
     }
 
     public function store(CreateRequest $request)

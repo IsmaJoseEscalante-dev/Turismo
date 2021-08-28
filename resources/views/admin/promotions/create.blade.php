@@ -21,7 +21,7 @@
 @endsection
 
 @section('content')
-    <h3>CREAR EXCURSIONES</h3>
+    <h3>Crear Promocion</h3>
     <div class="content">
         <div class="card">
             <div class="card-body">
@@ -50,20 +50,24 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label>Paradas</label>
+                            <label>Tours</label>
+                            <div class="pb-2">
+                                <span class="btn btn-primary btn-sm select-all">Seleccionar Todo</span>
+                                <span class="btn btn-primary btn-sm deselect-all">Deseleccionar</span>
+                            </div>
                             <select class="form-control select2 {{ $errors->has('stations') ? 'is-invalid' : '' }}"
-                                name="stations[]" id="txtStations" multiple>
-                                @foreach ($stations as $id => $station)
+                                name="tours[]" id="txtTours" multiple>
+                                @foreach ($tours as $id => $tour)
                                     <option value="{{ $id }}">
-                                        {{ $station }}
+                                        {{ $tour->name }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('stations')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            @if ($errors->has('tours'))
+                                <div class="invalid-feedback d-block">
+                                    {{ $errors->first('tours') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="col-md-6 form-group">
                             <label class="form-label">Precio</label><br>
@@ -76,82 +80,57 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label>Seleccionar imagen</label>
-                            <input class="form-control" type="file" name="image" id="image" accept="image/*">
-                            @error('image')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                    <div class="col-md-6 form-group">
+                        <label for="start">Fecha de Inicio</label>
+
+                        <input type="date" id="start" name="date-start">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="finish">Fecha de Fin</label>
+
+                        <input type="date" id="start" name="date_finish">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="formFile" class="form-label">Seleccionar imagen</label>
+                        <input type="file" name="image" id="image" accept="image/*">
+                        @error('image')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    {{-- 'name', 'description', 'tour_id', 'price', 'discount', 'date_start', 'date_finish', 'status' --}}
+                    <div class="form-group">
+                        <label class="form-label">Descuento</label><br>
+                        <input id="discount" name="discount" value="{{ old('discount') }}" type="number"
+                            class="form-control">
+                        @error('discount')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-froup">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Descripción</label><br>
+                            <textarea name="description" rows="6"
+                                class="form-control">{{ old('description') }}</textarea>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label>Seleccionar Categoria</label>
-                            <select class="form-control" name="category_id">
-                            @foreach ($categories as $id => $category)
-                                <option value="{{ $id }}">{{ $category }}</option>
-                            @endforeach
-                            </select>
-                            @error('category_id')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Estado</label><br>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary active">
+                                <input type="radio" name="options" id="option1" checked> No disponible
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="options" id="option2"> Disponible
+                            </label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Descripción Tour</label><br>
-                        <textarea class="ckeditor form-control"
-                            name="description_tour">{{ old('description_tour') }}</textarea>
-                        @error('descripcion_tour')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Descripción de Lugares</label><br>
-                        <textarea class="ckeditor form-control"
-                            name="description_place">{{ old('description_place') }}</textarea>
-                        @error('description_place')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Servicios</label><br>
-                        <textarea class="ckeditor form-control" name="services">{{ old('services') }}</textarea>
-                        @error('services')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Itinerario</label><br>
-                        <textarea class="ckeditor form-control" name="itinerario">{{ old('itinerario') }}</textarea>
-                        @error('itinerario')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Tips</label><br>
-                        <textarea class="ckeditor form-control" name="tips">{{ old('tips') }}</textarea>
-                        @error('tips')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <a href="/tours" class="btn btn-secondary" tabindex="5">Cancelar</a>
+                    <a href="/promotions" class="btn btn-secondary" tabindex="5">Cancelar</a>
                     <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     </div>
@@ -163,6 +142,7 @@
 @stop
 
 @section('js')
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
         $(document).ready(function() {
             $("#name").keyup(function() {
@@ -190,7 +170,6 @@
 
             return $("#slug").val(str);
         }
-
         $(document).ready(function() {
             $('.select2').select2();
         });

@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <h3>MODIFICAR EXCURSION</h3>
+    <h3>MODIFICAR PARADA</h3>
     <div class="card">
         <div class="card-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -22,7 +22,7 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <form action='{{ route('station.update', $station->id) }}' method="POST">
+                    <form action='{{ route('stations.update', $station->id) }}' method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group mt-3">
@@ -34,7 +34,7 @@
                             <textarea class="form-control" name="description"
                                       rows="6">{{ old('description', $station->description)}}</textarea>
                         </div>
-                        <a href="{{ route('station.index', $station->tour_id) }}" class="btn btn-secondary">Cancelar</a>
+                        <a href="{{ route('stations.index', $station->tour_id) }}" class="btn btn-secondary">Cancelar</a>
                         <button type="submit" class="btn btn-primary">Actualizar</button>
                     </form>
                 </div>

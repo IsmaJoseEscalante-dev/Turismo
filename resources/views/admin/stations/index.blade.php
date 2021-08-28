@@ -4,11 +4,12 @@
 
 @section('content')
     <h3>Lugares Turisticos</h3>
+    <div class="container d-flex justify-content-between py-4">
+        <a href="stations/create" class="btn btn-primary">CREAR</a>
+    </div>
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-                <h5>Tour <b> {{ $nameTour->name }} </b></h5>
-                <a href="{{ route('station.create', $nameTour->id) }}" class="btn btn-primary mb-3">CREAR</a>
             </div>
             <table id="station" class="table table-striped shadow-lg mt-4" style="width:100%">
                 <thead class="bg-primary text-white">
@@ -32,9 +33,9 @@
                             @endforeach
                         </td>
                         <td>
-                            <form action="{{route('station.destroy',$station->id)}}" method="post">
-                                <a href="{{ route('station.show', $station->id) }}" class="btn btn-info">Ver</a>
-                                <a href="{{ route('station.edit', $station->id) }}" class="btn btn-warning">Editar</a>
+                            <form action="{{route('stations.destroy',$station->id)}}" method="post">
+                                <a href="{{ route('stations.show', $station->id) }}" class="btn btn-info">Ver</a>
+                                <a href="{{ route('stations.edit', $station->id) }}" class="btn btn-warning">Editar</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Borrar</button>

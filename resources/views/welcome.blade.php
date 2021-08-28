@@ -162,8 +162,8 @@
                             </span>
 
                             <div class="place__data">
-                                <h3 class="place__title">{{ $tour->name }}</h3>
-                                <span class="place__subtitle">{{ $tour->category->name }}</span>
+                                {{-- <h3 class="place__title">{{ $tour->name }}</h3>
+                                <span class="place__subtitle">{{ $tour->category->name }}</span> --}}
                                 <span class="place__price">{{ $tour->amount }}</span>
                             </div>
                         </div>
@@ -194,8 +194,8 @@
                             </span>
 
                             <div class="place__data">
-                                <h3 class="place__title">{{ $tour->name }}</h3>
-                                <span class="place__subtitle">{{ $tour->category->name }}</span>
+                                {{-- <h3 class="place__title">{{ $tour->name }}</h3> --}}
+                                {{-- <span class="place__subtitle">{{ $tour->category->name }}</span> --}}
                                 <span class="place__subtitle">{{ $event->start }}</span>
                                 <span class="place__price">{{ $tour->amount }}</span>
                             </div>

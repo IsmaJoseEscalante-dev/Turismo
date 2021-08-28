@@ -37,8 +37,9 @@ class UpdateRequest extends FormRequest
             'services' => 'required',
             'tips' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'category_id' => 'required|exists:App\Models\Category,id'
-
+            "category_id" => 'required|numeric|exists:App\Models\Category,id',
+            "stations"    => "required|array|min:1",
+            "stations.*"  => "required|distinct",
         ];
     }
 }
