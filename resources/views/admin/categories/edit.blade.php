@@ -20,7 +20,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Nombre amigable</label>
-                    <input  name="slug" type="text" class="form-control" readonly value="{{ old('slug', $category->slug) }}">
+                    <input  name="slug" id="slug" type="text" class="form-control" readonly value="{{ old('slug', $category->slug) }}">
                     @error('slug')
                     <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -37,14 +37,14 @@
                 </span>
                     @enderror
                 </div>
-                <a href="{{ route('tours.index') }}" class="btn btn-secondary">Cancelar</a>
+                <a href="{{ route('categories.index') }}" class="btn btn-secondary">Cancelar</a>
                 <button type="submit" class="btn btn-primary" tabindex="4">Actualizar</button>
             </form>
         </div>
     </div>
 @endsection
 
-@section('style')
+@section('js')
     <script>
         $(document).ready(function () {
             $("#name").keyup(function () {

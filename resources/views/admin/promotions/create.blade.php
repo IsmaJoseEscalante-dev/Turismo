@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('style')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <style>
         .select2-container {
             width: 100% !important;
@@ -25,14 +25,14 @@
     <div class="content">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('tours.store') }}" method="POST" enctype='multipart/form-data'>
+                <form action="{{ route('promotions.store') }}" method="POST" enctype='multipart/form-data'>
                     @csrf
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label class="form-label">Nombre</label>
                             <input id="name" name="name" type="text" value="{{ old('name') }}" class="form-control">
                             @error('name')
-                                <span class="invalid-feedback d-block" role="alert">
+                            <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -40,9 +40,9 @@
                         <div class="col-md-6 form-group">
                             <label class="form-label">Nombre amigable</label>
                             <input id="slug" name="slug" type="text" value="{{ old('slug') }}" class="form-control"
-                                readonly>
+                                   readonly>
                             @error('slug')
-                                <span class="invalid-feedback d-block" role="alert">
+                            <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -51,82 +51,93 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>Tours</label>
-                            <div class="pb-2">
-                                <span class="btn btn-primary btn-sm select-all">Seleccionar Todo</span>
-                                <span class="btn btn-primary btn-sm deselect-all">Deseleccionar</span>
-                            </div>
-                            <select class="form-control select2 {{ $errors->has('stations') ? 'is-invalid' : '' }}"
-                                name="tours[]" id="txtTours" multiple>
+                            <select class="form-control select2 {{ $errors->has('tours') ? 'is-invalid' : '' }}"
+                                    name="tours[]" id="txtTours" multiple>
                                 @foreach ($tours as $id => $tour)
-                                    <option value="{{ $id }}">
-                                        {{ $tour->name }}
+                                    <option value="{{ $id }}" {{ (collect(old('tours'))->contains($id)) ? 'selected':'' }}>
+                                        {{ $tour }}
                                     </option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('tours'))
-                                <div class="invalid-feedback d-block">
-                                    {{ $errors->first('tours') }}
-                                </div>
-                            @endif
+                            @error('tours')
+                            <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="col-md-6 form-group">
                             <label class="form-label">Precio</label><br>
                             <input id="amount" name="amount" value="{{ old('amount') }}" type="number"
-                                class="form-control">
+                                   class="form-control">
                             @error('amount')
-                                <span class="invalid-feedback d-block" role="alert">
+                            <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6 form-group">
-                        <label for="start">Fecha de Inicio</label>
-
-                        <input type="date" id="start" name="date-start">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Fecha de Inicio</label>
+                            <input class="form-control" type="date" name="date_start" value="{{ old('date_start') }}">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Fecha de Fin</label>
+                            <input class="form-control" type="date" name="date_finish" value="{{ old('date_finish') }}">
+                        </div>
                     </div>
-                    <div class="col-md-6 form-group">
-                        <label for="finish">Fecha de Fin</label>
 
-                        <input type="date" id="start" name="date_finish">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="formFile" class="form-label">Seleccionar imagen</label>
-                        <input type="file" name="image" id="image" accept="image/*">
-                        @error('image')
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Seleccionar imagen</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="image" id="inputGroupFile01"
+                                       accept="image/*">
+                                <label class="custom-file-label" for="inputGroupFile01">Seleccione una imagen</label>
+                            </div>
+                            @error('image')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                        @enderror
-                    </div>
-                    {{-- 'name', 'description', 'tour_id', 'price', 'discount', 'date_start', 'date_finish', 'status' --}}
-                    <div class="form-group">
-                        <label class="form-label">Descuento</label><br>
-                        <input id="discount" name="discount" value="{{ old('discount') }}" type="number"
-                            class="form-control">
-                        @error('discount')
+                            @enderror
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="form-label">Descuento</label><br>
+                            <input name="discount" value="{{ old('discount') }}" type="number"
+                                   class="form-control">
+                            @error('discount')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                        @enderror
+                            @enderror
+                        </div>
                     </div>
                     <div class="form-froup">
                         <div class="mb-3">
                             <label for="" class="form-label">Descripción</label><br>
                             <textarea name="description" rows="6"
-                                class="form-control">{{ old('description') }}</textarea>
+                                      class="form-control">{{ old('description') }}</textarea>
+                            @error('description')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="form-label">Estado</label><br>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option1" checked> No disponible
+                                <input type="radio" name="status" value="not_available" checked> No disponible
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option2"> Disponible
+                                <input type="radio" name="status" value="available"> Disponible
                             </label>
+                            @error('status')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
 
@@ -144,8 +155,8 @@
 @section('js')
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            $("#name").keyup(function() {
+        $(document).ready(function () {
+            $("#name").keyup(function () {
                 let cadena = $(this).val();
                 string_to_slug(cadena);
             });
@@ -170,7 +181,8 @@
 
             return $("#slug").val(str);
         }
-        $(document).ready(function() {
+
+        $(document).ready(function () {
             $('.select2').select2();
         });
     </script>

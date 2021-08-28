@@ -24,12 +24,15 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
+            'name'=>'required',
+            'slug'=>'required',
+            'description' => 'required',
+            'amount' => 'required',
+            'discount' => 'required',
             'date_start' => 'required|date|after:today',
             'date_finish' => 'date|after:today|after_or_equal:start',
-            'amount' => 'required',
-            'description' => 'required',
-            'discount' => 'required',
-            'status'=> 'required',
+            'status'=> 'required|in:available,not_available',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             "tours"    => "required|array|min:1",
             "tours.*"  => "required|distinct",
         ];

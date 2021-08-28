@@ -14,7 +14,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Descripción</label><br>
-                    <textarea name="description" rows="6" class="form-control">{{ old('description') }}</textarea>
+                    <textarea name="description" rows="3" class="form-control">{{ old('description') }}</textarea>
                 </div>
 
                 <a href="{{ route('stations.index') }}" class="btn btn-secondary" tabindex="5">Cancelar</a>

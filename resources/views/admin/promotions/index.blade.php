@@ -13,24 +13,26 @@
                 <thead class="bg-primary text-white">
                 <th scope="col">ID</th>
                 <th scope="col">nombre</th>
-                <th scope="col">Image</th>
                 <th scope="col">Precio</th>
+                <th scope="col">Descuento</th>
+                <th scope="col">Image</th>
                 <th scope="col">Acciones</th>
                 </thead>
                 <tbody>
                 @foreach($promotions as $promotion)
                     <tr>
-                        <td>{{$promotion->id}}</td>
+                        <td>{{ $promotion->id }}</td>
                         <td>{{$promotion->name}}</td>
+                        <td>{{$promotion->amount}}</td>
+                        <td>{{$promotion->discount}}</td>
                         <td>
-                        @if($promotion->image)
-                            <img width = "40px" height= '40px'
-                            src="{{ Storage::url($promotions->image->image) }}"  alt="">
-                        @endif
+                            @if($promotion->image)
+                                <img width="40px" height='40px'
+                                     src="{{ Storage::url($promotion->image->image) }}" alt="">
+                            @endif
                         </td>
-                        <td>{{$promotion->price}}</td>
                         <td>
-                            <form action="{{route('promotionss.destroy',$promotions->id)}}" method="post">
+                            <form action="{{route('promotions.destroy',$promotion->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <a href="promotions/{{$promotion->id}}" class="btn btn-info">Ver</a>
@@ -55,7 +57,7 @@
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#promotionss').DataTable({
+            $('#promotions').DataTable({
                 "lengthMenu": [[5, 10, 50, -1], [5, 10, 50, 'All']]
             });
         });

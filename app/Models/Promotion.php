@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Promotion extends Model
 {
     protected $fillable = [
-        'name', 'description', 'amount', 'discount', 'date_start', 'date_finish', 'status'
+        'name','slug', 'description', 'amount', 'discount', 'date_start', 'date_finish', 'status'
     ];
 
     public function tours()
@@ -16,4 +16,8 @@ class Promotion extends Model
         return $this->belongsToMany(Tour::class);
     }
 
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }

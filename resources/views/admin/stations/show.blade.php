@@ -16,11 +16,15 @@
                     <td>{{ $station->id }}</td>
                 </tr>
                 <tr>
-                    <th>Name</th>
+                    <th>Nombre</th>
                     <td>{{ $station->name }}</td>
                 </tr>
                 <tr>
-                    <th>Image</th>
+                    <th>Descripcion</th>
+                    <td>{{ $station->description }}</td>
+                </tr>
+                <tr>
+                    <th>Imagenes</th>
                     <td>
                         @foreach($station->images as $image)
                             <img class="rounded border shadow-sm" src="{{ Storage::url($image->image) }}" height="150"
@@ -30,12 +34,9 @@
                 </tr>
                 </tbody>
             </table>
-            {{-- <div class="form-group">
-                <a class="btn btn-primary"
-                   href="{{ route('station.index') }}">
-                    Volver
-                </a>
-            </div> --}}
+             <div class="form-group">
+                <a class="btn btn-primary" href="{{ route('stations.index') }}">Volver</a>
+            </div>
         </div>
     </div>
 @endsection

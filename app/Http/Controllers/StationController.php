@@ -9,11 +9,6 @@ use App\Models\Station;
 
 class StationController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
 
@@ -29,10 +24,7 @@ class StationController extends Controller
 
     public function store(CreateRequest $request)
     {
-        $station = Station::create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-        ]);
+        $station = Station::create($request->validated());
         return redirect()->route('stations.edit', $station->id);
     }
 

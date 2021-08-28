@@ -2,43 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Promotion\CreateRequest;
+use App\Http\Requests\Promotion\UpdateRequest;
 use App\Models\Tour;
 use App\Models\Image;
 use App\Models\Promotion;
-use Illuminate\Http\Request;
-use App\Http\Requests\Promotion\CreateRequest;
-use App\Http\Requests\Promotion\UpdateRequest;
 
 class PromotionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $promotions = Promotion::get();
+        $promotions = Promotion::all();
         return view('admin.promotions.index', compact('promotions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $tours = Tour::get();
+        $tours = Tour::pluck('name','id');
         return view('admin.promotions.create',compact('tours'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(CreateRequest $request)
     {
         $promotion = Promotion::create($request->validated());
@@ -52,50 +35,32 @@ class PromotionController extends Controller
         return redirect()->route('promotions.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\promotion  $promotion
-     * @return \Illuminate\Http\Response
-     */
-    public function show(promotion $promotion)
+    public function show(Promotion $promotion)
     {
-        //
+        return view('admin.promotions.show', compact('promotion'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\promotion  $promotion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(promotion $promotion)
+    public function edit(Promotion $promotion)
     {
-        //
+        $tours = Tour::pluck('name','id');
+        return view('admin.promotions.edit', compact('promotion','tours'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\promotion  $promotion
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateRequest $request, promotion $promotion)
+    public function update(UpdateRequest $request, Promotion $promotion)
     {
         $promotion->update($request->validated());
-        $promotion->tours()->sync($request->input('tours', []));
-        return;
+        if($request->hasFile('image')){
+            $image = $promotion->image;
+            $image->image = $request->file('image')->store('public');
+            $image->save();
+        }
+        $promotion->tours()->sync($request->tours);
+        return redirect()->route('promotions.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\promotion  $promotion
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(promotion $promotion)
+    public function destroy(Promotion $promotion)
     {
-        //
+        $promotion->delete();
+        return back();
     }
 }

@@ -36,7 +36,7 @@
                         </span>
                         @enderror
                     </div>
-                    <a href="/categories" class="btn btn-secondary">Cancelar</a>
+                    <a href="{{ route('categories.index') }}" class="btn btn-secondary">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>

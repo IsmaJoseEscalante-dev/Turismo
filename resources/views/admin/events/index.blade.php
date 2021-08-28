@@ -61,6 +61,19 @@
                                 <label>Color</label>
                                 <input type="color" class="form-control" value="#ff0000" id="txtColor">
                             </div>
+                            <div class="form-group col-md-12">
+                                <label>Seleccionar Categoria</label>
+                                <select class="form-control" name="category_id" id="category_id">
+                                    @foreach ($categories as $id => $category)
+                                        <option value="{{ $id }}">{{ $category }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
                             <div class="form-group col-12">
                                 <label for="tours">Tours</label>
                                 <div class="pb-2">
@@ -154,6 +167,7 @@
                     $('#txtAmount').val(calEvent.amount);
                     $('#txtTours').val(calEvent.tours);
                     $('#txtDescription').val(editor.setData(calEvent.description));
+                    $('#category_id').val(calEvent.category_id);
                     $('#txtFechaInicio').val(calEvent.start.format('Y-MM-DD'));
                     $('#txtFechaFin').val(calEvent.end.format('Y-MM-DD'));
                     $('#txtTours').val('');
@@ -219,7 +233,8 @@
                     amount: $('#txtAmount').val(),
                     tours: $('#txtTours').val(),
                     description: editor.getData(),
-                    end: $('#txtFechaFin').val() + " 23:59:59"
+                    end: $('#txtFechaFin').val() + " 23:59:59",
+                    category_id: $('#category_id').val()
                 }
             }
 

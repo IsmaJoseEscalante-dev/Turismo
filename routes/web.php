@@ -45,11 +45,6 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::resource('tours', TourController::class);
     Route::resource('stations', StationController::class);
     Route::resource('promotions', PromotionController::class);
-
-    /* Route::get('stations/{id}', [StationController::class, 'index'])->name('station.index'); */
-    Route::get('stations/create', [StationController::class, 'create'])->name('stations.create');
-    Route::resource('stations', StationController::class)->except(['index', 'create']);
-
     Route::get('events', [EventController::class, 'events'])->name('events.events');
 
     //Comments

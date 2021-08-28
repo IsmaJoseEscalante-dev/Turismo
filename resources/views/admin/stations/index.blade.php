@@ -3,8 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <h3>Lugares Turisticos</h3>
     <div class="container d-flex justify-content-between py-4">
+        <h3>Lugares Turisticos</h3>
         <a href="stations/create" class="btn btn-primary">CREAR</a>
     </div>
     <div class="card">

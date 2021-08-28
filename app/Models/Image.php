@@ -11,8 +11,6 @@ class Image extends Model
 
     protected $fillable = ['image','imageable_type','imageable_id'];
 
-    #https://www.laraveltip.com/como-mostrar-imagenes-de-la-carpeta-storage-en-laravel/
-
     public function imageable()
     {
         return $this->morphTo();
