@@ -130,16 +130,20 @@
                 </div>
 
                 <div class="home__info">
-                    <div>
-                        <span class="home__info-title">5 best places to visit</span>
-                        <a href="" class="button button--flex button--link home__info-button">
-                            More <i class="ri-arrow-right-line"></i>
-                        </a>
-                    </div>
+                    @forelse ($promotions as $promotion)
+                        <div>
+                            <span class="home__info-title">{{ $promotion->name }}</span>
+                            <a href="{{ route('promotions', $promotion->slug) }}" class="button button--flex button--link home__info-button">
+                                Reservar <i class="ri-arrow-right-line"></i>
+                            </a>
+                        </div>
 
-                    <div class="home__info-overlay">
-                        <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="home__info-img">
-                    </div>
+                        <div class="home__info-overlay">
+                            <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="home__info-img">
+                        </div>
+                    @empty
+                        <h6>No hay promociones</h6>
+                    @endforelse
                 </div>
             </div>
         </section>
@@ -162,8 +166,8 @@
                             </span>
 
                             <div class="place__data">
-                                {{-- <h3 class="place__title">{{ $tour->name }}</h3>
-                                <span class="place__subtitle">{{ $tour->category->name }}</span> --}}
+                                <h3 class="place__title">{{ $tour->name }}</h3>
+                                <span class="place__subtitle">{{ $tour->category->name }}</span>
                                 <span class="place__price">{{ $tour->amount }}</span>
                             </div>
                         </div>

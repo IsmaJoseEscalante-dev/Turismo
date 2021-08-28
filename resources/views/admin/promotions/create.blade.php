@@ -8,17 +8,15 @@
         .select2-container {
             width: 100% !important;
         }
-
         .select2-container--default .select2-selection--multiple .select2-selection__choice {
             background-color: #a846ea;
         }
-
         .fc-unthemed td.fc-today {
             background-color: #e8d77a !important;
         }
-
     </style>
 @endsection
+<!-- -->
 
 @section('content')
     <h3>Crear Promocion</h3>
@@ -80,13 +78,22 @@
                         <div class="col-md-6 form-group">
                             <label>Fecha de Inicio</label>
                             <input class="form-control" type="date" name="date_start" value="{{ old('date_start') }}">
+                            @error('date_start')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Fecha de Fin</label>
                             <input class="form-control" type="date" name="date_finish" value="{{ old('date_finish') }}">
+                            @error('date_finish')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>Seleccionar imagen</label>
@@ -161,27 +168,20 @@
                 string_to_slug(cadena);
             });
         });
-
-
         function string_to_slug(str) {
             str = str.replace(/^\s+|\s+$/g, '');
             str = str.toLowerCase();
-
             //quita acentos, cambia la ñ por n, etc
             let from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
             let to = "aaaaeeeeiiiioooouuuunc------";
-
             for (let i = 0, l = from.length; i < l; i++) {
                 str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
             }
-
             str = str.replace(/[^a-z0-9 -]/g, '') // quita caracteres invalidos
                 .replace(/\s+/g, '-') // reemplaza los espacios por -
                 .replace(/-+/g, '-'); // quita las plecas
-
             return $("#slug").val(str);
         }
-
         $(document).ready(function () {
             $('.select2').select2();
         });
