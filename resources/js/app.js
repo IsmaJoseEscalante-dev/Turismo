@@ -8,6 +8,8 @@ Vue.component('form-booking-component', require('./components/BookingComponent.v
 Vue.component('comment-component', require('./components/CommentComponent.vue').default);
 Vue.component('count-comment', require('./components/CountComment.vue').default);
 Vue.component('pay-component', require('./components/PeyComponent.vue').default);
+Vue.component('promotion-component', require('./components/PromotionComponent.vue').default);
+Vue.component('event-component', require('./components/EventComponent.vue').default);
 
 const app = new Vue({
     el: '#app',

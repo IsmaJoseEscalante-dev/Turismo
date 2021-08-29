@@ -3,86 +3,143 @@
 @section('content')
     <div class="container">
         <h3>{{ $promotion->name }}</h3>
-        <ul class="nav">
+        {{-- <ul class="nav">
             @foreach ($promotion->tours as $tour)
 
                 @if ($loop->iteration == 1)
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">{{$tour->name}}</a>
+                        <a class="nav-link active" href="#">{{ $tour->name }}</a>
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link " href="#">{{$tour->name}}</a>
+                        <a class="nav-link " href="#">{{ $tour->name }}</a>
                     </li>
                 @endif
             @endforeach
-        </ul>
+        </ul> --}}
 
-        <div id="accordion">
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                            aria-controls="collapseOne">
-                            Collapsible Group Item #1
-                        </button>
-                    </h5>
-                </div>
-
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                        wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                        eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                        farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                        labore sustainable VHS.
+        <div class="row">
+            <div class="col-md-6 col-lg-7 col-xl-8">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @foreach ($promotion->tours as $tour)
+                                    @if ($loop->iteration == 1)
+                                        <div class="carousel-item active">
+                                            <img src="{{ Storage::url($tour->image->image) }}" width="100%" height="400px"
+                                                alt="...">
+                                        </div>
+                                    @else
+                                        <div class="carousel-item">
+                                            <img src="{{ Storage::url($tour->image->image) }}" width="100%" height="400px"
+                                                alt="...">
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                                data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
+                <nav>
+                    <ul class="nav nav-tabs pt-3" id="myTab" role="tablist">
+                        @foreach ($promotion->tours as $tour)
+                            <li class="nav-item" role="presentation">
+                                @if ($loop->iteration == 1)
+                                    <a class="nav-link active" id="{{ $tour->id }}-tab" data-toggle="tab"
+                                        href="#{{ $tour->id }}" role="tab" aria-controls="{{ $tour->id }}"
+                                        aria-selected="true">{{ $tour->name }}</a>
+                                @else
+                                    <a class="nav-link" id="{{ $tour->id }}-tab" data-toggle="tab"
+                                        href="#{{ $tour->id }}" role="tab" aria-controls="{{ $tour->id }}"
+                                        aria-selected="true">{{ $tour->name }}</a>
+                                @endif
+                            </li>
+                        @endforeach
+                    </ul>
+                </nav>
+                <div class="tab-content" id="myTabContent">
+                    @foreach ($promotion->tours as $tour)
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $tour->id }}"
+                            role="tabpanel" aria-labelledby="{{ $tour->id }}-tab">
+                            <section class="mt-5">
+                                <div class="text-justify">
+                                    <p class="lead">{!! $tour->description_tour !!}</p>
+                                </div>
+                            </section>
+                            <section class="mt-5">
+                                <h3 class="color-primary">Descripcion</h3>
+                                <div class="text-justify">
+                                    <p class="lead">{!! $tour->description_place !!}</p>
+                                </div>
+                            </section>
+                            <section class="mt-5">
+                                <h3 class="color-primary">Itinerario</h3>
+                                <div>
+                                    <p class="lead">{!! $tour->itinerario !!}</p>
+                                </div>
+                            </section>
+
+                            <section class="mt-5">
+                                <h3 class="color-primary">Servicios</h3>
+                                <div>
+                                    <p class="lead">{!! $tour->services !!}</p>
+                                </div>
+                            </section>
+
+                            <section class="mt-5">
+                                <h3 class="color-primary">Tips</h3>
+                                <div>
+                                    <p class="lead">{!! $tour->tips !!}</p>
+                                </div>
+                            </section>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
-                            aria-expanded="false" aria-controls="collapseTwo">
-                            Collapsible Group Item #2
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="col-md-6 col-lg-5 col-xl-4 mt-3 mt-md-0">
+                <div class="card">
                     <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                        wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                        eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                        farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                        labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
-                            aria-expanded="false" aria-controls="collapseThree">
-                            Collapsible Group Item #3
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                        wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                        eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                        farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                        labore sustainable VHS.
+                        <h4 class="text-right">$ {{ $tour->amount }}</h4>
+                        <form-booking-component :tour="{{ json_encode($tour) }}"></form-booking-component>
                     </div>
                 </div>
             </div>
         </div>
+
+        {{-- Comentarios --}}
+        <section class="mt-5">
+            <div class="text-center">
+                <h3 class="color-primary">Opiniones de nuestros clientes</h3>
+                <p class="lead">Todas las opiniones han sido escritas por clientes reales que han reservado con nosotros.
+                </p>
+            </div>
+            <comment-component :tour="{{ json_encode($tour->id) }}"></comment-component>
+        </section>
     </div>
+@endsection
+@section('script')
+    <script>
+        let size = {{ count($promotion->tours) }}
+            for(let i = 1; i<= size; i++){
+                $("a[href='#"+i+"']").click(function(){
+                    $("#"+i).addClass("show active");
+                    for(let j = 1; j<= size; j++){
+                        if (j!= i) {
+                            $("#"+j).removeClass("show active");
+                        }
+                    }
+                });
+            }
+    </script>
 @endsection

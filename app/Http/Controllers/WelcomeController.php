@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\Station;
 use App\Models\Promotion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WelcomeController extends Controller
 {
@@ -28,9 +29,9 @@ class WelcomeController extends Controller
 
     public function promotions($slug)
     {
-        $promotion = Promotion::where('slug',$slug)->firstOrFail();
-/*         $tours = $promotion->tours()->where('promotion_id', $promotion->id)->with('images')->get();
-        dd($tours); */
+        $promotion = Promotion::where('slug',$slug)
+                    ->firstOrFail();
+
         return view('user.promotion', compact('promotion'));
     }
 
