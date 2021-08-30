@@ -227,7 +227,7 @@
             function recolectarDatosGUI() {
                 newEvent = {
                     id: $('#txtId').val(),
-                    title: $('#txtTitle').val(),
+                    name: $('#txtTitle').val(),
                     slug: string_to_slug($('#txtTitle').val()),
                     start: $('#txtFechaInicio').val() + " 00:00:00",
                     color: $('#txtColor').val(),

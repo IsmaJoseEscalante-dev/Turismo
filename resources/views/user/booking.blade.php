@@ -7,16 +7,15 @@
 
         $preference = new MercadoPago\Preference();
         $item = new MercadoPago\Item();
-        $item->title = $cart->tour->name;
+        $item->title = $cart->cartable->name;
         $item->quantity = $cart->quantity;
-        $item->unit_price = $cart->tour->amount;
+        $item->unit_price = $cart->cartable->amount;
         $preference->items = array($item);
         $preference->back_urls = array(
             "success" => route('home'),
             "failure" => route('home'),
             "pending" => route('home')
         );
-        <!-- $cart->update(['status','finalized']);  -->
         $preference->auto_return = "approved";
         $preference->save();
 
@@ -37,7 +36,7 @@
                             <tr>
                                 <td>{{ Auth::user()->name }}</td>
                                 <td>{{ $cart->date }}</td>
-                                <td>{{ $cart->tour->name }}</td>
+                                <td>{{ $cart->cartable->name }}</td>
                                 <td>
                                     <ul>
                                         @foreach($cart->passengers as $passenger)
@@ -50,8 +49,8 @@
                     </div>
                     <div class="col-md-4">
                         <h5 id="countPassenger">Pasajeros : {{ $cart->quantity }}</h5>
-                        <h5>Precio : {{ $cart->tour->amount }}$</h5>
-                        <h5>total : {{ $cart->tour->amount * $cart->quantity }} $</h5>
+                        <h5>Precio : {{ $cart->cartable->amount }}$</h5>
+                        <h5>total : {{ $cart->cartable->amount * $cart->quantity }} $</h5>
                         <div id="accordion">
                             <div class="card">
                                 <div class="card-header" id="headingOne">

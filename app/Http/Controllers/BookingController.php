@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
-
-
     public function show($id)
     {
         return view('user.showReservation', [
@@ -21,9 +19,9 @@ class BookingController extends Controller
         ]);
     }
 
-    public function bookingTour($id)
+    public function bookingCart($id)
     {
-        $cart = Cart::where('tour_id', $id)->where('user_id',Auth::id())->with('passengers','tour')->firstOrFail();
+        $cart = Cart::where('user_id',Auth::id())->where('id', $id)->with('passengers')->firstOrFail();
         return view('user.booking', compact('cart'));
     }
 }

@@ -35,7 +35,7 @@ Route::middleware(['auth', 'role:user'])->group(function (){
 
     Route::get('booking', [WelcomeController::class, 'booking'])->name('booking');
     Route::get('booking/{id}', [BookingController::class,'show'])->name('booking.show');
-    Route::get('bookings/{id}', [BookingController::class,'bookingTour'])->name('booking.tour');
+    Route::get('bookings/{id}', [BookingController::class,'bookingCart'])->name('booking');
 });
 
 
