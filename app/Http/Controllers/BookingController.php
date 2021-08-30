@@ -12,21 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
-    public function store(StoreRequest $request)
-    {
-        return DB::transaction(function () use ($request) {
-            $cart = Cart::create($request->validated());
 
-            for ($i = 0; $i < count($request->input('names')); $i++) {
-                $cart->passengers()->create([
-                    'name' => $request->input('names')[$i]['name'],
-                    'lastName' => $request->input('names')[$i]['lastName'],
-                    'user_id' => $request->input('user_id'),
-                    'tour_id' => $request->input('tour_id'),
-                ]);
-            }
-        });
-    }
 
     public function show($id)
     {

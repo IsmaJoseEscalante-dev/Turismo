@@ -10,7 +10,7 @@
                 v-model="date"
             ></datepicker>
         </div>
-        <booking-component :model="model" :date="formatDate"></booking-component>
+        <booking-component :model="model" :cartable_type="'App\\Models\\Tour'" :date="formatDate"></booking-component>
     </div>
 </template>
 

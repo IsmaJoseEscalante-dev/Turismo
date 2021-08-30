@@ -20,4 +20,9 @@ class Promotion extends Model
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
+    public function carts()
+    {
+        return $this->morphMany(Cart::class, 'cartable');
+    }
 }

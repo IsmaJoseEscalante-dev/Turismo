@@ -5,7 +5,7 @@
             <h5>fecha de inicio: {{ formatDate(model.start) }}</h5>
             <h5>fecha de llegada: {{ formatDate(model.end) }}</h5>
         </div>
-        <booking-component :model="model" :date="formatDate(model.start)"></booking-component>
+        <booking-component :model="model" :cartable_type="'App\\Models\\Event'" :date="formatDate(model.start)"></booking-component>
     </div>
 </template>
 

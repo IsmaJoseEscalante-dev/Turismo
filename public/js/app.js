@@ -1942,7 +1942,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['model', 'date'],
+  props: ['model', 'date', 'cartable_type'],
   data: function data() {
     return {
       quantity: {
@@ -1998,6 +1998,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.errors.length === 0) {
         localStorage.setItem('inputs', JSON.stringify(this.inputs));
         localStorage.setItem('date', this.date);
+        localStorage.setItem('cartable_type', JSON.stringify(this.cartable_type));
         localStorage.setItem('model', JSON.stringify(this.model));
         location.href = "/home";
       }
@@ -62437,7 +62438,11 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("booking-component", {
-        attrs: { model: _vm.model, date: _vm.formatDate(_vm.model.start) }
+        attrs: {
+          model: _vm.model,
+          cartable_type: "App\\Models\\Event",
+          date: _vm.formatDate(_vm.model.start)
+        }
       })
     ],
     1
@@ -62942,7 +62947,11 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("booking-component", {
-        attrs: { model: _vm.model, date: _vm.selected }
+        attrs: {
+          model: _vm.model,
+          cartable_type: "App\\Models\\Promotion",
+          date: _vm.selected
+        }
       })
     ],
     1
@@ -63106,7 +63115,11 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("booking-component", {
-        attrs: { model: _vm.model, date: _vm.formatDate }
+        attrs: {
+          model: _vm.model,
+          cartable_type: "App\\Models\\Tour",
+          date: _vm.formatDate
+        }
       })
     ],
     1

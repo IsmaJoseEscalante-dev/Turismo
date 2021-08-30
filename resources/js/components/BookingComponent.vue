@@ -83,7 +83,7 @@
 <script>
 import moment from "moment";
 export default {
-    props: ['model','date'],
+    props: ['model','date','cartable_type'],
     data() {
         return {
             quantity: {adult: 1, boy: 0, bebe: 0},
@@ -120,6 +120,7 @@ export default {
             if (this.errors.length === 0) {
                 localStorage.setItem('inputs', JSON.stringify(this.inputs));
                 localStorage.setItem('date', this.date);
+                localStorage.setItem('cartable_type',JSON.stringify(this.cartable_type));
                 localStorage.setItem('model', JSON.stringify(this.model));
                 location.href = "/home"
             }

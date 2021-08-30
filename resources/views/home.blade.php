@@ -190,18 +190,20 @@
     <script>
         if (localStorage.getItem('date') && localStorage.getItem('inputs')) {
             let date = localStorage.getItem('date');
-            let tour = JSON.parse(localStorage.getItem('model'))
+            let model = JSON.parse(localStorage.getItem('model'))
+            let cartable_type = JSON.parse(localStorage.getItem('cartable_type'))
             let passengers = JSON.parse(localStorage.getItem('inputs'));
-            let total = passengers.length * Number(tour.amount)
+            let total = passengers.length * Number(model.amount)
 
-            axios.post('/api/booking', {
+            axios.post('/api/cart', {
                 names: passengers,
                 total: total,
                 quantity: passengers.length,
                 date: date,
                 user_id: "{{ Auth::id() }}",
-                tour_id: tour.id,
-                unit_price: tour.amount
+                cartable_type:cartable_type,
+                cartable_id:model.id,
+                unit_price: model.amount
             })
                 .then( () => {
                     localStorage.clear()

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Cart\StoreRequest;
 use App\Models\Cart;
-use Illuminate\Http\Request;
+use App\Models\Passenger;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -11,11 +13,24 @@ class CartController extends Controller
     {
         $carts = Cart::where('user_id', auth()->id())
                 ->where('status','pendiente')
-                ->with('tour')
                 ->get();
-        return view('user.bookings', compact('carts'));
+        return view('user.checkout', compact('carts'));
     }
+    public function store(StoreRequest $request)
+    {
+        return DB::transaction(function () use ($request) {
+            $cart = Cart::create($request->validated());
 
+            for ($i = 0; $i < count($request->input('names')); $i++) {
+                Passenger::create([
+                    'name' => $request->input('names')[$i]['name'],
+                    'lastName' => $request->input('names')[$i]['lastName'],
+                    'user_id' => $request->input('user_id'),
+                    'cart_id' => $cart->id
+                ]);
+            }
+        });
+    }
     public function destroy($id)
     {
         $cart = Cart::findOrFail($id);

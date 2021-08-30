@@ -6,7 +6,7 @@
                 <option v-for="option in daysOfYear">{{ option }}</option>
             </select>
         </div>
-        <booking-component :model="model" :date="selected"></booking-component>
+        <booking-component :model="model" :cartable_type="'App\\Models\\Promotion'" :date="selected"></booking-component>
     </div>
 </template>
 

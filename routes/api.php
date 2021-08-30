@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\CommentController;
@@ -11,7 +11,7 @@ Route::get('comments/{slug}', [CommentController::class,'comments'])->name('comm
 Route::get('comment-count', [CommentController::class, 'commentCount'])->name('comments.count');
 Route::get('tour/{id}',[WelcomeController::class,'tour'])->name('tour.show');
 
-Route::post('booking', [BookingController::class,'store']);
+Route::post('cart', [CartController::class,'store']);
 
 //Routes admin
     Route::get('images/{id}',[ImageController::class, 'index']);

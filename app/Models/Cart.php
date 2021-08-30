@@ -16,16 +16,6 @@ class Cart extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tour()
-    {
-        return $this->belongsTo(Tour::class);
-    }
-
-    public function passengers()
-    {
-        return $this->hasMany(Passenger::class);
-    }
-
     public function cartable()
     {
         return $this->morphTo();
