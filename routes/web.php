@@ -47,6 +47,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::resource('tours', TourController::class);
     Route::resource('stations', StationController::class);
     Route::resource('promotions', PromotionController::class);
+    Route::resource('bookings', BookingController::class);
     Route::get('events', [EventController::class, 'events'])->name('events.events');
 
     //Comments

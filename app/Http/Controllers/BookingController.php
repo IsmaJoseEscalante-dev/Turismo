@@ -12,7 +12,17 @@ use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
+    public function index()
+    {
+        $bookings = Booking::get();
+        return view('admin.bookings.index',compact('bookings'));
+    }
 
+    public function create()
+    {
+        $bookings = Booking::get();
+        return view('admin.bookings.index',compact('bookings'));
+    }
 
     public function show($id)
     {
