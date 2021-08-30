@@ -7,12 +7,12 @@
             @forelse($carts as $cart)
                 <div class="card col-md-8 mx-auto my-2">
                     <div class="card-body">
-                        <h4>Reserva para {{ $cart->name }}</h4>
+                        <h4>Reserva para {{ $cart->cartable->name }}</h4>
                         <p class="lead">Precio: {{ $cart->cartable->amount }} $</p>
                         <p class="lead">N° personas: {{ $cart->quantity }}</p>
                         <p class="lead">Total a pagar: {{ $cart->cartable->amount * $cart->quantity }} $</p>
                         <div class="d-flex float-right">
-                            <a href="{{ route('booking.tour', $cart->id) }}"
+                            <a href="{{ route('booking', $cart->id) }}"
                                class="btn btn-primary">Pagar</a>
                             <form action="{{ route('carts.destroy', $cart->id) }}" method="POST">
                                 @csrf

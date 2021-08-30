@@ -29,7 +29,7 @@ class UpdateRequest extends FormRequest
             'end' => 'date|after_or_equal:start',
             'amount' => 'required',
             'description' => 'required',
-            'title' => 'required',
+            'name' => 'required',
             'slug' => [
                 'required',
                 Rule::unique('tours')->ignore($this->event->id),
@@ -50,7 +50,7 @@ class UpdateRequest extends FormRequest
             'start.required' => 'El campo fecha de inicio no puede estar vacio',
             'end.required' => 'El campo fecha de llegada no puede estar vacio',
             'description.required' => 'Es campo descripcion no puede estar vacio',
-            'title.required' => 'El campo titulo no puede estar vacio',
+            'name.required' => 'El campo titulo no puede estar vacio',
             'tours.required' => 'Debes seleccionar al menos un tour',
             'end.after_or_equal' => 'La fecha de llegada debe ser mayor o igual a la fecha de salida',
             'category_id.required' => 'El campo categoria es requerido'

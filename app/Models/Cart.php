@@ -20,4 +20,9 @@ class Cart extends Model
     {
         return $this->morphTo();
     }
+
+    public function passengers()
+    {
+        return $this->hasMany(Passenger::class);
+    }
 }
