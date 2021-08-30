@@ -9,7 +9,7 @@ class Cart extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','tour_id','quantity','status','date'];
+    protected $fillable = ['cartable_type','cartable_id','user_id','quantity','status','date'];
 
     public function user()
     {
@@ -24,5 +24,10 @@ class Cart extends Model
     public function passengers()
     {
         return $this->hasMany(Passenger::class);
+    }
+
+    public function cartable()
+    {
+        return $this->morphTo();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Promotion;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -25,14 +26,17 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'slug' => 'required',
+            'slug' => [
+                'required',
+                Rule::unique('tours')->ignore($this->promotion->id),
+            ],
             'description' => 'required',
             'amount' => 'required',
             'discount' => 'required',
             'date_start' => 'required|date|after:today',
             'date_finish' => 'date|after:today|after_or_equal:start',
             'status' => 'required|in:available,not_available',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             "tours" => "required|array|min:1",
             "tours.*" => "required|distinct",
         ];

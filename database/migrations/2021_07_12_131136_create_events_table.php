@@ -18,6 +18,7 @@ class CreateEventsTable extends Migration
             $table->dateTime('start');
             $table->dateTime('end')->nullable();
             $table->string('title');
+            $table->string('slug')->unique();
             $table->string('color');
             $table->text('description');
             $table->decimal('amount',8,2);

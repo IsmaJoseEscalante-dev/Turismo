@@ -187,9 +187,8 @@
                 <!--==================== PLACES CARD 1 ====================-->
 
                 @foreach ($events as $event)
-                    @foreach ($event->tours as $tour)
                     <div class="place__card">
-                        <img src="{{ asset(Storage::url($tour->image->image)) }}" alt="" class="place__img">
+                        <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="place__img">
 
                         <div class="place__content">
                             <span class="place__rating">
@@ -198,18 +197,17 @@
                             </span>
 
                             <div class="place__data">
-                                {{-- <h3 class="place__title">{{ $tour->name }}</h3> --}}
-                                {{-- <span class="place__subtitle">{{ $tour->category->name }}</span> --}}
+                                 <h3 class="place__title">{{ $event->title }}</h3>
+                                 <span class="place__subtitle">{{ $event->category->name }}</span>
                                 <span class="place__subtitle">{{ $event->start }}</span>
-                                <span class="place__price">{{ $tour->amount }}</span>
+                                <span class="place__price">{{ $event->amount }}</span>
                             </div>
                         </div>
 
-                        <a href="{{ route('paradas', $tour->slug) }}" class="button button--flex place__button">
+                        <a href="{{ route('events', $event->slug) }}" class="button button--flex place__button">
                             <i class="ri-arrow-right-line"></i>
                         </a>
                     </div>
-                    @endforeach
                 @endforeach
         </section>
 

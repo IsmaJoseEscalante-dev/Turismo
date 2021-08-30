@@ -43,6 +43,12 @@
                             @endforeach
                         </td>
                     </tr>
+                    <tr>
+                        <th>Imagen</th>
+                        <td>
+                            <img src="{{ Storage::url($promotion->image->image) }}" alt="image" width="100px">
+                        </td>
+                    </tr>
                 </table>
                 <div class="form-group pt-3">
                     <a href="{{ route('promotions.index') }}" class="btn btn-secondary">Regresar</a>

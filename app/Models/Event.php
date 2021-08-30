@@ -9,7 +9,7 @@ class Event extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['start','end','amount','description','title','color','category_id'];
+    protected $fillable = ['start','end','amount','description','title','slug','color','category_id'];
 
     public function tours()
     {

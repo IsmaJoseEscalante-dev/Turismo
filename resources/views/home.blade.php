@@ -190,7 +190,7 @@
     <script>
         if (localStorage.getItem('date') && localStorage.getItem('inputs')) {
             let date = localStorage.getItem('date');
-            let tour = JSON.parse(localStorage.getItem('tour'))
+            let tour = JSON.parse(localStorage.getItem('model'))
             let passengers = JSON.parse(localStorage.getItem('inputs'));
             let total = passengers.length * Number(tour.amount)
 

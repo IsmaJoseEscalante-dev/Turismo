@@ -1,15 +1,5 @@
 <template>
-    <div class="container">
-        <div class="form-group">
-            <label>Dia de reserva</label>
-            <datepicker
-                type="date"
-                :language="es"
-                :inline="true"
-                :format="formatDate"
-                v-model="date"
-            ></datepicker>
-        </div>
+    <div>
         <div class="form-group">
             <label>Cantidad</label>
             <div class="d-flex justify-content-between">
@@ -75,9 +65,9 @@
                             </div>
                         </div>
                         <hr>
-                        <h5>Reserva viaje para {{ tour.name }}</h5>
+                        <h5>Reserva viaje para {{ model.name }}</h5>
                         <p class="lead">Dia : {{ date }}</p>
-                        <p class="lead">{{ persons }} x {{ tour.amount }}</p>
+                        <p class="lead">{{ persons }} x {{ model.amount }}</p>
                         <p class="lead">Total : {{ total }} $</p>
                     </div>
                     <div class="modal-footer d-flex align-items-end">
@@ -91,21 +81,13 @@
 </template>
 
 <script>
-import Datepicker from 'vuejs-datepicker';
-import {es} from 'vuejs-datepicker/dist/locale'
 import moment from "moment";
-
 export default {
-    components: {
-        Datepicker
-    },
-    props: ['tour'],
+    props: ['model','date'],
     data() {
         return {
-            date: new Date(),
             quantity: {adult: 1, boy: 0, bebe: 0},
             amount: 0,
-            es: es,
             persons: 0,
             inputs: [],
             total: 0,
@@ -116,7 +98,7 @@ export default {
         loadBooking() {
             this.date = this.formatDate;
             this.persons = Number(this.quantity.adult) + Number(this.quantity.boy) + Number(this.quantity.bebe);
-            this.total = Number(this.tour.amount) * this.persons;
+            this.total = Number(this.model.amount) * this.persons;
             for (let i = 0; i < this.persons; i++) {
                 this.inputs.push({name: '', lastName: ''})
             }
@@ -138,7 +120,7 @@ export default {
             if (this.errors.length === 0) {
                 localStorage.setItem('inputs', JSON.stringify(this.inputs));
                 localStorage.setItem('date', this.date);
-                localStorage.setItem('tour', JSON.stringify(this.tour));
+                localStorage.setItem('model', JSON.stringify(this.model));
                 location.href = "/home"
             }
         }

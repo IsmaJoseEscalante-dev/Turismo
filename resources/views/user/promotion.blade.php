@@ -110,8 +110,8 @@
             <div class="col-md-6 col-lg-5 col-xl-4 mt-3 mt-md-0">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="text-right">$ {{ $tour->amount }}</h4>
-                        <form-booking-component :tour="{{ json_encode($tour) }}"></form-booking-component>
+                        <h4 class="text-right">$ {{ $promotion->amount }}</h4>
+                        <promotion-component :model="{{ json_encode($promotion) }}"></promotion-component>
                     </div>
                 </div>
             </div>

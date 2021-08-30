@@ -29,6 +29,7 @@ class CreateRequest extends FormRequest
             'amount' => 'required',
             'description' => 'required',
             'title' => 'required',
+            'slug' => 'required|unique:events,slug',
             'color' => 'required',
             "tours"    => "required|array|min:1",
             "tours.*"  => "required|distinct",

@@ -13,7 +13,6 @@ Route::get('tour/{id}',[WelcomeController::class,'tour'])->name('tour.show');
 
 Route::post('booking', [BookingController::class,'store']);
 
-
 //Routes admin
     Route::get('images/{id}',[ImageController::class, 'index']);
     Route::post('storeTour/{id}',[ImageController::class,'storeTour'])->name('store.tour');

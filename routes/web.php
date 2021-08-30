@@ -18,6 +18,7 @@ Auth::routes();
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 Route::get('paradas/{slug}', [WelcomeController::class, 'paradas'])->name('paradas');
 Route::get('promociones/{slug}', [WelcomeController::class, 'promotions'])->name('promotions');
+Route::get('events/{slug}', [WelcomeController::class, 'events'])->name('events');
 
 Route::post('comments', [CommentController::class, 'store'])->name('comments.store');
 

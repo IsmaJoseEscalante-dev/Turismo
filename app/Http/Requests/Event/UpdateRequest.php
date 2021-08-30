@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Event;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -29,6 +30,10 @@ class UpdateRequest extends FormRequest
             'amount' => 'required',
             'description' => 'required',
             'title' => 'required',
+            'slug' => [
+                'required',
+                Rule::unique('tours')->ignore($this->event->id),
+            ],
             'color' => 'required',
             "tours"    => "required|array|min:1",
             "tours.*"  => "required|distinct",

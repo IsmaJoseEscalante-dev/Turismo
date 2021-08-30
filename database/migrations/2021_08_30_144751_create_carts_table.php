@@ -16,7 +16,7 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('tour_id')->constrained('tours');
+            $table->morphs('cartable');
             $table->integer('quantity');
             $table->date('date');
             $table->enum('status', ['pagado', 'pendiente'])->default('pendiente');

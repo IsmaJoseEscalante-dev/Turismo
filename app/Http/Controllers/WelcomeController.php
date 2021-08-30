@@ -31,10 +31,15 @@ class WelcomeController extends Controller
     {
         $promotion = Promotion::where('slug',$slug)
                     ->firstOrFail();
-
         return view('user.promotion', compact('promotion'));
     }
 
+    public function events($slug)
+    {
+        $event = Event::where('slug',$slug)
+            ->firstOrFail();
+        return view('user.event', compact('event'));
+    }
     public function booking()
     {
         return view('user.booking');

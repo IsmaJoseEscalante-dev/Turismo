@@ -228,6 +228,7 @@
                 newEvent = {
                     id: $('#txtId').val(),
                     title: $('#txtTitle').val(),
+                    slug: string_to_slug($('#txtTitle').val()),
                     start: $('#txtFechaInicio').val() + " 00:00:00",
                     color: $('#txtColor').val(),
                     amount: $('#txtAmount').val(),
@@ -273,6 +274,25 @@
                 $('#txtTours').trigger('change');
                 editor.setData("");
                 $('#errors').html("");
+            }
+
+            function string_to_slug(str) {
+                str = str.replace(/^\s+|\s+$/g, '');
+                str = str.toLowerCase();
+
+                //quita acentos, cambia la ñ por n, etc
+                let from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+                let to = "aaaaeeeeiiiioooouuuunc------";
+
+                for (let i = 0, l = from.length; i < l; i++) {
+                    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+                }
+
+                str = str.replace(/[^a-z0-9 -]/g, '') // quita caracteres invalidos
+                    .replace(/\s+/g, '-') // reemplaza los espacios por -
+                    .replace(/-+/g, '-'); // quita las plecas
+
+                return str;
             }
         });
     </script>
