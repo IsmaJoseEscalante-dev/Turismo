@@ -77,13 +77,17 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-6">
+                        <div class="col-md-6 form-group">
                             <label>Seleccionar imagen</label>
-                            <input class="form-control" type="file" name="image" id="image" accept="image/*">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="image" id="inputGroupFile01"
+                                       accept="image/*">
+                                <label class="custom-file-label" for="inputGroupFile01">Seleccione una imagen</label>
+                            </div>
                             @error('image')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                         <div class="form-group col-md-6">

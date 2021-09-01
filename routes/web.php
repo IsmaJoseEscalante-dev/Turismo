@@ -11,7 +11,9 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\UserController;
 
 Auth::routes();
 
@@ -36,6 +38,11 @@ Route::middleware(['auth', 'role:user'])->group(function (){
     Route::get('booking', [WelcomeController::class, 'booking'])->name('booking');
     Route::get('booking/{id}', [BookingController::class,'show'])->name('booking.show');
     Route::get('bookings/{id}', [BookingController::class,'bookingCart'])->name('booking');
+
+    //routes pay with mercado pago
+    Route::post('/payments/pay', [PaymentController::class,'pay'])->name('pay');
+    Route::get('/payments/approval', [PaymentController::class,'approval'])->name('approval');
+    Route::get('/payments/cancelled',  [PaymentController::class,'cancelled'])->name('cancelled');
 });
 
 
@@ -48,6 +55,8 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::resource('stations', StationController::class);
     Route::resource('promotions', PromotionController::class);
     Route::resource('bookings', BookingController::class);
+    Route::resource('carts', CartController::class);
+    Route::get('show',[CartController::class, 'show'])->name('carts.show');
     Route::get('events', [EventController::class, 'events'])->name('events.events');
 
     //Comments

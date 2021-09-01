@@ -40,21 +40,3 @@
         </div>
     </div>
 @endsection
-
-@section('style')
-    <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-@endsection
-
-@section('js')
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#bookings').DataTable({
-                "lengthMenu": [[5, 10, 50, -1], [5, 10, 50, 'All']]
-            });
-        });
-    </script>
-@endsection
-
-

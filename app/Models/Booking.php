@@ -9,15 +9,15 @@ class Booking extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['status','user_id','tour_id','total','date'];
+    protected $fillable = ['title','user_id','cart_id','type_booking','total','date'];
 
     public function passengers()
     {
         return $this->hasMany(Passenger::class);
     }
 
-    public function tour()
+    public function cart()
     {
-        return $this->belongsTo(Tour::class);
+        return $this->belongsTo(Cart::class);
     }
 }

@@ -6,34 +6,57 @@
     <div class="container pt-3">
         <div class="row">
             <div class="col-6 col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>EXCURSIONES<h5>
-                        <h5>{{ $tours }}<h5>
+                <div class="card bg-danger ">
+                    <div class="card-body text-white d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5><b>EXCURSIONES</b>
+                                <h5>
+                                    <h5>{{ $tours }}<h5>
+                        </div>
+                        <div>
+                            <i class="fas fa-hiking" style="font-size:50px"></i>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>ESTACIONES<h5>
-                        <h5>{{ $stations }}<h5>
+                <div class="card bg-success">
+                    <div class="card-body text-white d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5><b>ESTACIONES</b>
+                                <h5>
+                                    <h5>{{ $stations }}<h5>
+                        </div>
+                        <div>
+                            <i class="fas fa-charging-station" style="font-size:50px"></i>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>USUARIOS<h5>
-                        <h5>{{ $users }}<h5>
+                <div class="card bg-primary">
+                    <div class="card-body text-white d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5><b>USUARIOS</b>
+                                <h5>
+                                    <h5>{{ $users }}<h5>
+                        </div>
+                        <div>
+                            <i class="fas fa-hiking" style="font-size:50px"></i>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>RESERVAS</h5>
-                        <h5>dsf</h5>
+                <div class="card bg-warning ">
+                    <div class="card-body text-white d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5><b>RESERVAS</b></h5>
+                            <h5>{{ $bookings }}</h5>
+                        </div>
+                        <div>
+                            <i class="fas fa-hiking" style="font-size:50px"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,6 +74,13 @@
                 <div class="card">
                     <div class="card-body">
                         <canvas id="myChartCT"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="myChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -104,11 +134,12 @@
                 }
             }
         });
+
     </script>
     <script>
         var ctx = document.getElementById('myChartCT').getContext('2d');
         var myChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'pie',
             data: {
                 labels: <?php echo json_encode($namesCategory); ?>,
                 datasets: [{
@@ -133,13 +164,6 @@
                     borderWidth: 1
                 }]
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
         });
     </script>
 @stop

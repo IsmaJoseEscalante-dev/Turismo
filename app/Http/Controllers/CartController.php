@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+
     public function index()
     {
         $carts = Cart::where('user_id', auth()->id())
@@ -16,6 +17,13 @@ class CartController extends Controller
                 ->get();
         return view('user.checkout', compact('carts'));
     }
+
+    public function show()
+    {
+        $carts = Cart::get();
+        return view('admin.carts.show',compact('carts'));
+    }
+
     public function store(StoreRequest $request)
     {
         return DB::transaction(function () use ($request) {
@@ -31,6 +39,7 @@ class CartController extends Controller
             }
         });
     }
+
     public function destroy($id)
     {
         $cart = Cart::findOrFail($id);

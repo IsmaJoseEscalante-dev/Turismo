@@ -16,7 +16,7 @@
                         <form @submit.prevent="storeImage()" enctype="multipart/form-data">
                             <div class="form-group">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" @change="getImage">
+                                    <input type="file" class="custom-file-input" @change="getImage" accept="image/*">
                                     <label class="custom-file-label">seleccionar imagen</label>
                                 </div>
                                 <span v-if="errors.image" class="text-danger">{{ errors.image[0] }}</span>

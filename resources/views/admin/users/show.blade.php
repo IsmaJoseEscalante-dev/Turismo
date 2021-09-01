@@ -4,32 +4,37 @@
 
 @section('content')
     <div class="container d-flex justify-content-between py-4">
-        <h3>Reservas</h3>
-        <a href="bookings/create" class="btn btn-primary">CREAR</a>
+        <h3>EXCURSIONES</h3>
+        <a href="users/create" class="btn btn-primary">CREAR</a>
     </div>
     <div class="card">
         <div class="card-body">
-            <table id="bookings" class="table table-striped shadow-lg mt-4" style="width:100%">
+            <table id="users" class="table table-striped shadow-lg mt-4" style="width:100%">
                 <thead class="bg-primary text-white">
                 <th scope="col">ID</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Total</th>
+                <th scope="col">nombre</th>
+                <th scope="col">Image</th>
+                <th scope="col">Precio</th>
                 <th scope="col">Acciones</th>
                 </thead>
                 <tbody>
-                @foreach($bookings as $booking)
+                @foreach($users as $user)
                     <tr>
-                        <td>{{$booking->id}}</td>
-                        <td>{{$booking->date}}</td>
-                        <td>{{$booking->status}}</td>
-                        <td>{{$booking->total}}</td>
+                        <td>{{$user->id}}</td>
+                        <td>{{$user->name}}</td>
                         <td>
-                            <form action="{{route('bookings.destroy',$booking->id)}}" method="post">
+                        @if($user->image)
+                            <img width = "40px" height= '40px'
+                            src="{{ Storage::url($user->image->image) }}"  alt="">
+                        @endif
+                        </td>
+                        <td>{{$user->amount}}</td>
+                        <td>
+                            <form action="{{route('users.destroy',$user->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <a href="bookings/{{$booking->id}}" class="btn btn-info">Ver</a>
-                                <a href="bookings/{{$booking->id}}/edit" class="btn btn-warning">Editar</a>
+                                <a href="users/{{$user->id}}" class="btn btn-info">Ver</a>
+                                <a href="users/{{$user->id}}/edit" class="btn btn-warning">Editar</a>
                                 <button type="submit" class="btn btn-danger">Borrar</button>
                             </form>
                         </td>
@@ -50,11 +55,10 @@
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#bookings').DataTable({
+            $('#users').DataTable({
                 "lengthMenu": [[5, 10, 50, -1], [5, 10, 50, 'All']]
             });
         });
     </script>
 @endsection
-
 

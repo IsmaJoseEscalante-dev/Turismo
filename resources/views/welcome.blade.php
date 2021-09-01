@@ -129,21 +129,29 @@
                     </a>
                 </div>
 
-                <div class="home__info">
+                <div class="home__info" style="background-color:rgb(0, 255, 55)">
+                    <p>{{$promotions->count()}}</p>
                     @forelse ($promotions as $promotion)
-                        <div>
-                            <span class="home__info-title">{{ $promotion->name }}</span>
-                            <a href="{{ route('promotions', $promotion->slug) }}" class="button button--flex button--link home__info-button">
-                                Reservar <i class="ri-arrow-right-line"></i>
-                            </a>
-                        </div>
+                        <div class = "container-all">
+                            <div class="slide">
+                                <div class="item-slide">
+                                    <img src = "{{ asset(Storage::url($promotion->tours->image->image)) }}">
+                                    <span class="home__info-title">{{ $promotion->name }}</span>
+                                </div>
+                            </div>
+                            {{-- <img src = "{{ asset('imagenes/fondo1.jpg') }}"> --}}
 
-                        <div class="home__info-overlay">
-                            <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="home__info-img">
                         </div>
+                        {{-- <div class="home__info-overlay">
+                            <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="home__info-img">
+                        </div> --}}
                     @empty
                         <h6>No hay promociones</h6>
                     @endforelse
+
+                            <a href="{{ route('promotions', $promotion->slug) }}" class="button button--flex button--link home__info-button">
+                                Ver Promocion <i class="ri-arrow-right-line"></i>
+                            </a>
                 </div>
             </div>
         </section>
@@ -177,7 +185,7 @@
                         </a>
                     </div>
                 @endforeach
-
+            </div>
         </section>
 
         <section class="place section" id="event">

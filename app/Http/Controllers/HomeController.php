@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Booking;
 use App\Models\Station;
 use App\Models\Category;
+use App\Models\Currency;
+use App\Models\PaymentPlatform;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -29,6 +31,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['user', 'admin']);
+
         return view('home')->with([
             'bookings' => Booking::where('user_id', auth()->id())->orderByDesc('date')->get()
         ]);
@@ -38,6 +41,8 @@ class HomeController extends Controller
     {
         $tours = Tour::count();
         $users = User::count();
+
+        $bookings = Booking::count();
 
         $datosTS = Tour::select(['name'])
         ->withCount('stations')
@@ -65,6 +70,6 @@ class HomeController extends Controller
         /* print_r($values);
         print_r( $names);
         var_dump($tours); */
-        return view('dashboard',compact('tours','stations','namesCategory','countTours','namesTour','countStations','users'));
+        return view('dashboard',compact('tours','stations','namesCategory','countTours','namesTour','countStations','users','bookings'));
     }
 }

@@ -27,8 +27,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('carts.show') }}" class="nav-link {{ Request::is('carts') ? 'active' :'' }}">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>
+                            Carts
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('bookings.index') }}" class="nav-link {{ Request::is('bookings') ? 'active' :'' }}">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fa fa-address-book"></i>
                         <p>
                             Reservas
                         </p>
@@ -36,7 +44,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('categories.index') }}" class="nav-link {{ Request::is('categories') ? 'active' :'' }}">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fa fa-list-alt"></i>
                         <p>
                             Categorias
                         </p>
@@ -44,7 +52,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('promotions.index') }}" class="nav-link {{ Request::is('promotions') ? 'active' :'' }}">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fa fa-gift"></i>
                         <p>
                             Promociones
                         </p>
@@ -52,7 +60,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('tours.index') }}" class="nav-link {{ Request::is('tours') ? 'active' :'' }}">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-bus-alt"></i>
                         <p>
                             Excursiones
                         </p>
@@ -68,7 +76,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('events.events') }}" class="nav-link  {{ Request::is('events') ? 'active' :'' }}">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fa fa-calendar"></i>
                         <p>
                             Eventos
                         </p>
@@ -76,7 +84,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('comments.index') }}" class="nav-link {{ Request::is('comments') ? 'active' :'' }}">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fa fa-comments"></i>
                         <p>
                             comentarios
                         </p>

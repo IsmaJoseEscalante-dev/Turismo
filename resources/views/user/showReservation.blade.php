@@ -10,7 +10,7 @@
                         <table class="table table-bordered">
                             <tr>
                                 <th>Destino</th>
-                                <td>{{ $booking->tour->name }}</td>
+                                <td>{{ $booking->title }}</td>
                             </tr>
                             <tr>
                                 <th>Fecha de reserva</th>
@@ -21,11 +21,15 @@
                                 <td>{{ $booking->date }}</td>
                             </tr>
                             <tr>
+                                <th>Tipo de reserva</th>
+                                <td>{{ $booking->type_booking }}</td>
+                            </tr>
+                            <tr>
                                 <th>Pasajeros</th>
                                 <td>
-                                    @foreach($booking->passengers as $passenger)
-                                        {{ $passenger->name }} {{ $passenger->lastName }}<br>
-                                    @endforeach
+                                @foreach ($passengers as $passenger)
+                                    <p>{{ $passenger->name }} {{ $passenger->lastName }}</p>
+                                @endforeach
                                 </td>
                             </tr>
                             <tr>

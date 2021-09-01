@@ -847,7 +847,7 @@ input {
     justify-content: center;
   }
   .place__container {
-    grid-template-columns: repeat(3, max-content);
+    grid-template-columns: repeat(2, max-content);
   }
   .subscribe__form {
     width: 470px;
@@ -1052,3 +1052,44 @@ input {
     height: 640px;
   }
 }
+
+/* Carousel para las promociones*/
+.container-all{
+    position:relative;
+    max-width:1000px;
+    width:100%;
+    border-radius: 6px;
+    overflow:hidden;
+}
+.slide{
+    display: flex;
+    transform: translate3d(0,0,0);
+    transition: all 600ms;
+    animation-name: autoplay;
+    animation-duration: 6.5s;
+    animation-direction: alternate;
+    animation-fill-mode:forwards;
+    animation-iteration-count: infinite;
+}
+
+.item-slide{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-width: 100%;
+}
+
+@keyframes autoplay{
+    33%{
+        transform:translate3d(calc(-100%*0),0,0)
+    }
+    66%{
+        transform:translate3d(calc(-100%*1),0,0)
+    }
+    100%{
+        transform:translate3d(calc(-100%*2),0,0)
+    }
+}
+

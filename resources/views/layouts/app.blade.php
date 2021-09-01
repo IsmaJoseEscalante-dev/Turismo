@@ -78,7 +78,14 @@
                                     <a href="{{ route('home') }}" class="nav-link">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('checkout') }}" class="nav-link">Mis reservas <span class="badge badge-primary">{{ Auth::user()->carts()->count() }}</span></a>
+                                    <a href="{{ route('checkout') }}" class="nav-link">
+                                    Mis reservas
+                                    <span class="badge badge-primary">
+                                    @php
+                                    $cart = App\Models\Cart::where('user_id', Auth::user()->id)->where('status','pendiente')->count();
+                                    echo $cart = $cart == 0 ? "" : $cart;
+                                    @endphp
+                                    </span></a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

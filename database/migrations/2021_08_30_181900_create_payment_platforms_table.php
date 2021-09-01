@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookingsTable extends Migration
+class CreatePaymentPlatformsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateBookingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('payment_platforms', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['active', 'disable'])->default('disable');
-            $table->integer('total');
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('tour_id')->constrained('tours');
-            $table->date('date');
+            $table->string('name', 50);
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateBookingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('payment_platforms');
     }
 }

@@ -144,6 +144,9 @@
                     center: 'title',
                     right: 'month,basicWeek,basicDay,agendaWeek,agendaDay'
                 },
+                eventRender: function(event, element) {
+                    element.find('.fc-title').append(event.name);
+                },
                 dayClick: function(date) {
                     $('#addEvent').css("display", "block");
                     $('#updateEvent').css("display", "none");
@@ -160,9 +163,9 @@
                     $('#destroyEvent').css("display", "block");
 
                     $('#txtId').val(calEvent.id);
-                    $('#titleEvent').html(calEvent.title);
+                    $('#titleEvent').html(calEvent.name);
                     $('#txtId').val(calEvent.id);
-                    $('#txtTitle').val(calEvent.title);
+                    $('#txtTitle').val(calEvent.name);
                     $('#txtColor').val(calEvent.color);
                     $('#txtAmount').val(calEvent.amount);
                     $('#txtTours').val(calEvent.tours);
@@ -186,7 +189,7 @@
                 },
                 eventDrop: function(calEvent) {
                     $('#txtId').val(calEvent.id);
-                    $('#txtTitle').val(calEvent.title);
+                    $('#txtTitle').val(calEvent.name);
                     $('#txtColor').val(calEvent.color);
                     $('#txtAmount').val(calEvent.amount);
                     $('#txtDescription').val(calEvent.description);

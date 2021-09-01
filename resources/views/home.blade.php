@@ -2,12 +2,32 @@
 
 @section('content')
     <div class="container pt-5">
-        @if(Session::has('message'))
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {{Session::get('message')}}
-            </div>
-        @endif
+        <div class="container">
+            @if (isset($errors) && $errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    <ul>
+                        @foreach (session()->get('success') as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if (session()->has('change-user'))
+                <div class="alert alert-success">
+                    <p>{{ Session::get('change-user') }}</p>
+                </div>
+            @endif
+        </div>
         <div class="row bg-white py-3 border rounded">
             <div class="col-md-4">
                 <div class="list-group" id="list-tab" role="tablist">
@@ -60,7 +80,7 @@
                                 <th width="10px">Orden</th>
                                 <th>Lugar</th>
                                 <th>Fecha</th>
-                                <th>Estado</th>
+                                <th>Tipo</th>
                                 <th>Total</th>
                                 <th>Acciones</th>
                             </tr>
@@ -69,9 +89,9 @@
                             @forelse($bookings as $booking)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $booking->tour->name }}</td>
+                                    <td>{{ $booking->title }}</td>
                                     <td>{{ $booking->date }}</td>
-                                    <td>{{ $booking->status }}</td>
+                                    <td>{{ $booking->type_booking }}</td>
                                     <td>{{ $booking->total }}</td>
                                     <td>
                                         <a href="{{ route('booking.show', $booking->id) }}" class="btn btn-primary">Ver</a>
@@ -207,6 +227,7 @@
             })
                 .then( () => {
                     localStorage.clear()
+                    location.reload();
                 })
                 .catch(function (error) {
                     console.log(error.data);
