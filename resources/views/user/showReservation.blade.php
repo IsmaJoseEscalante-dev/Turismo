@@ -13,8 +13,8 @@
                                 <td>{{ $booking->title }}</td>
                             </tr>
                             <tr>
-                                <th>Fecha de reserva</th>
-                                <td>{{ $booking->created_at }}</td>
+                                <th>Dia que se reservó</th>
+                                <td>{{ $booking->created_at->format('Y-m-d') }}</td>
                             </tr>
                             <tr>
                                 <th>Fecha de salida</th>
@@ -31,6 +31,10 @@
                                     <p>{{ $passenger->name }} {{ $passenger->lastName }}</p>
                                 @endforeach
                                 </td>
+                            </tr>
+                            <tr>
+                                <th>Precio unitario</th>
+                                <td>{{ $cart->cartable->amount }} $</td>
                             </tr>
                             <tr>
                                 <th>Total pagado</th>

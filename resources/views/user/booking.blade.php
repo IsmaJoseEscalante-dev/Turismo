@@ -1,5 +1,19 @@
 @extends('layouts.app')
 
+@section('css')
+    <style>
+        .btn-pagar {
+            background-color: #01BCFF;
+            color: white;
+        }
+
+        .btn-pagar:hover {
+            color: #F8FAFC
+        }
+
+    </style>
+@endsection
+
 @section('content')-
     <div class="container-fluid my-3">
         <div class="card">
@@ -11,7 +25,7 @@
                             <tr>
                                 <th>Propietario</th>
                                 <th>Fecha</th>
-                                <th>Tour</th>
+                                <th>Reserva</th>
                                 <th>Pasajeros</th>
                             </tr>
                             <tr>
@@ -32,41 +46,6 @@
                         <h5 id="countPassenger">Pasajeros : {{ $cart->quantity }}</h5>
                         <h5>Precio : {{ $cart->cartable->amount }}$</h5>
                         <h5>total : {{ $cart->cartable->amount * $cart->quantity }} $</h5>
-                        <div id="accordion">
-                            <div class="card">
-                                <div class="card-header" id="headingOne">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
-                                            aria-expanded="true" aria-controls="collapseOne">
-                                            Mercado pago
-                                        </button>
-                                    </h5>
-                                </div>
-
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                    data-parent="#accordion">
-                                    <div class="card-body">
-                                        <div class="cho-container"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" id="headingTwo">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed" data-toggle="collapse"
-                                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Tarjeta de credito
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                    data-parent="#accordion">
-                                    <div class="card-body">
-                                        pago con tarjeta
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -75,43 +54,41 @@
             <div class="card-body">
                 <form action="{{ route('pay') }}" method="POST" id="paymentForm">
                     @csrf
-                    @foreach($paymentPlatforms as $paymentPlatform)
+                    @foreach ($paymentPlatforms as $paymentPlatform)
                         <img src="{{ asset('img/mercadopago.jpg') }}" alt="" class="d-block">
                         <label class="mt-3">Card details:</label>
 
                         <div class="form-group form-row">
                             <div class="col-5">
                                 <input class="form-control" type="text" id="cardNumber" data-checkout="cardNumber"
-                                       placeholder="Card Number">
+                                    placeholder="Numero de la tarjeta">
                             </div>
 
-                            <div class="col-2">
-                                <input class="form-control" type="text" data-checkout="securityCode" placeholder="CVC">
+                            <div class="col-3">
+                                <input class="form-control" type="number"
+                                pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" data-checkout="securityCode" placeholder="CVC">
                             </div>
-
                             <div class="col-1"></div>
-
                             <div class="col-1">
-                                <input class="form-control" type="text" data-checkout="cardExpirationMonth"
-                                       placeholder="MM">
+                                <input class="form-control" type="number"
+                                pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" data-checkout="cardExpirationMonth"
+                                    placeholder="Mes">
                             </div>
-
                             <div class="col-1">
-                                <input class="form-control" type="text" data-checkout="cardExpirationYear"
-                                       placeholder="YY">
+                                <input class="form-control" type="number"
+                                pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" data-checkout="cardExpirationYear"
+                                    placeholder="Año">
                             </div>
                         </div>
-
-
 
                         <div class="form-group form-row">
                             <div class="col-5">
                                 <input class="form-control" type="text" data-checkout="cardholderName"
-                                       placeholder="Your Name" value="{{ Auth::user()->name }}">
+                                    placeholder="Your Name" value="{{ Auth::user()->name }}">
                             </div>
                             <div class="col-5">
                                 <input class="form-control" type="email" data-checkout="cardholderEmail"
-                                       placeholder="email@example.com" name="email" value="{{ Auth::user()->email }}">
+                                    placeholder="email@example.com" name="email" value="{{ Auth::user()->email }}">
                             </div>
                         </div>
 
@@ -121,15 +98,13 @@
                                 <select class="custom-select" data-checkout="docType"></select>
                             </div>
                             <div class="col-3">
-                                <input class="form-control" type="text" data-checkout="docNumber"
-                                       placeholder="Document">
+                                <input class="form-control" type="text" data-checkout="docNumber" placeholder="Document">
                             </div>
                         </div>
 
                         <div class="form-group form-row">
                             <div class="col">
-                                <small class="form-text text-mute" role="alert">Your payment will be converted
-                                    to {{ strtoupper(config('services.mercadopago.base_currency')) }}</small>
+                                <small class="form-text text-mute" role="alert">La moneda oficial es el {{ strtoupper(config('services.mercadopago.base_currency')) }} <i>(peso Argentino)</i></small>
                             </div>
                         </div>
 
@@ -143,7 +118,7 @@
                         <input type="hidden" id="cardNetwork" name="card_network">
                         <input type="hidden" id="cardToken" name="card_token">
                         <div class="text-center mt-3">
-                            <button type="submit" id="payButton" class="btn btn-primary btn-lg">Pay</button>
+                            <button type="submit" id="payButton" class="btn btn-pagar btn-lg">Pagar</button>
                         </div>
                     @endforeach
                 </form>
@@ -165,9 +140,10 @@
         function setCardNetwork() {
             const cardNumber = document.getElementById("cardNumber");
 
-            mercadoPago.getPaymentMethod(
-                {"bin": cardNumber.value.substring(0, 7)},
-                function (status, response) {
+            mercadoPago.getPaymentMethod({
+                    "bin": cardNumber.value.substring(0, 7)
+                },
+                function(status, response) {
                     const cardNetwork = document.getElementById("cardNetwork");
 
                     cardNetwork.value = response[0].id;
@@ -179,10 +155,10 @@
 
         const mercadoPagoForm = document.getElementById("paymentForm");
 
-        mercadoPagoForm.addEventListener('submit', function (e) {
+        mercadoPagoForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            mercadoPago.createToken(mercadoPagoForm, function (status, response) {
+            mercadoPago.createToken(mercadoPagoForm, function(status, response) {
                 if (status != 200 && status != 201) {
                     const errors = document.getElementById("paymentErrors");
 

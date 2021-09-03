@@ -18,7 +18,7 @@ class CreatePassengersTable extends Migration
             $table->string('name');
             $table->string('lastName');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('cart_id')->constrained('carts');
+            $table->foreignId('cart_id')->constrained('carts')->onDelete('cascade');
             $table->timestamps();
         });
     }

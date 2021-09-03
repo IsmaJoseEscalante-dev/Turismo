@@ -1958,8 +1958,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    closeModal: function closeModal(id) {
+      this.errors = [];
+      $(id).modal("hide");
+    },
     loadBooking: function loadBooking() {
-      this.date = this.formatDate;
       this.persons = Number(this.quantity.adult) + Number(this.quantity.boy) + Number(this.quantity.bebe);
       this.total = Number(this.model.amount) * this.persons;
 
@@ -1974,6 +1977,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     storeLocal: function storeLocal() {
       this.errors = [];
+      var fech = this.date.split("-");
+      var a = new Date();
+      var m = new Date();
+      var d = new Date();
 
       for (var i = 0; i < this.persons; i++) {
         if (this.inputs[i].name === "" || /^\s+$/.test(this.inputs[i].name)) {
@@ -1989,7 +1996,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      if (this.date <= moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date()).format('YYYY-MM-D')) {
+      if (new Date(fech[0], fech[1], fech[2]) <= new Date(a.getFullYear(), m.getMonth() + 1, d.getDate())) {
         this.errors.push({
           error: 'la fecha no puede ser menor a la de hoy'
         });
@@ -2730,9 +2737,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     fillSelect: function fillSelect() {
-      for (var d = new Date(this.model.date_start); d <= new Date(this.model.date_finish); d.setDate(d.getDate() + 1)) {
+      var dateStart = new Date(this.model.date_start);
+      dateStart.setDate(dateStart.getDate() + 1);
+      var dateFinish = new Date(this.model.date_finish);
+      dateFinish.setDate(dateFinish.getDate() + 1);
+      console.log(dateStart);
+
+      for (var d = dateStart; d <= dateFinish; d.setDate(d.getDate() + 1)) {
         this.daysOfYear.push(moment__WEBPACK_IMPORTED_MODULE_0___default()(d).format('YYYY-MM-D'));
       }
+
+      this.selected = this.daysOfYear[0];
     }
   }
 });
@@ -7396,7 +7411,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.lead {\r\n    margin-bottom: 0;\n}\n.rating-box {\r\n    display: inline-block;\n}\n.rating-box .rating-container {\r\n    direction: rtl !important;\n}\n.rating-box .rating-container label {\r\n    display: inline-block;\r\n    margin: -10px 0;\r\n    color: #d4d4d4;\r\n    cursor: pointer;\r\n    font-size: 37px;\r\n    transition: color 0.2s;\n}\n.rating-box .rating-container input {\r\n    display: none;\n}\n.rating-box .rating-container label:hover, .rating-box .rating-container label:hover ~ label, .rating-box .rating-container input:checked ~ label {\r\n    color: gold;\n}\n.color-start{\r\n    color: darkgoldenrod;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.lead {\n    margin-bottom: 0;\n}\n.rating-box {\n    display: inline-block;\n}\n.rating-box .rating-container {\n    direction: rtl !important;\n}\n.rating-box .rating-container label {\n    display: inline-block;\n    margin: -10px 0;\n    color: #d4d4d4;\n    cursor: pointer;\n    font-size: 37px;\n    transition: color 0.2s;\n}\n.rating-box .rating-container input {\n    display: none;\n}\n.rating-box .rating-container label:hover, .rating-box .rating-container label:hover ~ label, .rating-box .rating-container input:checked ~ label {\n    color: gold;\n}\n.color-start{\n    color: darkgoldenrod;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -61857,7 +61872,28 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "modal-header" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.closeModal("#modalStorage")
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c(
                 "div",
@@ -61969,7 +62005,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("p", { staticClass: "lead" }, [
-                    _vm._v("Dia : " + _vm._s(_vm.date))
+                    _vm._v("Dia : " + _vm._s(_vm.formatDate))
                   ]),
                   _vm._v(" "),
                   _c("p", { staticClass: "lead" }, [
@@ -61992,8 +62028,13 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-secondary w-25",
-                      attrs: { type: "button", "data-dismiss": "modal" }
+                      staticClass: "btn btn-secondary",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.closeModal("#modalStorage")
+                        }
+                      }
                     },
                     [_vm._v("Close")]
                   ),
@@ -62001,7 +62042,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-primary w-25",
+                      staticClass: "btn btn-primary",
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -62025,26 +62066,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "modalStorageLabel" } },
-        [_c("h4", [_vm._v("Rellena los siguientes datos")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "h5",
+      { staticClass: "modal-title", attrs: { id: "modalStorageLabel" } },
+      [_c("h4", [_vm._v("Rellena los siguientes datos")])]
+    )
   }
 ]
 render._withStripped = true
@@ -62537,7 +62563,7 @@ var render = function() {
                       _c("div", { staticClass: "custom-file" }, [
                         _c("input", {
                           staticClass: "custom-file-input",
-                          attrs: { type: "file" },
+                          attrs: { type: "file", accept: "image/*" },
                           on: { change: _vm.getImage }
                         }),
                         _vm._v(" "),
@@ -62939,8 +62965,8 @@ var render = function() {
               }
             }
           },
-          _vm._l(_vm.daysOfYear, function(option) {
-            return _c("option", [_vm._v(_vm._s(option))])
+          _vm._l(_vm.daysOfYear, function(option, index) {
+            return _c("option", { key: index }, [_vm._v(_vm._s(option))])
           }),
           0
         )

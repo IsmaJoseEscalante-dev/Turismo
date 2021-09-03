@@ -10,6 +10,9 @@
     <!--=============== REMIXICONS ===============-->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
+    <!--=============== FONT-AWESOME ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <!--=============== SWIPER CSS ===============-->
     <link rel="stylesheet" href="{{ asset('css/swiper-bundle.min.css') }}">
 
@@ -45,37 +48,38 @@
                         <a href="#discover" class="nav__link">Descubrí </a>
                     </li>
                     @guest
-                            @if (Route::has('login'))
-                                <li class="nav__item">
-                                    <a class="nav__link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+                        @if (Route::has('login'))
+                            <li class="nav__item">
+                                <a class="nav__link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        @if (Request::is('/'))
+                            <li class="nav__item">
+                                <a href="{{ route('home') }}" class="nav__link">Home</a>
+                            </li>
                         @else
-                            @if (Request::is('/'))
-                                <li class="nav__item">
-                                    <a href="{{ route('home') }}" class="nav__link">Home</a>
-                                </li>
-                            @else
-                                <li class="nav__item dropdown">
-                                    <a id="navbarDropdown" class="nav__link dropdown-toggle" href="#" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }}
+                            <li class="nav__item dropdown">
+                                <a id="navbarDropdown" class="nav__link dropdown-toggle" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                                                             document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
                                     </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            @endif
-                        @endguest
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endif
+                    @endguest
                 </ul>
 
                 <div class="nav__dark">
@@ -129,31 +133,57 @@
                     </a>
                 </div>
 
-                <div class="home__info" style="background-color:rgb(0, 255, 55)">
-                    <p>{{$promotions->count()}}</p>
-                    @forelse ($promotions as $promotion)
-                        <div class = "container-all">
-                            <div class="slide">
-                                <div class="item-slide">
-                                    <img src = "{{ asset(Storage::url($promotion->tours->image->image)) }}">
-                                    <span class="home__info-title">{{ $promotion->name }}</span>
-                                </div>
-                            </div>
-                            {{-- <img src = "{{ asset('imagenes/fondo1.jpg') }}"> --}}
+                {{-- <div class="home__info" style="background-color:rgb(223, 243, 227)"> --}}
+                {{-- <p>{{ $promotions->count() }}</p> --}}
 
-                        </div>
-                        {{-- <div class="home__info-overlay">
+                <div class="home__info" style="background-color:transparent">
+                    <div id="carrusel">
+                        @forelse ($promotions as $promotion)
+                            @if ($loop->iteration == 1)
+                                <div class="actual">
+                                   {{--  <span class="home__info-title" style = "text-align:center;color: var(--title-color);background-color:white">{{ $promotion->name }}</span> --}}
+                                    <div class="home__info-overlay">
+                                        <img src="{{ asset(Storage::url($promotion->image->image)) }}" alt="" class="home__info-img">
+                                    </div>
+                                    <a href="{{ route('promotions', $promotion->slug) }}" class="button--flex button--link home__info-button" style="justify-content: center; padding-bottom:10px;background-color: var(--title-color);color:white;">
+                                        Ver Promoción <i class="ri-arrow-right-line"></i>
+                                    </a>
+                                </div>
+                            @else
+                                <div class="" style="display:none">
+                                   {{--  <span class="home__info-title" style="text-align:center;color: var(--title-color);background-color:white">{{ $promotion->name }}</span> --}}
+                                    <div class="home__info-overlay">
+                                        <img src="{{ asset(Storage::url($promotion->image->image)) }}" alt="" class="home__info-img">
+                                    </div>
+                                    <a href="{{ route('promotions', $promotion->slug) }}" class="button button--flex button--link home__info-button" style="justify-content: center; padding-bottom:10px;background-color: var(--title-color);color:white;">
+                                        Ver Promoción <i class="ri-arrow-right-line"></i>
+                                    </a>
+                                </div>
+                            @endif
+
+                        @empty
+                            no hay promociones
+                        @endforelse
+                    </div>
+
+                    <button id="right"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+            </div>
+            {{-- <img src = "{{ asset('imagenes/fondo1.jpg') }}"> --}}
+
+
+            {{-- <div class="home__info-overlay">
                             <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="home__info-img">
                         </div> --}}
-                    @empty
-                        <h6>No hay promociones</h6>
-                    @endforelse
 
-                            <a href="{{ route('promotions', $promotion->slug) }}" class="button button--flex button--link home__info-button">
-                                Ver Promocion <i class="ri-arrow-right-line"></i>
-                            </a>
-                </div>
-            </div>
+            {{-- <a href="{{ route('promotions', $promotion->slug) }}"
+                    class="button button--flex button--link home__info-button">
+                    Ver Promocion <i class="ri-arrow-right-line"></i>
+                </a>
+
+
+            </div> --}}
         </section>
 
         <!--==================== PLACES ====================-->
@@ -168,10 +198,6 @@
                         <img src="{{ asset(Storage::url($tour->image->image)) }}" alt="" class="place__img">
 
                         <div class="place__content">
-                            <span class="place__rating">
-                                <i class="ri-star-line place__rating-icon"></i>
-                                <span class="place__rating-number">4,8</span>
-                            </span>
 
                             <div class="place__data">
                                 <h3 class="place__title">{{ $tour->name }}</h3>
@@ -205,8 +231,8 @@
                             </span>
 
                             <div class="place__data">
-                                 <h3 class="place__title">{{ $event->title }}</h3>
-                                 <span class="place__subtitle">{{ $event->category->name }}</span>
+                                <h3 class="place__title">{{ $event->title }}</h3>
+                                <span class="place__subtitle">{{ $event->category->name }}</span>
                                 <span class="place__subtitle">{{ $event->start }}</span>
                                 <span class="place__price">{{ $event->amount }}</span>
                             </div>
@@ -457,9 +483,33 @@
     <!--=============== MAIN JS ===============-->
     <script src="{{ asset('js/main.js') }}"></script>
 
-    <!--=============== Boopstrap 5 JS ===============-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <!--=============== JQUERY ===============-->
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var right = document.getElementById('right');
+        console.log(right);
+
+        right.addEventListener('click', carruselImagenes);
+
+        function carruselImagenes() {
+            var fotoActual = $('#carrusel div.actual');
+            var fotoSig = fotoActual.next();
+            if (fotoSig.length == 0) {
+                fotoSig = $('#carrusel div:first');
+            }
+            fotoActual.removeClass('actual').addClass('anterior');
+            fotoActual.css('display','none')
+            fotoSig.css({
+                    opacity: 0.0
+                }).css('display','block').addClass('actual')
+                .animate({
+                        opacity: 1.0
+                    }, 1000,
+                    function() {
+                        fotoActual.removeClass('anterior');
+                    });
+        }
     </script>
 </body>
 

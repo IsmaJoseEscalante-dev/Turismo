@@ -41,7 +41,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalStorageLabel"><h4>Rellena los siguientes datos</h4></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" @click.prevent="closeModal('#modalStorage')">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -66,13 +66,13 @@
                         </div>
                         <hr>
                         <h5>Reserva viaje para {{ model.name }}</h5>
-                        <p class="lead">Dia : {{ date }}</p>
+                        <p class="lead">Dia : {{ formatDate }}</p>
                         <p class="lead">{{ persons }} x {{ model.amount }}</p>
                         <p class="lead">Total : {{ total }} $</p>
                     </div>
                     <div class="modal-footer d-flex align-items-end">
-                        <button type="button" class="btn btn-secondary w-25" data-dismiss="modal">Close</button>
-                        <button class="btn btn-primary w-25" @click.prevent="storeLocal">Reservar</button>
+                        <button @click.prevent="closeModal('#modalStorage')" class="btn btn-secondary">Close</button>
+                        <button class="btn btn-primary" @click.prevent="storeLocal">Reservar</button>
                     </div>
                 </div>
             </div>
@@ -95,8 +95,11 @@ export default {
         }
     },
     methods: {
+        closeModal(id){
+            this.errors = []
+            $(id).modal("hide");
+        },
         loadBooking() {
-            this.date = this.formatDate;
             this.persons = Number(this.quantity.adult) + Number(this.quantity.boy) + Number(this.quantity.bebe);
             this.total = Number(this.model.amount) * this.persons;
             for (let i = 0; i < this.persons; i++) {
@@ -106,6 +109,10 @@ export default {
         },
         storeLocal() {
             this.errors = [];
+            let fech = this.date.split("-")
+            let a = new Date()
+            let m = new Date()
+            let d = new Date()
             for (let i = 0; i < this.persons; i++) {
                 if (this.inputs[i].name === "" || /^\s+$/.test(this.inputs[i].name)) {
                     this.errors.push({error: 'llene el campo de nombre'})
@@ -114,7 +121,7 @@ export default {
                     this.errors.push({error: 'llene el campo de apellido'})
                 }
             }
-            if (this.date <= moment(new Date()).format('YYYY-MM-D')) {
+            if (new Date(fech[0],fech[1],fech[2]) <= new Date(a.getFullYear(),(m.getMonth() +1), d.getDate())) {
                 this.errors.push({error: 'la fecha no puede ser menor a la de hoy'})
             }
             if (this.errors.length === 0) {
