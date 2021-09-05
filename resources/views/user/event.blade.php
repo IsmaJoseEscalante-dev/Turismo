@@ -30,34 +30,34 @@
                 {{-- Descripcion del event --}}
                 <section class="mt-5">
                     <div class="text-justify">
-                        <p class="lead">{!! $event->description_event !!}</p>
+                        <p class="lead">{!! $event->tour->description_event !!}</p>
                     </div>
                 </section>
                 <section class="mt-5">
-                    <h3 class="color-primary">Descripcion</h3>
+                    <h3 class="color-primary">Descripcion->tour->description</h3>
                     <div class="text-justify">
-                        <p class="lead">{!! $event->description_place !!}</p>
+                        <p class="lead">{!! $event->tour->description_place !!}</p>
                     </div>
                 </section>
                 {{-- Descripcion del event --}}
                 <section class="mt-5">
                     <h3 class="color-primary">Itinerario</h3>
                     <div>
-                        <p class="lead">{!! $event->itinerario !!}</p>
+                        <p class="lead">{!! $event->tour->itinerario !!}</p>
                     </div>
                 </section>
 
                 <section class="mt-5">
                     <h3 class="color-primary">Servicios</h3>
                     <div>
-                        <p class="lead">{!! $event->services !!}</p>
+                        <p class="lead">{!! $event->tour->services !!}</p>
                     </div>
                 </section>
 
                 <section class="mt-5">
                     <h3 class="color-primary">Tips</h3>
                     <div>
-                        <p class="lead">{!! $event->tips !!}</p>
+                        <p class="lead">{!! $event->tour->tips !!}</p>
                     </div>
                 </section>
             </div>

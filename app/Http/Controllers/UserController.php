@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\UpdateRequest;
 use App\Http\Requests\User\UpdatePasswordRequest;
+use App\Models\User;
 
 class UserController extends Controller
 {
+    public function index(){
+        $users = User::get();
+        return view('admin.users.show',compact('users'));
+    }
+
     public function updateUser(UpdateRequest $request)
     {
         auth()->user()->update($request->validated());

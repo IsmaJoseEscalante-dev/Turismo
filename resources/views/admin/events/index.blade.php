@@ -62,37 +62,17 @@
                                 <input type="color" class="form-control" value="#ff0000" id="txtColor">
                             </div>
                             <div class="form-group col-md-12">
-                                <label>Seleccionar Categoria</label>
-                                <select class="form-control" name="category_id" id="category_id">
-                                    @foreach ($categories as $id => $category)
-                                        <option value="{{ $id }}">{{ $category }}</option>
+                                <label>Seleccionar la excursión</label>
+                                <select class="form-control" name="tour_id" id="tour_id">
+                                    @foreach ($tours as $id => $tour)
+                                        <option value="{{ $id }}">{{ $tour }}</option>
                                     @endforeach
                                 </select>
-                                @error('category_id')
+                                @error('tour_id')
                                 <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                            </div>
-                            <div class="form-group col-12">
-                                <label for="tours">Tours</label>
-                                <div class="pb-2">
-                                    <span class="btn btn-primary btn-sm select-all">Seleccionar Todo</span>
-                                    <span class="btn btn-primary btn-sm deselect-all">Deseleccionar</span>
-                                </div>
-                                <select class="form-control select2 {{ $errors->has('tours') ? 'is-invalid' : '' }}"
-                                    name="tours[]" id="txtTours" multiple>
-                                    @foreach ($tours as $id => $tour)
-                                        <option value="{{ $id }}">
-                                            {{ $tour }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('tours'))
-                                    <div class="invalid-feedback d-block">
-                                        {{ $errors->first('tours') }}
-                                    </div>
-                                @endif
                             </div>
                         </div>
                         <div class="form-group">
@@ -170,21 +150,9 @@
                     $('#txtAmount').val(calEvent.amount);
                     $('#txtTours').val(calEvent.tours);
                     $('#txtDescription').val(editor.setData(calEvent.description));
-                    $('#category_id').val(calEvent.category_id);
+                    $('#tour_id').val(calEvent.tour_id);
                     $('#txtFechaInicio').val(calEvent.start.format('Y-MM-DD'));
                     $('#txtFechaFin').val(calEvent.end.format('Y-MM-DD'));
-                    $('#txtTours').val('');
-                    $('#txtTours').trigger('change');
-                    if (calEvent.tours.length) {
-                        let array = [];
-                        for (let i = 0; i < calEvent.tours.length; i++) {
-                            array.push(calEvent.tours[i].pivot.tour_id);
-                        }
-                        $('#txtTours').val(array);
-                        $('#txtTours').trigger('change');
-                    } else {
-                        console.log("no hay tours")
-                    }
                     $('#modalFullCalendar').modal();
                 },
                 eventDrop: function(calEvent) {
@@ -235,10 +203,9 @@
                     start: $('#txtFechaInicio').val() + " 00:00:00",
                     color: $('#txtColor').val(),
                     amount: $('#txtAmount').val(),
-                    tours: $('#txtTours').val(),
                     description: editor.getData(),
                     end: $('#txtFechaFin').val() + " 23:59:59",
-                    category_id: $('#category_id').val()
+                    tour_id: $('#tour_id').val()
                 }
             }
 
@@ -273,8 +240,6 @@
                 $('#txtColor').val('');
                 $('#txtAmount').val('');
                 $('#txtDescription').val('');
-                $('#txtTours').val('');
-                $('#txtTours').trigger('change');
                 editor.setData("");
                 $('#errors').html("");
             }

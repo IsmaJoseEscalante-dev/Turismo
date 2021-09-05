@@ -4,42 +4,32 @@
 
 @section('content')
     <div class="container d-flex justify-content-between py-4">
-        <h3>EXCURSIONES</h3>
-        <a href="users/create" class="btn btn-primary">CREAR</a>
+        <h3>Usuarios</h3>
     </div>
     <div class="card">
         <div class="card-body">
             <table id="users" class="table table-striped shadow-lg mt-4" style="width:100%">
                 <thead class="bg-primary text-white">
-                <th scope="col">ID</th>
-                <th scope="col">nombre</th>
-                <th scope="col">Image</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Acciones</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Celular</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Acciones</th>
                 </thead>
                 <tbody>
-                @foreach($users as $user)
-                    <tr>
-                        <td>{{$user->id}}</td>
-                        <td>{{$user->name}}</td>
-                        <td>
-                        @if($user->image)
-                            <img width = "40px" height= '40px'
-                            src="{{ Storage::url($user->image->image) }}"  alt="">
-                        @endif
-                        </td>
-                        <td>{{$user->amount}}</td>
-                        <td>
-                            <form action="{{route('users.destroy',$user->id)}}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <a href="users/{{$user->id}}" class="btn btn-info">Ver</a>
-                                <a href="users/{{$user->id}}/edit" class="btn btn-warning">Editar</a>
-                                <button type="submit" class="btn btn-danger">Borrar</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
+                    @foreach ($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->lastName }}</td>
+                            <td>{{ $user->phone }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                <a href="#" class="btn btn-info">Ver reservas</a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -54,11 +44,13 @@
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#users').DataTable({
-                "lengthMenu": [[5, 10, 50, -1], [5, 10, 50, 'All']]
+                "lengthMenu": [
+                    [5, 10, 50, -1],
+                    [5, 10, 50, 'All']
+                ]
             });
         });
     </script>
 @endsection
-

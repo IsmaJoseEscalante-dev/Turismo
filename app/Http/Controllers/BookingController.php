@@ -35,6 +35,7 @@ class BookingController extends Controller
     public function show($id)
     {
         $booking = Booking::where('id',$id)->firstOrFail();
+        $this->authorize('pass',$booking);
         $cart = Cart::where('id', $booking->cart_id)->firstOrFail();
         $passengers = Passenger::where('cart_id', $cart->id)->get();
         return view('user.showReservation',compact('booking','cart','passengers'));
@@ -43,7 +44,7 @@ class BookingController extends Controller
     public function bookingCart($id)
     {
         $cart = Cart::where('user_id',Auth::id())->where('id', $id)->with('passengers')->firstOrFail();
-
+        $this->authorize('pass',$cart);
         $paymentPlatforms = PaymentPlatform::all();
         return view('user.booking', compact('cart','paymentPlatforms'));
     }

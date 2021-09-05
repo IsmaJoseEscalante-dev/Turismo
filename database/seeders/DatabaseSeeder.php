@@ -36,8 +36,18 @@ class DatabaseSeeder extends Seeder
             'name' => 'MercadoPago',
             'image' => 'img/mercadopago.jpg',
         ]);
-
-        Category::factory(10)->create();
+        Category::create([
+            'name' => 'excursiones diarias',
+            'description' => 'excursion diaria'
+        ]);
+        Category::create([
+            'name' => 'Eventos',
+            'description' => 'Eventos'
+        ]);
+        Category::create([
+            'name' => 'Trekking',
+            'description' => 'Trekking'
+        ]);
         Station::factory(10)->create();
 
 

@@ -35,9 +35,7 @@ class UpdateRequest extends FormRequest
                 Rule::unique('tours')->ignore($this->event->id),
             ],
             'color' => 'required',
-            "tours"    => "required|array|min:1",
-            "tours.*"  => "required|distinct",
-            "category_id" => 'required|numeric|exists:App\Models\Category,id'
+            "tour_id" => 'required|numeric|exists:App\Models\Tour,id'
         ];
     }
 
@@ -53,7 +51,7 @@ class UpdateRequest extends FormRequest
             'name.required' => 'El campo titulo no puede estar vacio',
             'tours.required' => 'Debes seleccionar al menos un tour',
             'end.after_or_equal' => 'La fecha de llegada debe ser mayor o igual a la fecha de salida',
-            'category_id.required' => 'El campo categoria es requerido'
+            'tour_id.required' => 'El campo tour es requerido'
         ];
     }
 }

@@ -50,7 +50,7 @@ Route::middleware(['auth', 'role:user'])->group(function (){
 Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::resource('categories', CategoryController::class);
-
+    /* Route::get('users', [UserController::class, 'show'])->name('users.show'); */
     Route::resource('tours', TourController::class);
     Route::resource('stations', StationController::class);
     Route::resource('promotions', PromotionController::class);
@@ -58,7 +58,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::resource('carts', CartController::class);
     Route::get('show',[CartController::class, 'show'])->name('carts.show');
     Route::get('events', [EventController::class, 'events'])->name('events.events');
-
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
     //Comments
     Route::get('comments', [CommentController::class, 'index'])->name('comments.index');
     Route::get('unread_comments', [CommentController::class, 'unread'])->name('comments.unread');

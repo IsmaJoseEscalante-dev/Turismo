@@ -43,6 +43,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('users.index') }}" class="nav-link {{ Request::is('users') ? 'active' :'' }}">
+                        <i class="nav-icon fa fa-address-book"></i>
+                        <p>
+                            Usuarios
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('categories.index') }}" class="nav-link {{ Request::is('categories') ? 'active' :'' }}">
                         <i class="nav-icon fa fa-list-alt"></i>
                         <p>

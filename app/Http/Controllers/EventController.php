@@ -11,32 +11,26 @@ class EventController extends Controller
 {
     public function events()
     {
-        $categories = Category::pluck('name', 'id');
-        $tours = Tour::pluck('name', 'id');
-        return view('admin.events.index', compact('tours','categories'));
+        $tours = Tour::where('category_id','!=',1)->pluck('name','id');
+        return view('admin.events.index', compact('tours'));
     }
     public function index()
     {
-        return Event::with('tours:name,id','category:name,id')->get();
+        return Event::with('tour:name,id')->get();
     }
 
     public function store(CreateRequest $request)
     {
-        $event = Event::create($request->validated());
-        $event->tours()->sync($request->input('tours', []));
-        return;
+        return Event::create($request->validated());
     }
 
     public function update(UpdateRequest $request, Event $event)
     {
-        $event->update($request->validated());
-        $event->tours()->sync($request->input('tours', []));
-        return;
+        return $event->update($request->validated());
     }
 
     public function destroy(Event $event)
     {
-        $event->tours()->detach();
         return $event->delete();
     }
 }

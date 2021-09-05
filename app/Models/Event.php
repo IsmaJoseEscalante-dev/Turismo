@@ -9,15 +9,11 @@ class Event extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['start','end','amount','description','name','slug','color','category_id'];
+    protected $fillable = ['start','end','amount','description','name','slug','color','tour_id'];
 
-    public function tours()
+    public function tour()
     {
-        return $this->belongsToMany(Tour::class);
+        return $this->belongsTo(Tour::class);
     }
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
 }

@@ -13,6 +13,7 @@
                 <thead class="bg-primary text-white">
                 <th scope="col">ID</th>
                 <th scope="col">nombre</th>
+                <th scope="col">Categoria</th>
                 <th scope="col">Image</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Acciones</th>
@@ -22,6 +23,7 @@
                     <tr>
                         <td>{{$tour->id}}</td>
                         <td>{{$tour->name}}</td>
+                        <td>{{$tour->category->name}}</td>
                         <td>
                         @if($tour->image)
                             <img width = "40px" height= '40px'

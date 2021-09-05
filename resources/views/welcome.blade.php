@@ -200,7 +200,7 @@
                         <div class="place__content">
 
                             <div class="place__data">
-                                <h3 class="place__title">{{ $tour->name }}</h3>
+                                <h3 class="place__title" >{{ $tour->name }}</h3>
                                 <span class="place__subtitle">{{ $tour->category->name }}</span>
                                 <span class="place__price">{{ $tour->amount }}</span>
                             </div>
@@ -232,7 +232,7 @@
 
                             <div class="place__data">
                                 <h3 class="place__title">{{ $event->title }}</h3>
-                                <span class="place__subtitle">{{ $event->category->name }}</span>
+                                <span class="place__subtitle">{{ $event->tour->name }}</span>
                                 <span class="place__subtitle">{{ $event->start }}</span>
                                 <span class="place__price">{{ $event->amount }}</span>
                             </div>
