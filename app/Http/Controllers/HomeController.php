@@ -49,19 +49,43 @@ class HomeController extends Controller
         $total = Booking::sum('total');
 
         $date = Carbon::now();
-        $year = [];
-        $user = [];
-        $meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-        $val_months = [];
-        for ($i = 1 ; $i<= 12; $i++){
-            $val_months[] = User::whereYear('created_at',$date->year)->whereMonth('created_at', '=', $i)->count();
-        }
 
+        $year = [];
+        $userYear = [];
+        $bookingYear = [];
+        $bookingsMonth = [];
+        $userMonth = [];
+        $montoYear = [];
+        $montoMonth = [];
+        $meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+        // user created for month
+        for ($i = 1 ; $i<= 12; $i++){
+            $userMonth[] = User::whereYear('created_at',$date->year)->whereMonth('created_at', '=', $i)->count();
+        }
+        // bookings created for month
+        for ($i = 1 ; $i<= 12; $i++){
+            $bookingsMonth[] = Booking::whereYear('created_at',$date->year)->whereMonth('created_at', '=', $i)->count();
+        }
+        // bookings created for month
+        for ($i = 1 ; $i<= 12; $i++){
+            $montoMonth[] = Booking::whereYear('created_at',$date->year)->whereMonth('created_at', '=', $i)->sum('total');
+        }
+        // loading the last 5 years
         for ($i = 4; $i > -1; $i--) {
             $year[] = $date->year - $i;
         }
+        // user created for year
         foreach ($year as $value) {
-            $user[] = User::where(DB::raw("DATE_FORMAT(created_at, '%Y')"), $value)->count();
+            $userYear[] = User::where(DB::raw("DATE_FORMAT(created_at, '%Y')"), $value)->count();
+        }
+        // booking created for year
+        foreach ($year as $value) {
+            $bookingYear[] = Booking::where(DB::raw("DATE_FORMAT(created_at, '%Y')"), $value)->count();
+        }
+        // booking created for year
+        foreach ($year as $value) {
+            $montoYear[] = Booking::where(DB::raw("DATE_FORMAT(created_at, '%Y')"), $value)->sum('total');
         }
 
         $datosTS = Tour::select(['name'])
@@ -87,10 +111,7 @@ class HomeController extends Controller
             array_push($namesCategory , $dato->name);
             array_push($countTours , $dato->tours_count);
         }
-        /* print_r($values);
-        print_r( $names);
-        var_dump($tours); */
-        return view('dashboard',compact('tours','carts','stations','namesCategory','countTours','namesTour','countStations','users','bookings','total'))->with('year', json_encode($year, JSON_NUMERIC_CHECK))->with('user', json_encode($user, JSON_NUMERIC_CHECK))->with('meses', json_encode($meses, JSON_NUMERIC_CHECK))->with('val_months', json_encode($val_months, JSON_NUMERIC_CHECK));
+        return view('dashboard',compact('tours','carts','stations','namesCategory','countTours','namesTour','countStations','users','bookings','total'))->with('year', json_encode($year, JSON_NUMERIC_CHECK))->with('userYear', json_encode($userYear, JSON_NUMERIC_CHECK))->with('meses', json_encode($meses, JSON_NUMERIC_CHECK))->with('userMonth', json_encode($userMonth, JSON_NUMERIC_CHECK))->with('bookingYear', json_encode($bookingYear,JSON_NUMERIC_CHECK))->with('bookingsMonth', json_encode($bookingsMonth,JSON_NUMERIC_CHECK))->with('montoYear', json_encode($montoYear,JSON_NUMERIC_CHECK))->with('montoMonth', json_encode($montoMonth,JSON_NUMERIC_CHECK));
     }
 
 

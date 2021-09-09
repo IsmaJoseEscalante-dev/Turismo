@@ -78,27 +78,27 @@
                                 </div>
                             </section>
                             <section class="mt-5">
-                                <h3 class="color-primary">Descripcion</h3>
+                                <h3 class="text-primary">Descripcion</h3>
                                 <div class="text-justify">
                                     <p class="lead">{!! $tour->description_place !!}</p>
                                 </div>
                             </section>
                             <section class="mt-5">
-                                <h3 class="color-primary">Itinerario</h3>
+                                <h3 class="text-primary">Itinerario</h3>
                                 <div>
                                     <p class="lead">{!! $tour->itinerario !!}</p>
                                 </div>
                             </section>
 
                             <section class="mt-5">
-                                <h3 class="color-primary">Servicios</h3>
+                                <h3 class="text-primary">Servicios</h3>
                                 <div>
                                     <p class="lead">{!! $tour->services !!}</p>
                                 </div>
                             </section>
 
                             <section class="mt-5">
-                                <h3 class="color-primary">Tips</h3>
+                                <h3 class="text-primary">Tips</h3>
                                 <div>
                                     <p class="lead">{!! $tour->tips !!}</p>
                                 </div>
@@ -110,22 +110,12 @@
             <div class="col-md-6 col-lg-5 col-xl-4 mt-3 mt-md-0">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="text-right">$ {{ $promotion->amount }}</h4>
+                        <h4 class="text-right text-primary font-weight-bold">$ {{ $promotion->amount }}</h4>
                         <promotion-component :model="{{ json_encode($promotion) }}"></promotion-component>
                     </div>
                 </div>
             </div>
         </div>
-
-        {{-- Comentarios --}}
-        <section class="mt-5">
-            <div class="text-center">
-                <h3 class="color-primary">Opiniones de nuestros clientes</h3>
-                <p class="lead">Todas las opiniones han sido escritas por clientes reales que han reservado con nosotros.
-                </p>
-            </div>
-            <comment-component :tour="{{ json_encode($tour->id) }}"></comment-component>
-        </section>
     </div>
 @endsection
 @section('script')

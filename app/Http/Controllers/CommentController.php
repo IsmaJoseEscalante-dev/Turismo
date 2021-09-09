@@ -48,7 +48,7 @@ class CommentController extends Controller
             'status' => 'si',
             'read' => 'si',
         ]);
-        return redirect()->route('comments.index');
+        return back();
     }
 
     public function ignore($id)

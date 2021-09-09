@@ -334,7 +334,7 @@ input {
 }
 
 .home__data-title {
-  font-size: var(--biggest-font-size);
+  font-size: 30px;
   font-weight: var(--font-medium);
   margin-bottom: var(--mb-2-5);
 }
@@ -348,6 +348,7 @@ input {
 .home__social-link {
   font-size: 3.2rem;
   width: max-content;
+  display: flex;
 }
 
 .home__info {
@@ -488,6 +489,9 @@ input {
 
 .discover__img {
   transition: var(--img-transition);
+  width:500px;
+  height:250px;
+  object-fit:cover;
 }
 
 .discover__img:hover {
@@ -622,6 +626,7 @@ input {
   align-self: flex-end;
   display: flex;
   align-items: center;
+  font-size: 1.3rem;
 }
 
 .place__rating-icon {
@@ -690,22 +695,17 @@ input {
 
 /*=============== SPONSORS ===============*/
 .sponsor__container {
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  justify-items: center;
-  row-gap: 3.5rem;
-}
-
-.sponsor__content:hover .sponsor__img {
-  filter: invert(0.5);
+  justify-content: center;
+    row-gap: 3.5rem;
+    display: flex;
+    align-items: center;
 }
 
 .sponsor__img {
   width: 90px;
-  filter: invert(0.7);
   transition: var(--img-transition);
 }
 
-/*=============== FOOTER ===============*/
 .footer__container {
   row-gap: 5rem;
 }
@@ -815,6 +815,11 @@ input {
 }
 
 /*=============== MEDIA QUERIES ===============*/
+@media screen and (min-width:768px){
+  .home__data-title{
+    font-size:var(--biggest-font-size);
+  }
+}
 /* For small devices */
 @media screen and (max-width: 340px) {
   .place__container {

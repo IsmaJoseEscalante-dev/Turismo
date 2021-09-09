@@ -14,10 +14,22 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 
 Auth::routes();
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
+
+Route::get('/linkstorage', function(){
+    Artisan::call('storage:link');
+    return "successfully!";
+
+});
+Route::get('/linkstorage', function(){
+    Artisan::call('storage:link');
+    return "successfully!";
+});
+
 Route::get('paradas/{slug}', [WelcomeController::class, 'paradas'])->name('paradas');
 Route::get('promociones/{slug}', [WelcomeController::class, 'promotions'])->name('promotions');
 Route::get('events/{slug}', [WelcomeController::class, 'events'])->name('events');
@@ -30,10 +42,6 @@ Route::middleware(['auth', 'role:user'])->group(function (){
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('checkout',[CartController::class,'index'])->name('checkout');
     Route::delete('carts/{id}',[CartController::class,'destroy'])->name('carts.destroy');
-
-    //Actualizar usuario
-    Route::put('users', [UserController::class, 'updateUser'])->name('users.update');
-    Route::put('password', [UserController::class, 'updatePassword'])->name('users.password');
 
     Route::get('booking', [WelcomeController::class, 'booking'])->name('booking');
     Route::get('booking/{id}', [BookingController::class,'show'])->name('booking.show');
@@ -59,6 +67,9 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('show',[CartController::class, 'show'])->name('carts.show');
     Route::get('events', [EventController::class, 'events'])->name('events.events');
     Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('usersCart/{user}',[UserController::class, 'showCart'])->name('users.showCart');
+    Route::get('usersBooking/{user}',[UserController::class, 'showBooking'])->name('usersAdmin.booking');
+
     //Comments
     Route::get('comments', [CommentController::class, 'index'])->name('comments.index');
     Route::get('unread_comments', [CommentController::class, 'unread'])->name('comments.unread');
@@ -66,4 +77,13 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::put('comment/{id}', [CommentController::class, 'ignore'])->name('comments.ignore');
     Route::delete('comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
     Route::get('comments/{id}', [CommentController::class, 'show'])->name('comments.show');
+    Route::get('admin/edit',[UserController::class,'editDataAdmin'])->name('admin.edit');
 });
+
+ //Actualizar usuario
+ Route::put('users', [UserController::class, 'updateUser'])
+        ->name('users.update')
+        ->middleware('auth');
+ Route::put('password', [UserController::class, 'updatePassword'])
+        ->name('users.password')
+        ->middleware('auth');

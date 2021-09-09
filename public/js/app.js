@@ -1973,6 +1973,14 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
 
+      function utf8_to_b64(str) {
+        return window.btoa(unescape(encodeURIComponent(str)));
+      }
+
+      function b64_to_utf8(str) {
+        return decodeURIComponent(escape(window.atob(str)));
+      }
+
       $("#modalStorage").modal('show');
     },
     storeLocal: function storeLocal() {
@@ -2003,10 +2011,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.errors.length === 0) {
-        localStorage.setItem('inputs', JSON.stringify(this.inputs));
-        localStorage.setItem('date', this.date);
-        localStorage.setItem('cartable_type', JSON.stringify(this.cartable_type));
-        localStorage.setItem('model', JSON.stringify(this.model));
+        localStorage.setItem('aW5wdXRz', JSON.stringify(this.inputs));
+        localStorage.setItem('ZGF0ZQ==', this.date);
+        localStorage.setItem('Y2FydGFibGVfdHlwZQ==', JSON.stringify(this.cartable_type));
+        localStorage.setItem('bW9kZWw=', JSON.stringify(this.model));
         location.href = "/home";
       }
     }
@@ -2868,6 +2876,7 @@ __webpack_require__.r(__webpack_exports__);
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
@@ -2880,6 +2889,13 @@ Vue.component('booking-component', __webpack_require__(/*! ./components/BookingC
 Vue.component('promotion-component', __webpack_require__(/*! ./components/PromotionComponent.vue */ "./resources/js/components/PromotionComponent.vue").default);
 Vue.component('event-component', __webpack_require__(/*! ./components/EventComponent.vue */ "./resources/js/components/EventComponent.vue").default);
 Vue.component('tour-component', __webpack_require__(/*! ./components/TourComponent.vue */ "./resources/js/components/TourComponent.vue").default);
+
+if (process.env.MIX_ENV_MODE === 'production') {
+  Vue.config.devtools = false;
+  Vue.config.debug = false;
+  Vue.config.silent = true;
+}
+
 var app = new Vue({
   el: '#app'
 });
@@ -7411,7 +7427,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.lead {\n    margin-bottom: 0;\n}\n.rating-box {\n    display: inline-block;\n}\n.rating-box .rating-container {\n    direction: rtl !important;\n}\n.rating-box .rating-container label {\n    display: inline-block;\n    margin: -10px 0;\n    color: #d4d4d4;\n    cursor: pointer;\n    font-size: 37px;\n    transition: color 0.2s;\n}\n.rating-box .rating-container input {\n    display: none;\n}\n.rating-box .rating-container label:hover, .rating-box .rating-container label:hover ~ label, .rating-box .rating-container input:checked ~ label {\n    color: gold;\n}\n.color-start{\n    color: darkgoldenrod;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.lead {\n    margin-bottom: 0;\n}\n.rating-box {\n    display: inline-block;\n}\n.rating-box .rating-container {\n    direction: rtl !important;\n}\n.rating-box .rating-container label {\n    display: inline-block;\n    margin: -10px 0;\n    color: #d4d4d4;\n    cursor: pointer;\n    font-size: 37px;\n    transition: color 0.2s;\n}\n.rating-box .rating-container input {\n    display: none;\n}\n.rating-box .rating-container label:hover, .rating-box .rating-container label:hover ~ label, .rating-box .rating-container input:checked ~ label {\n    color: #14505C;\n}\n.color-start{\n    color: #14505C;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -61663,10 +61679,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Cantidad")]),
+      _c("h5", { staticClass: "text-principal font-weight-bold mb-3" }, [
+        _vm._v("Cantidad")
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "d-flex justify-content-between" }, [
-        _c("h5", [_vm._v("Adulto:")]),
+        _c("h6", [_vm._v("Mayores:")]),
         _vm._v(" "),
         _c("span", { staticClass: "pr-4" }, [
           _c(
@@ -61723,7 +61741,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "d-flex justify-content-between mt-2" }, [
-        _c("h5", [_vm._v("3 a 11 años:")]),
+        _c("h6", [_vm._v("3 a 11 años:")]),
         _vm._v(" "),
         _c("span", { staticClass: "pr-4" }, [
           _c(
@@ -61780,7 +61798,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "d-flex justify-content-between mt-2" }, [
-        _c("h5", [_vm._v("0 a 2 años:")]),
+        _c("h6", [_vm._v("0 a 2 años:")]),
         _vm._v(" "),
         _c("span", { staticClass: "pr-4" }, [
           _c(
@@ -62004,17 +62022,17 @@ var render = function() {
                     _vm._v("Reserva viaje para " + _vm._s(_vm.model.name))
                   ]),
                   _vm._v(" "),
-                  _c("p", { staticClass: "lead" }, [
+                  _c("p", { staticClass: "text-primary font-weight-bold" }, [
                     _vm._v("Dia : " + _vm._s(_vm.formatDate))
                   ]),
                   _vm._v(" "),
-                  _c("p", { staticClass: "lead" }, [
+                  _c("p", { staticClass: "text-primary font-weight-bold" }, [
                     _vm._v(
                       _vm._s(_vm.persons) + " x " + _vm._s(_vm.model.amount)
                     )
                   ]),
                   _vm._v(" "),
-                  _c("p", { staticClass: "lead" }, [
+                  _c("p", { staticClass: "text-primary font-weight-bold" }, [
                     _vm._v("Total : " + _vm._s(_vm.total) + " $")
                   ])
                 ],
@@ -62036,7 +62054,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Close")]
+                    [_vm._v("Cerrar")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -62069,7 +62087,7 @@ var staticRenderFns = [
     return _c(
       "h5",
       { staticClass: "modal-title", attrs: { id: "modalStorageLabel" } },
-      [_c("h4", [_vm._v("Rellena los siguientes datos")])]
+      [_c("h4", [_vm._v("Rellena los siguientes campos")])]
     )
   }
 ]
@@ -62122,7 +62140,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("h6", [
-                    _c("i", { staticClass: "fas fa-clock" }),
+                    _c("i", { staticClass: "fas fa-clock text-primary" }),
                     _vm._v(" " + _vm._s(_vm.getDate(comment.created_at)))
                   ])
                 ]
@@ -62452,7 +62470,9 @@ var render = function() {
     { staticClass: "container" },
     [
       _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("Dia de reserva")]),
+        _c("h5", { staticClass: "text-principal font-weight-bold" }, [
+          _vm._v("Dia de reserva")
+        ]),
         _vm._v(" "),
         _c("h5", [
           _vm._v("fecha de inicio: " + _vm._s(_vm.formatDate(_vm.model.start)))
@@ -62935,7 +62955,9 @@ var render = function() {
     { staticClass: "container" },
     [
       _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("Dia de reserva")]),
+        _c("h5", { staticClass: "text-principal font-weight-bold" }, [
+          _vm._v("Dia de reserva")
+        ]),
         _vm._v(" "),
         _c(
           "select",
@@ -63119,7 +63141,9 @@ var render = function() {
         "div",
         { staticClass: "form-group" },
         [
-          _c("label", [_vm._v("Dia de reserva")]),
+          _c("h5", { staticClass: "text-principal font-weight-bold" }, [
+            _vm._v("Dia de reserva")
+          ]),
           _vm._v(" "),
           _c("datepicker", {
             attrs: {

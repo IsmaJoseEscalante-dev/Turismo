@@ -56,27 +56,7 @@
                     @else
                         @if (Request::is('/'))
                             <li class="nav__item">
-                                <a href="{{ route('home') }}" class="nav__link">Home</a>
-                            </li>
-                        @else
-                            <li class="nav__item dropdown">
-                                <a id="navbarDropdown" class="nav__link dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                                                                                             document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+                                <a href="{{ route('home') }}" class="nav__link">Mi cuenta</a>
                             </li>
                         @endif
                     @endguest
@@ -100,36 +80,28 @@
         <!--==================== HOME ====================-->
         <section class="home" id="home">
             <img src="{{ asset('imagenes/fondo1.jpg') }}" class="home__img" alt="...">
-            <!-- <div id="carouselExampleSlidesOnly" class="carousel slide home__img" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img src="assets/img/FB_IMG_1624836172476.jpg" class="img-carousel" alt="...">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="assets/img/IMG-20210614-WA0009.jpg" class="img-carousel" alt="...">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="assets/img/IMG-20210805-WA0016.jpg" class="img-carousel" alt="...">
-                      </div>
-                    </div>
-                  </div> -->
 
             <div class="home__container container grid">
                 <div class="home__data">
                     <span class="home__data-subtitle">Conoce nuevos lugares</span>
                     <h1 class="home__data-title"><b>A'lli Turismo </b> Leg.14876</b><br> Agencia de <b>viajes</b> </h1>
-                    <a href="#" class="button">Explore</a>
+                    {{-- <a href="#" class="button">Explore</a> --}}
                 </div>
 
                 <div class="home__social">
-                    <a href="https://www.facebook.com/AlliTurismo" target="_blank" class="home__social-link">
+                    <a href="https://www.facebook.com/AlliTurismo" target="_blank" class="home__social-link"
+                        style="color: #31579A;">
                         <i class="ri-facebook-box-fill"></i>
                     </a>
-                    <a href=https://www.instagram.com/alli_turismo/ target="_blank" class="home__social-link">
-                        <i class="ri-instagram-fill"></i>
+                    <a href="https://api.whatsapp.com/send?phone=5493875923738&text=Hola a'lli turismo, puedo realizar una consulta:" target="_blank" class="home__social-link"
+                        style="color: #1BD741;">
+                        <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="https://twitter.com/" target="_blank" class="home__social-link">
-                        <i class="ri-twitter-fill"></i>
+                    <a href="https://www.instagram.com/alli_turismo/" target="_blank" class="home__social-link" style="background: #d6249f;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;">
+                        <i class="ri-instagram-fill"></i>
                     </a>
                 </div>
 
@@ -141,21 +113,26 @@
                         @forelse ($promotions as $promotion)
                             @if ($loop->iteration == 1)
                                 <div class="actual">
-                                   {{--  <span class="home__info-title" style = "text-align:center;color: var(--title-color);background-color:white">{{ $promotion->name }}</span> --}}
+                                    {{-- <span class="home__info-title" style = "text-align:center;color: var(--title-color);background-color:white">{{ $promotion->name }}</span> --}}
                                     <div class="home__info-overlay">
-                                        <img src="{{ asset(Storage::url($promotion->image->image)) }}" alt="" class="home__info-img">
+                                        <img src="{{ asset(Storage::url($promotion->image->image)) }}" alt=""
+                                            class="home__info-img" style="border-radius:10px">
                                     </div>
-                                    <a href="{{ route('promotions', $promotion->slug) }}" class="button--flex button--link home__info-button" style="justify-content: center; padding-bottom:10px;background-color: var(--title-color);color:white;">
-                                        Ver Promoción <i class="ri-arrow-right-line"></i>
+                                    <a href="{{ route('promotions', $promotion->slug) }}" class="button"
+                                        style="margin: 0 auto;background-color: var(--title-color);color:white;">
+                                        Ver Promoción</i>
                                     </a>
                                 </div>
                             @else
-                                <div class="" style="display:none">
-                                   {{--  <span class="home__info-title" style="text-align:center;color: var(--title-color);background-color:white">{{ $promotion->name }}</span> --}}
+                                <div class="" style=" display:none">
+                                    {{-- <span class="home__info-title" style="text-align:center;color: var(--title-color);background-color:white">{{ $promotion->name }}</span> --}}
                                     <div class="home__info-overlay">
-                                        <img src="{{ asset(Storage::url($promotion->image->image)) }}" alt="" class="home__info-img">
+                                        <img src="{{ asset(Storage::url($promotion->image->image)) }}" alt=""
+                                            class="home__info-img">
                                     </div>
-                                    <a href="{{ route('promotions', $promotion->slug) }}" class="button button--flex button--link home__info-button" style="justify-content: center; padding-bottom:10px;background-color: var(--title-color);color:white;">
+                                    <a href="{{ route('promotions', $promotion->slug) }}"
+                                        class="button button--flex button--link home__info-button"
+                                        style="justify-content: center; padding-bottom:10px;background-color: var(--title-color);color:white;">
                                         Ver Promoción <i class="ri-arrow-right-line"></i>
                                     </a>
                                 </div>
@@ -170,20 +147,6 @@
                 </div>
 
             </div>
-            {{-- <img src = "{{ asset('imagenes/fondo1.jpg') }}"> --}}
-
-
-            {{-- <div class="home__info-overlay">
-                            <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="home__info-img">
-                        </div> --}}
-
-            {{-- <a href="{{ route('promotions', $promotion->slug) }}"
-                    class="button button--flex button--link home__info-button">
-                    Ver Promocion <i class="ri-arrow-right-line"></i>
-                </a>
-
-
-            </div> --}}
         </section>
 
         <!--==================== PLACES ====================-->
@@ -196,13 +159,15 @@
                 @foreach ($tours as $tour)
                     <div class="place__card">
                         <img src="{{ asset(Storage::url($tour->image->image)) }}" alt="" class="place__img">
-
                         <div class="place__content">
-
+                            <span class="place__rating">
+                                <i class="ri-star-line place__rating-icon"></i>
+                                <span class="place__rating-number">{{ substr($tour->promedio_points, 0, 3) }}</span>
+                            </span>
                             <div class="place__data">
-                                <h3 class="place__title" >{{ $tour->name }}</h3>
+                                <h3 class="place__title">{{ $tour->name }}</h3>
                                 <span class="place__subtitle">{{ $tour->category->name }}</span>
-                                <span class="place__price">{{ $tour->amount }}</span>
+                                <span class="place__price">{{ $tour->amount }} $</span>
                             </div>
                         </div>
 
@@ -222,19 +187,23 @@
 
                 @foreach ($events as $event)
                     <div class="place__card">
-                        <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="place__img">
+                        <img src="{{ asset(Storage::url($event->image->image)) }}" alt="" class="place__img">
 
                         <div class="place__content">
                             <span class="place__rating">
                                 <i class="ri-star-line place__rating-icon"></i>
-                                <span class="place__rating-number">4,8</span>
+                                <span class="place__rating-number">{{ substr($event->promedio_points, 0, 3) }}</span>
                             </span>
 
                             <div class="place__data">
-                                <h3 class="place__title">{{ $event->title }}</h3>
-                                <span class="place__subtitle">{{ $event->tour->name }}</span>
-                                <span class="place__subtitle">{{ $event->start }}</span>
-                                <span class="place__price">{{ $event->amount }}</span>
+                                <h3 class="place__title">
+                                    {{ $event->category->name }}
+                                </h3>
+                                <span class="place__title">{{ $event->name }}</span>
+                                <span class="place__subtitle">
+                                    {{ date('d-m-Y', strtotime($event->event->start)) }}
+                                </span>
+                                <span class="place__price">{{ $event->amount }} $</span>
                             </div>
                         </div>
 
@@ -276,13 +245,17 @@
             <div class="discover__container container swiper-container">
                 <div class="swiper-wrapper">
 
-                    @foreach ($tours as $tour)
+                    @foreach ($stations as $station)
                         <!--==================== DISCOVER 1 ====================-->
                         <div class="discover__card swiper-slide">
-                            <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="discover__img">
+                            @foreach($station->images as $image)
+                                @if($loop->iteration == 1)
+                                    <img src="{{ asset(Storage::url($image->image)) }}" alt="" class="discover__img">
+                                @endif
+                            @endforeach
                             <div class="discover__data">
-                                <h2 class="discover__title">{{ $tour->name }}</h2>
-                                <span class="discover__description">24 tours available</span>
+                                <h2 class="discover__title">{{ $station->name }}</h2>
+                                <span class="discover__description">{{ $station->description }}</span>
                             </div>
                         </div>
                     @endforeach
@@ -310,16 +283,6 @@
                     <div class="experience__data">
                         <h2 class="experience__number">10+</h2>
                         <span class="experience__description"> Destinos <br> Destinos</span>
-                    </div>
-                </div>
-
-                <div class="experience__img grid">
-                    <div class="experience__overlay">
-                        <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="experience__img-one">
-                    </div>
-
-                    <div class="experience__overlay">
-                        <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="experience__img-two">
                     </div>
                 </div>
             </div>
@@ -370,19 +333,19 @@
         <section class="sponsor section">
             <div class="sponsor__container container grid">
                 <div class="sponsor__content">
-                    <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="sponsor__img">
+                    <img class="img-card sponsor__img" src="{{ asset('pagos/mastercard.jpeg') }}" alt="mastercard">
                 </div>
                 <div class="sponsor__content">
-                    <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="sponsor__img">
+                    <img class="img-card sponsor__img" src="{{ asset('pagos/americanexpress.jpeg') }}" alt="mastercard">
                 </div>
                 <div class="sponsor__content">
-                    <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="sponsor__img">
+                    <img class="img-card sponsor__img" src="{{ asset('pagos/vista.jpeg') }}" alt="mastercard">
                 </div>
                 <div class="sponsor__content">
-                    <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="sponsor__img">
-                </div>
-                <div class="sponsor__content">
-                    <img src="{{ asset('imagenes/fondo1.jpg') }}" alt="" class="sponsor__img">
+                    <img class="img-card sponsor__img" src="{{ asset('pagos/mercadopago.jpeg') }}" alt="mastercard" style="border-radius: 5px;
+                    border: 1px solid rgb(28, 32, 168);
+                    padding-top: 5px;
+                    padding-bottom: 5px;">
                 </div>
             </div>
         </section>
@@ -393,77 +356,73 @@
         <div class="footer__container container grid">
             <div class="footer__content grid">
                 <div class="footer__data">
-                    <h3 class="footer__title">Travel</h3>
-                    <p class="footer__description">Travel you choose the <br> destination,
-                        we offer you the <br> experience.
+                    <h3 class="footer__title">Excursiones</h3>
+                    <p class="footer__description">Realizamos continuamente <br> viajes,
+                        a Salta o <br> Jujuy.
                     </p>
                     <div>
-                        <a href="https://www.facebook.com/" target="_blank" class="footer__social">
+                        <a href="https://www.facebook.com/AlliTurismo" target="_blank" class="footer__social">
                             <i class="ri-facebook-box-fill"></i>
                         </a>
-                        <a href="https://twitter.com/" target="_blank" class="footer__social">
-                            <i class="ri-twitter-fill"></i>
+                        <a href="https://api.whatsapp.com/send?phone=5493875923738&text=Hola, puedo realizar una consulta:" target="_blank" class="footer__social">
+                            <i class="fab fa-whatsapp-square"></i>
                         </a>
-                        <a href="https://www.instagram.com/" target="_blank" class="footer__social">
+                        <a href="https://www.instagram.com/alli_turismo/" target="_blank" class="footer__social">
                             <i class="ri-instagram-fill"></i>
-                        </a>
-                        <a href="https://www.youtube.com/" target="_blank" class="footer__social">
-                            <i class="ri-youtube-fill"></i>
                         </a>
                     </div>
                 </div>
 
                 <div class="footer__data">
-                    <h3 class="footer__subtitle">About</h3>
+                    <h3 class="footer__subtitle">Acerca de nosotros</h3>
                     <ul>
                         <li class="footer__item">
-                            <a href="" class="footer__link">About Us</a>
+                            <a href="" class="footer__link">Experiencia</a>
                         </li>
                         <li class="footer__item">
-                            <a href="" class="footer__link">Features</a>
+                            <a href="" class="footer__link">Cantidad de viajes</a>
                         </li>
                         <li class="footer__item">
-                            <a href="" class="footer__link">New & Blog</a>
+                            <a href="" class="footer__link">Años de experiencia</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="footer__data">
-                    <h3 class="footer__subtitle">Company</h3>
+                    <h3 class="footer__subtitle">Aventuras</h3>
                     <ul>
                         <li class="footer__item">
-                            <a href="" class="footer__link">Team</a>
+                            <a href="#event" class="footer__link">Eventos</a>
                         </li>
                         <li class="footer__item">
-                            <a href="" class="footer__link">Plan y Pricing</a>
+                            <a href="#place" class="footer__link">Excursiones diarias</a>
                         </li>
                         <li class="footer__item">
-                            <a href="" class="footer__link">Become a member</a>
+                            <a href="#event" class="footer__link">Trekking</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="footer__data">
-                    <h3 class="footer__subtitle">Support</h3>
+                    <h3 class="footer__subtitle">Soporte</h3>
                     <ul>
                         <li class="footer__item">
                             <a href="" class="footer__link">FAQs</a>
                         </li>
                         <li class="footer__item">
-                            <a href="" class="footer__link">Support Center</a>
+                            <a href="#home" class="footer__link">Centro de soporte</a>
                         </li>
                         <li class="footer__item">
-                            <a href="" class="footer__link">Contact Us</a>
+                            <a href="#home" class="footer__link">Contactanos</a>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer__rights">
-                <p class="footer__copy">&#169; 2021 Bedimcode. All rigths reserved.</p>
+                <p class="footer__copy">&#169; {{ date('Y'); }} All'i Turismo derechos reservados.</p>
                 <div class="footer__terms">
-                    <a href="#" class="footer__terms-link">Terms & Agreements</a>
-                    <a href="#" class="footer__terms-link">Privacy Policy</a>
+                    <a href="#" class="footer__terms-link">Salta - Argentina</a>
                 </div>
             </div>
         </div>
@@ -488,8 +447,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         var right = document.getElementById('right');
-        console.log(right);
-
         right.addEventListener('click', carruselImagenes);
 
         function carruselImagenes() {
@@ -499,10 +456,10 @@
                 fotoSig = $('#carrusel div:first');
             }
             fotoActual.removeClass('actual').addClass('anterior');
-            fotoActual.css('display','none')
+            fotoActual.css('display', 'none')
             fotoSig.css({
                     opacity: 0.0
-                }).css('display','block').addClass('actual')
+                }).css('display', 'block').addClass('actual')
                 .animate({
                         opacity: 1.0
                     }, 1000,

@@ -61,8 +61,9 @@
                         <h3>Dashboard</h3>
                         <hr>
                         <p class="lead">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ipsum mollitia obcaecati,
-                            pariatur perspiciatis placeat qui! Atque eligendi excepturi laborum!
+                            Hola <span class="font-weight-bold">{{ Auth::user()->name }}</span> gracias por registrarte en All'i Turismo. <br>
+                            Desde este panel podras manejar tus reservas para que tengas una mejor experiencia.
+
                         </p>
                     </div>
                     <div class="tab-pane fade show active" id="list-orders" role="tabpanel"
@@ -205,11 +206,11 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         window.onload = function() {
-            if (localStorage.getItem('date') && localStorage.getItem('inputs')) {
-                let date = localStorage.getItem('date');
-                let model = JSON.parse(localStorage.getItem('model'))
-                let cartable_type = JSON.parse(localStorage.getItem('cartable_type'))
-                let passengers = JSON.parse(localStorage.getItem('inputs'));
+            if (localStorage.getItem('ZGF0ZQ==') && localStorage.getItem('aW5wdXRz')) {
+                let date = localStorage.getItem('ZGF0ZQ==');
+                let model = JSON.parse(localStorage.getItem('bW9kZWw='))
+                let cartable_type = JSON.parse(localStorage.getItem('Y2FydGFibGVfdHlwZQ=='))
+                let passengers = JSON.parse(localStorage.getItem('aW5wdXRz'));
                 let total = passengers.length * Number(model.amount)
 
                 axios.post('/api/cart', {

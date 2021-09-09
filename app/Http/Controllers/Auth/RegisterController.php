@@ -77,10 +77,6 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
-        if($user->hasRole('admin')){
-            return redirect()->route('tours.index') ;
-        }else{
-            return redirect()->route('home') ;
-        }
+        return redirect()->route('home');
     }
 }

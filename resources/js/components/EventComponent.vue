@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="form-group">
-            <label>Dia de reserva</label>
+            <h5 class="text-principal font-weight-bold">Dia de reserva</h5>
             <h5>fecha de inicio: {{ formatDate(model.start) }}</h5>
             <h5>fecha de llegada: {{ formatDate(model.end) }}</h5>
         </div>

@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="form-group">
-            <label>Cantidad</label>
+            <h5 class="text-principal font-weight-bold mb-3">Cantidad</h5>
             <div class="d-flex justify-content-between">
-                <h5>Adulto:</h5>
+                <h6>Mayores:</h6>
                 <span class="pr-4">
                     <button class="button_quanity" @click.prevent="quantity.adult+=1">+</button>
                         <input type="number" class="person-input" min="0" v-model="quantity.adult">
@@ -12,7 +12,7 @@
                 </span>
             </div>
             <div class="d-flex justify-content-between mt-2">
-                <h5>3 a 11 años:</h5>
+                <h6>3 a 11 años:</h6>
                 <span class="pr-4">
                     <button class="button_quanity" @click.prevent="quantity.boy+=1">+</button>
                         <input type="number" class="person-input" v-model="quantity.boy">
@@ -21,7 +21,7 @@
                 </span>
             </div>
             <div class="d-flex justify-content-between mt-2">
-                <h5>0 a 2 años:</h5>
+                <h6>0 a 2 años:</h6>
                 <span class="pr-4">
                     <button class="button_quanity" @click.prevent="quantity.bebe+=1">+</button>
                         <input type="number" class="person-input" :min="0" v-model="quantity.bebe">
@@ -40,7 +40,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalStorageLabel"><h4>Rellena los siguientes datos</h4></h5>
+                        <h5 class="modal-title" id="modalStorageLabel"><h4>Rellena los siguientes campos</h4></h5>
                         <button type="button" class="close" @click.prevent="closeModal('#modalStorage')">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -66,12 +66,12 @@
                         </div>
                         <hr>
                         <h5>Reserva viaje para {{ model.name }}</h5>
-                        <p class="lead">Dia : {{ formatDate }}</p>
-                        <p class="lead">{{ persons }} x {{ model.amount }}</p>
-                        <p class="lead">Total : {{ total }} $</p>
+                        <p class="text-primary font-weight-bold">Dia : {{ formatDate }}</p>
+                        <p class="text-primary font-weight-bold">{{ persons }} x {{ model.amount }}</p>
+                        <p class="text-primary font-weight-bold">Total : {{ total }} $</p>
                     </div>
                     <div class="modal-footer d-flex align-items-end">
-                        <button @click.prevent="closeModal('#modalStorage')" class="btn btn-secondary">Close</button>
+                        <button @click.prevent="closeModal('#modalStorage')" class="btn btn-secondary">Cerrar</button>
                         <button class="btn btn-primary" @click.prevent="storeLocal">Reservar</button>
                     </div>
                 </div>
@@ -105,6 +105,14 @@ export default {
             for (let i = 0; i < this.persons; i++) {
                 this.inputs.push({name: '', lastName: ''})
             }
+
+            function utf8_to_b64( str ) {
+                return window.btoa(unescape(encodeURIComponent( str )));
+            }
+
+            function b64_to_utf8( str ) {
+                return decodeURIComponent(escape(window.atob( str )));
+            }
             $("#modalStorage").modal('show');
         },
         storeLocal() {
@@ -125,10 +133,10 @@ export default {
                 this.errors.push({error: 'la fecha no puede ser menor a la de hoy'})
             }
             if (this.errors.length === 0) {
-                localStorage.setItem('inputs', JSON.stringify(this.inputs));
-                localStorage.setItem('date', this.date);
-                localStorage.setItem('cartable_type',JSON.stringify(this.cartable_type));
-                localStorage.setItem('model', JSON.stringify(this.model));
+                localStorage.setItem('aW5wdXRz', JSON.stringify(this.inputs));
+                localStorage.setItem('ZGF0ZQ==', this.date);
+                localStorage.setItem('Y2FydGFibGVfdHlwZQ==',JSON.stringify(this.cartable_type));
+                localStorage.setItem('bW9kZWw=', JSON.stringify(this.model));
                 location.href = "/home"
             }
         }

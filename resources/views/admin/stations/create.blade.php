@@ -11,10 +11,20 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Nombre</label>
                     <input id="name" name="name" type="text" class="form-control" value="{{ old('name') }}">
+                    @error('name')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Descripción</label><br>
                     <textarea name="description" rows="3" class="form-control">{{ old('description') }}</textarea>
+                    @error('description')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <a href="{{ route('stations.index') }}" class="btn btn-secondary" tabindex="5">Cancelar</a>

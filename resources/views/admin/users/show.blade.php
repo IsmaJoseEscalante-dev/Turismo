@@ -26,7 +26,8 @@
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
-                                <a href="#" class="btn btn-info">Ver reservas</a>
+                                <a href="{{ asset() }}" class="btn btn-info">Ver Carro</a>
+                                <a href="#" class="btn btn-info">Ver Reservas</a>
                             </td>
                         </tr>
                     @endforeach

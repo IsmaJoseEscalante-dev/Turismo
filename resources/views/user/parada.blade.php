@@ -76,7 +76,7 @@
             <div class="col-md-6 col-lg-5 col-xl-4 mt-3 mt-md-0">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="text-right">$ {{ $tour->amount }}</h4>
+                    <h4 class="text-right text-primary font-weight-bold">$ {{ $tour->amount }}</h4>
                         <tour-component
                             :model="{{ json_encode($tour) }}"
                         ></tour-component>

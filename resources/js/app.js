@@ -12,6 +12,12 @@ Vue.component('promotion-component', require('./components/PromotionComponent.vu
 Vue.component('event-component', require('./components/EventComponent.vue').default);
 Vue.component('tour-component', require('./components/TourComponent.vue').default);
 
+if (process.env.MIX_ENV_MODE === 'production') {
+    Vue.config.devtools = false;
+    Vue.config.debug = false;
+    Vue.config.silent = true;
+}
+
 const app = new Vue({
     el: '#app',
 });

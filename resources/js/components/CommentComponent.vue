@@ -7,7 +7,7 @@
                         <h5><b>{{ comment.name }}</b>
                             <span id="sss" v-html="setStart(comment.points)"></span>
                         </h5>
-                        <h6><i class="fas fa-clock"></i> {{ getDate(comment.created_at) }}</h6>
+                        <h6><i class="fas fa-clock text-primary"></i> {{ getDate(comment.created_at) }}</h6>
                     </div>
                     <p class="lead">{{ comment.body }}</p>
                 </div>
@@ -149,9 +149,9 @@ export default {
 }
 
 .rating-box .rating-container label:hover, .rating-box .rating-container label:hover ~ label, .rating-box .rating-container input:checked ~ label {
-    color: gold;
+    color: #14505C;
 }
 .color-start{
-    color: darkgoldenrod;
+    color: #14505C;
 }
 </style>

@@ -7,17 +7,31 @@ use App\Models\Event;
 use App\Models\Image;
 use App\Models\Station;
 use App\Models\Promotion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class WelcomeController extends Controller
 {
     public function welcome()
     {
-        $tours = Tour::all();
-        $events = Event::all();
+        $tours = Tour::where('category_id',1)
+        ->withAvg('comments as promedio_points','points')->get();
+
+        $events = Tour::where('category_id','>',1)
+                ->whereHas('event', function($query){
+                    $query->where('start','>',Carbon::now());
+                })
+                ->withAvg('comments as promedio_points','points')
+                ->get();
+
         $promotions = Promotion::all();
-        return view('welcome', compact('tours','events','promotions'));
+
+        $stations = Station::inRandomOrder()->take(5)->get();
+
+
+        return view('welcome', compact('tours','promotions','events','stations'));
     }
 
     public function paradas($slug)
