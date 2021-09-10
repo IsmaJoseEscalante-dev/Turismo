@@ -206,7 +206,7 @@
                             </div>
                         </div>
 
-                        <a href="{{ route('events', $event->slug) }}" class="button button--flex place__button">
+                        <a href="{{ route('events', $event->event->slug) }}" class="button button--flex place__button">
                             <i class="ri-arrow-right-line"></i>
                         </a>
                     </div>

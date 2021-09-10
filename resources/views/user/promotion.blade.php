@@ -56,12 +56,12 @@
                         @foreach ($promotion->tours as $tour)
                             <li class="nav-item" role="presentation">
                                 @if ($loop->iteration == 1)
-                                    <a class="nav-link active" id="{{ $tour->id }}-tab" data-toggle="tab"
-                                        href="#{{ $tour->id }}" role="tab" aria-controls="{{ $tour->id }}"
+                                    <a class="nav-link active" id="{{ $loop->iteration }}-tab" data-toggle="tab"
+                                        href="#{{ $loop->iteration }}" role="tab" aria-controls="{{ $loop->iteration }}"
                                         aria-selected="true">{{ $tour->name }}</a>
                                 @else
-                                    <a class="nav-link" id="{{ $tour->id }}-tab" data-toggle="tab"
-                                        href="#{{ $tour->id }}" role="tab" aria-controls="{{ $tour->id }}"
+                                    <a class="nav-link" id="{{ $loop->iteration }}-tab" data-toggle="tab"
+                                        href="#{{ $loop->iteration }}" role="tab" aria-controls="{{ $loop->iteration }}"
                                         aria-selected="true">{{ $tour->name }}</a>
                                 @endif
                             </li>
@@ -70,8 +70,8 @@
                 </nav>
                 <div class="tab-content" id="myTabContent">
                     @foreach ($promotion->tours as $tour)
-                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $tour->id }}"
-                            role="tabpanel" aria-labelledby="{{ $tour->id }}-tab">
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $loop->iteration }}"
+                            role="tabpanel" aria-labelledby="{{ $loop->iteration }}-tab">
                             <section class="mt-5">
                                 <div class="text-justify">
                                     <p class="lead">{!! $tour->description_tour !!}</p>
