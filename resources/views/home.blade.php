@@ -33,11 +33,11 @@
                 <div class="list-group" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action" id="list-dashboard-list" data-toggle="list"
                         href="#list-dashboard" role="tab" aria-controls="dashboard">
-                        <i class="fas fa-tachometer-alt"></i> &nbsp;Dashboard
+                        <i class="fas fa-tachometer-alt"></i> &nbsp;Panel
                     </a>
                     <a class="list-group-item list-group-item-action active" id="list-orders-list" data-toggle="list"
                         href="#list-orders" role="tab" aria-controls="orders">
-                        <i class="fa fa-cart-arrow-down"></i> &nbsp;Ordenes
+                        <i class="fa fa-cart-arrow-down"></i> &nbsp;Reservas canceladas
                     </a>
                     <a class="list-group-item list-group-item-action" id="list-detail-list" data-toggle="list"
                         href="#list-detail" role="tab" aria-controls="detail">
@@ -58,7 +58,7 @@
             <div class="col-md-8">
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade" id="list-dashboard" role="tabpanel" aria-labelledby="list-dashboard-list">
-                        <h3>Dashboard</h3>
+                        <h3>Panel de Control</h3>
                         <hr>
                         <p class="lead">
                             Hola <span class="font-weight-bold">{{ Auth::user()->name }}</span> gracias por registrarte en All'i Turismo. <br>

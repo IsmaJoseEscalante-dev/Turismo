@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid my-3">
-        <h3 style = "font-family:currency;">Reservas por pagar</h3>
+    <div class="container my-3">
+        <h3>Reservas por pagar</h3>
         <div class="row">
             @forelse($carts as $cart)
                 <div class="card col-md-8 mx-auto my-2">
                     <div class="card-body">
-                        <h4 style = "font-family:currency;">Reserva para {{ $cart->cartable->name }} </h4>
+                        <h4>Reserva para {{ $cart->cartable->name }} </h4>
                         <p class="lead">Precio: {{ $cart->cartable->amount }} $</p>
                         <p class="lead">N° personas: {{ $cart->quantity }}</p>
                         <p class="lead">Total a pagar: {{ $cart->cartable->amount * $cart->quantity }} $</p>
