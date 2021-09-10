@@ -16,7 +16,7 @@ use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 
@@ -38,7 +38,7 @@ Route::post('comments', [CommentController::class, 'store'])->name('comments.sto
 
 
 //Routes role user
-Route::middleware(['auth', 'role:user'])->group(function (){
+Route::middleware(['auth','verified', 'role:user'])->group(function (){
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('checkout',[CartController::class,'index'])->name('checkout');
     Route::delete('carts/{id}',[CartController::class,'destroy'])->name('carts.destroy');

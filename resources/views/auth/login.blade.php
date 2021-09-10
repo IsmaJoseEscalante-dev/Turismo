@@ -14,7 +14,6 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <h2 class="text-center"><i class="fas fa-user"></i></h2>
-                    {{-- <h3 class="text-center">A'lli Turismo</h3> --}}
                     <h3 class="text-center py-3"><B>LOGIN</B></h3>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
