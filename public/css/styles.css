@@ -604,6 +604,7 @@ input {
 
 .place__img {
   transition: var(--img-transition);
+    width: 100%;
 }
 
 .place__content, .place__title {
@@ -819,6 +820,9 @@ input {
   .home__data-title{
     font-size:var(--biggest-font-size);
   }
+    .place__card, .place__img{
+        height: 195px;
+    }
 }
 /* For small devices */
 @media screen and (max-width: 340px) {
@@ -981,6 +985,9 @@ input {
     margin-left: auto;
     margin-right: auto;
   }
+    .place__card, .place__img{
+        height: 250px;
+    }
   .home__container {
     grid-template-rows: 2fr .5fr;
   }
@@ -1050,6 +1057,9 @@ input {
   .place__container{
     grid-template-columns: repeat(3, max-content);
   }
+    .place__card, .place__img{
+        height: 240px;
+    }
 }
 
 /* For tall screens on mobiles y desktop*/

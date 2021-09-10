@@ -84,7 +84,7 @@
             <div class="home__container container grid">
                 <div class="home__data">
                     <span class="home__data-subtitle">Conoce nuevos lugares</span>
-                    <h1 class="home__data-title"><b>A'lli Turismo </b> Leg.14876</b><br> Agencia de <b>viajes</b> </h1>
+                    <h1 class="home__data-title"><b>A'lli Turismo </b> Leg.14876<br> Agencia de <b>viajes</b> </h1>
                     {{-- <a href="#" class="button">Explore</a> --}}
                 </div>
 
@@ -113,19 +113,18 @@
                         @forelse ($promotions as $promotion)
                             @if ($loop->iteration == 1)
                                 <div class="actual">
-                                    {{-- <span class="home__info-title" style = "text-align:center;color: var(--title-color);background-color:white">{{ $promotion->name }}</span> --}}
                                     <div class="home__info-overlay">
                                         <img src="{{ asset(Storage::url($promotion->image->image)) }}" alt=""
-                                            class="home__info-img" style="border-radius:10px">
+                                             class="home__info-img">
                                     </div>
-                                    <a href="{{ route('promotions', $promotion->slug) }}" class="button"
-                                        style="margin: 0 auto;background-color: var(--title-color);color:white;">
-                                        Ver Promoción</i>
+                                    <a href="{{ route('promotions', $promotion->slug) }}"
+                                       class="button button--flex button--link home__info-button"
+                                       style="justify-content: center; padding-bottom:10px;background-color: var(--title-color);color:white;">
+                                        Ver Promoción <i class="ri-arrow-right-line"></i>
                                     </a>
                                 </div>
                             @else
                                 <div class="" style=" display:none">
-                                    {{-- <span class="home__info-title" style="text-align:center;color: var(--title-color);background-color:white">{{ $promotion->name }}</span> --}}
                                     <div class="home__info-overlay">
                                         <img src="{{ asset(Storage::url($promotion->image->image)) }}" alt=""
                                             class="home__info-img">
